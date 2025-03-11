@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <title>Home</title>
+</head>
+
+<body>
+
+    <div class="mainWrapper container">
+
+        <nav class="navbar position-sticky top-0 navbar-expand-lg col-xl-11 mx-auto py-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="{% static '/assets/media/coldwell_logo.svg' %}" class="img-fluid" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav mx-auto gap-5">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="#">Properties</a>
+                        <a class="nav-link" href="#">Agents</a>
+                        <a class="nav-link" href="#">Pages</a>
+                    </div>
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" aria-current="page" href="#">
+                            <button class="btn btn_outlined_blue">
+                                Contact Us
+                            </button>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        {% block content %}
+        {% endblock content %}
+
+
+    </div>
+
+    <!-- <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="footer-p col-md-3">
+                    <p>We are creative people who provide the best way to you who want to have a new comfortable and suitable place to live</p>
+                    <div class="social-icons-2">
+                        <a href="#"><i class="fas fa-phone"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="row col-xl-7">
+                    <div class=".more-info col-md-3">
+                        <h6>Pages</h6>
+                        <ul>
+                            <li><a href="#">Home V1</a></li>
+                            <li><a href="#">Home V2</a></li>
+                            <li><a href="#">Home V3</a></li>
+                            <li><a href="#">Search Properties V1</a></li>
+                            <li><a href="#">Search Properties V2</a></li>
+                            <li><a href="#">Property Details V1</a></li>
+                            <li><a href="#">Property Details V2</a></li>
+                            <li><a href="#">Agent List V1</a></li>
+                            <li><a href="#">Agent List V2</a></li>
+                        </ul>
+                    </div>
+
+                    <div class=" more-info col-md-3">
+                        <ul>
+                            <li><a href="#">Agent Details V1</a></li>
+                            <li><a href="#">Agent Details V2</a></li>
+                            <li><a href="#">About Us V1</a></li>
+                            <li><a href="#">About Us V2</a></li>
+                            <li><a href="#">Contact Us V1</a></li>
+                            <li><a href="#">Contact Us V2</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6>Utility Pages</h6>
+                        <ul>
+                            <li><a href="#">Sign In</a></li>
+                            <li><a href="#">Sign Up</a></li>
+                            <li><a href="#">Forgot Password</a></li>
+                            <li><a href="#">Reset Password</a></li>
+                            <li><a href="#">404 Error Page</a></li>
+                            <li><a href="#">Protected Page</a></li>
+                            <li><a href="#">Style Guide</a></li>
+                            <li><a href="#">Licenses</a></li>
+                            <li><a href="#">Changelog</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js "></script>
+</body>
+
+</html>

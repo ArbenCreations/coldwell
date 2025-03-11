@@ -1,0 +1,1447 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'assets/css/listing.css' %}">
+<div class="section first-section">
+  <div class="container w-container">
+    <div class="breadcrumb">
+      <a href="/properties-v1" class="w-inline-block"
+        ><div class="svg-icon _24x24 w-embed">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14.9998 19.9201L8.47984 13.4001C7.70984 12.6301 7.70984 11.3701 8.47984 10.6001L14.9998 4.08008"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-miterlimit="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg></div></a
+      ><a href="/properties-v1" class="w-inline-block"
+        ><div class="text-l-medium">Back To Search</div></a
+      >
+    </div>
+    <div
+      data-w-id="faf893fc-85de-68ed-db8e-fddcebeb5e75"
+      style="opacity: 1"
+      class="details-property-header"
+    >
+      <div class="w-layout-grid grid-details-property-header">
+        <div id="w-node-faf893fc-85de-68ed-db8e-fddcebeb5e77-f2fef3f7">
+          <div class="box-full-width-height grid-images-item-wrap">
+
+
+            <img
+              loading="lazy"
+              alt="Beach Pros Realty Inc."
+              src="/{{listing.0.Media.0}}"
+              sizes="(max-width: 767px) 28vw, (max-width: 1439px) 29vw, 365.3333435058594px"
+             
+              class="image-full-absolute-cover"
+            />
+          </div>
+        </div>
+        <div
+          id="w-node-bdabde49-0b52-1941-f76b-8430f1d0daa4-f2fef3f7"
+          class="w-dyn-list"
+        >
+          <script
+            type="text/x-wf-template"
+            id="wf-template-bdabde49-0b52-1941-f76b-8430f1d0daa5"
+          >
+            %3Cdiv%20role%3D%22listitem%22%20class%3D%22box-ratio-2-3%20grid-images-item-wrap%20w-dyn-item%20w-dyn-repeater-item%22%3E%3Cimg%20loading%3D%22lazy%22%20alt%3D%22%22%20src%3D%22https%3A%2F%2Fcdn.prod.website-files.com%2F64087d5b4d8daebee9cc0cf2%2F6408c98484b6bf0c64696d10_Estately%2520Property%2520-%2520Photo%2520Gallery%25201.png%22%20class%3D%22image-full-absolute-cover%22%2F%3E%3C%2Fdiv%3E
+          </script>
+          <div
+            role="list"
+            class="grid-details-property-header-side w-dyn-items"
+          >
+            <div
+              role="listitem"
+              class="box-ratio-2-3 grid-images-item-wrap w-dyn-item w-dyn-repeater-item"
+            >
+              <img
+                loading="lazy"
+                alt=""
+                src="/{{listing.0.Media.1}}"
+                class="image-full-absolute-cover"
+              />
+            </div>
+            <div
+              role="listitem"
+              class="box-ratio-2-3 grid-images-item-wrap w-dyn-item w-dyn-repeater-item"
+            >
+              <img
+                loading="lazy"
+                alt=""
+                src="/{{listing.0.Media.2}}"
+                sizes="(max-width: 767px) 28vw, (max-width: 1439px) 29vw, 365.3333435058594px"
+               
+                class="image-full-absolute-cover"
+              />
+            </div>
+          </div>
+          <div class="empty-state w-dyn-hide w-dyn-empty">
+            <div>No items found.</div>
+          </div>
+        </div>
+      </div>
+      <div class="details-property-header-cta-wrap">
+        <a
+          href="#"
+          class="button button-outline-white w-inline-block w-lightbox"
+          aria-label="open lightbox"
+          aria-haspopup="dialog"
+          ><div class="svg-icon _20x20 w-embed">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.49984 18.3334H12.4998C16.6665 18.3334 18.3332 16.6667 18.3332 12.5001V7.50008C18.3332 3.33341 16.6665 1.66675 12.4998 1.66675H7.49984C3.33317 1.66675 1.6665 3.33341 1.6665 7.50008V12.5001C1.6665 16.6667 3.33317 18.3334 7.49984 18.3334Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M7.50016 8.33333C8.42064 8.33333 9.16683 7.58714 9.16683 6.66667C9.16683 5.74619 8.42064 5 7.50016 5C6.57969 5 5.8335 5.74619 5.8335 6.66667C5.8335 7.58714 6.57969 8.33333 7.50016 8.33333Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M2.2251 15.7916L6.33343 13.0332C6.99176 12.5916 7.94176 12.6416 8.53343 13.1499L8.80843 13.3916C9.45843 13.9499 10.5084 13.9499 11.1584 13.3916L14.6251 10.4166C15.2751 9.85822 16.3251 9.85822 16.9751 10.4166L18.3334 11.5832"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </div>
+          <div>Show All Photos</div>
+          <script type="application/json" class="w-json">
+            {
+              "items": [
+                {
+                  "_id": "example_img",
+                  "origFileName": "Estately Property - Featured Photo.webp",
+                  "fileName": "Estately Property - Featured Photo.webp",
+                  "fileSize": 56430,
+                  "height": 600,
+                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954ab313f7e96fb2d3a03_Estately%20Property%20-%20Featured%20Photo.webp",
+                  "width": 1441,
+                  "caption": "View from Outside",
+                  "type": "image"
+                },
+                {
+                  "_id": "example_img",
+                  "origFileName": "Estately Property - Photo Gallery 1.webp",
+                  "fileName": "Estately Property - Photo Gallery 1.webp",
+                  "fileSize": 29520,
+                  "height": 702,
+                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b585ef9f70057fc639_Estately%20Property%20-%20Photo%20Gallery%201.webp",
+                  "width": 699,
+                  "caption": "Kitchen",
+                  "type": "image"
+                },
+                {
+                  "_id": "example_img",
+                  "origFileName": "Estately Property - Photo Gallery 2.webp",
+                  "fileName": "Estately Property - Photo Gallery 2.webp",
+                  "fileSize": 43410,
+                  "height": 702,
+                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b586523a3e281182de_Estately%20Property%20-%20Photo%20Gallery%202.webp",
+                  "width": 699,
+                  "caption": "Living Room",
+                  "type": "image"
+                },
+                {
+                  "_id": "example_img",
+                  "origFileName": "Estately Property - Photo Gallery 3.webp",
+                  "fileName": "Estately Property - Photo Gallery 3.webp",
+                  "fileSize": 73040,
+                  "height": 702,
+                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b6a5623bf6b0cc19e5_Estately%20Property%20-%20Photo%20Gallery%203.webp",
+                  "width": 699,
+                  "caption": "Living Room",
+                  "type": "image"
+                },
+                {
+                  "_id": "example_img",
+                  "origFileName": "Estately Property - Photo Gallery 4.webp",
+                  "fileName": "Estately Property - Photo Gallery 4.webp",
+                  "fileSize": 49842,
+                  "height": 702,
+                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b698a4d37102ac50ea_Estately%20Property%20-%20Photo%20Gallery%204.webp",
+                  "width": 699,
+                  "caption": "Balcony",
+                  "type": "image"
+                },
+                {
+                  "_id": "example_img",
+                  "origFileName": "Estately Property - Photo Gallery 5.webp",
+                  "fileName": "Estately Property - Photo Gallery 5.webp",
+                  "fileSize": 46622,
+                  "height": 702,
+                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b58291c6a208fd10aa_Estately%20Property%20-%20Photo%20Gallery%205.webp",
+                  "width": 699,
+                  "caption": "Bedroom",
+                  "type": "image"
+                },
+                {
+                  "_id": "example_img",
+                  "origFileName": "Estately Property - Photo Gallery 6.webp",
+                  "fileName": "Estately Property - Photo Gallery 6.webp",
+                  "fileSize": 25378,
+                  "height": 702,
+                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b54109b237b4a5bfb9_Estately%20Property%20-%20Photo%20Gallery%206.webp",
+                  "width": 699,
+                  "caption": "Kitchen",
+                  "type": "image"
+                }
+              ],
+              "group": ""
+            }
+          </script></a
+        >
+      </div>
+    </div>
+    <div
+      data-w-id="faf893fc-85de-68ed-db8e-fddcebeb5e85"
+      style="opacity: 1"
+      class="w-layout-grid grid-layout"
+    >
+      <div
+        id="w-node-faf893fc-85de-68ed-db8e-fddcebeb5e86-f2fef3f7"
+        class="details-layout"
+      >
+        <div>
+          <div class="details-main-heading">
+            <div class="details-main-heading-inner-wrap">
+              {% comment %} <div><h3 class="color-dark-100">Beach Pros Realty Inc.</h3></div> {% endcomment %}
+              <div>
+                <div class="text-xl color-dark-100">
+                    {{ listing.0.StreetNumber|default:"" }} {{ listing.0.StreetName|default:"" }} {{ listing.0.StreetSuffix|default:"" }} {{ listing.0.StreetDirSuffix|default:"" }}, {{ listing.0.City|default:"" }}, {{ listing.0.StateOrProvince|default:"" }} {{ listing.0.PostalCode|default:"" }}, {{ listing.0.CountyOrParish|default:"" }}
+
+                </div>
+              </div>
+            </div>
+            <a href="#" class="button button-outline w-inline-block"
+              ><div class="svg-icon _20x20 w-embed">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_473_3471)">
+                    <path
+                      d="M5 12.5C6.38071 12.5 7.5 11.3807 7.5 10C7.5 8.61929 6.38071 7.5 5 7.5C3.61929 7.5 2.5 8.61929 2.5 10C2.5 11.3807 3.61929 12.5 5 12.5Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M15 7.5C16.3807 7.5 17.5 6.38071 17.5 5C17.5 3.61929 16.3807 2.5 15 2.5C13.6193 2.5 12.5 3.61929 12.5 5C12.5 6.38071 13.6193 7.5 15 7.5Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M15 17.5C16.3807 17.5 17.5 16.3807 17.5 15C17.5 13.6193 16.3807 12.5 15 12.5C13.6193 12.5 12.5 13.6193 12.5 15C12.5 16.3807 13.6193 17.5 15 17.5Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M7.25 8.91658L12.75 6.08325"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M7.25 11.0833L12.75 13.9166"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_473_3471">
+                      <rect width="20" height="20" fill="white"></rect>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <div>Share</div></a
+            >
+          </div>
+          <div class="details-property-facilities">
+            <div class="big-card-property-facility">
+              <div>Bedrooms</div>
+              <div class="big-card-property-facility-details">
+                <div class="svg-icon _24x24 color-dark-100 w-embed">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20.8889 18.5V16.3333M3.11111 18.5V16.3333M22 16.3333H2V13.0833C2 12.796 2.11706 12.5205 2.32544 12.3173C2.53381 12.1141 2.81643 12 3.11111 12H20.8889C21.1836 12 21.4662 12.1141 21.6746 12.3173C21.8829 12.5205 22 12.796 22 13.0833V16.3333ZM19.7778 6.58333C19.7778 6.29602 19.6607 6.02047 19.4523 5.8173C19.244 5.61414 18.9614 5.5 18.6667 5.5H5.33333C5.03865 5.5 4.75603 5.61414 4.54766 5.8173C4.33929 6.02047 4.22222 6.29602 4.22222 6.58333V12H19.7778V6.58333Z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="text-r-bold color-dark-100">{{listing.0.BedroomsTotal}}</div>
+              </div>
+            </div>
+            <div class="big-card-property-facility">
+              <div>Bathrooms</div>
+              <div class="big-card-property-facility-details">
+                <div class="svg-icon _24x24 color-dark-100 w-embed">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9 5.83333C9 5.21449 8.73661 4.621 8.26777 4.18342C7.79893 3.74583 7.16304 3.5 6.5 3.5V3.5C5.83696 3.5 5.20107 3.74583 4.73223 4.18342C4.26339 4.621 4 5.21449 4 5.83333V10.5"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M3 10.5H21M17.5 18.5L18 20.5M6.5 18.5L6 20.5M20 14.5V10.5H4V14.5C4 15.5609 4.42143 16.5783 5.17157 17.3284C5.92172 18.0786 6.93913 18.5 8 18.5H16C17.0609 18.5 18.0783 18.0786 18.8284 17.3284C19.5786 16.5783 20 15.5609 20 14.5Z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="text-r-bold color-dark-100">{{listing.0.BathroomsTotalInteger}}</div>
+              </div>
+            </div>
+            <div class="big-card-property-facility">
+              <div>Square Area</div>
+              <div class="big-card-property-facility-details">
+                <div class="svg-icon _24x24 color-dark-100 w-embed">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_48_5110)">
+                      <path
+                        d="M10.5979 18.6525L4.14766 12.2022C3.41758 11.4722 3.41758 10.1279 4.14766 9.3978L10.5979 2.94759C11.328 2.2175 12.6722 2.2175 13.4023 2.94759L19.8525 9.3978C20.5826 10.1279 20.5826 11.4722 19.8525 12.2022L13.4023 18.6525C12.6722 19.3825 11.328 19.3825 10.5979 18.6525V18.6525Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M2.3999 15.8057L7.63636 21.0421"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M16.3633 21.0421L21.5997 15.8057"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_48_5110">
+                        <rect width="24" height="24" fill="white"></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="text-r-bold color-dark-100">{{listing.0.BuildingAreaTotal}} {{listing.0.BelowGradeFinishedAreaUnits}}</div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+        <div>
+          <div class="details-heading">
+            <h5 class="color-dark-100">Description</h5>
+          </div>
+          <div class="details-property-description">
+            <p>
+                {{listing.0.PublicRemarks}}
+            </p>
+          
+          </div>
+        </div>
+        <div
+          id="w-node-faf893fc-85de-68ed-db8e-fddcebeb5ebc-f2fef3f7"
+          class="card-property-form-wrap"
+        >
+          <div
+            id="w-node-_053d1046-6edc-bf11-b8cc-2cfe59d5d4c1-59d5d4c1"
+            class="card-property-forms"
+          >
+            <div class="details-property-price">
+              <div class="text-r-medium">Price</div>
+              <h2 class="color-dark-100">$15,000</h2>
+            </div>
+            <div class="horizontal-line"></div>
+            <div class="details-property-forms">
+              <h5 class="color-dark-100">Request a home tour</h5>
+              <div
+                data-current="Tab 1"
+                data-easing="ease"
+                data-duration-in="300"
+                data-duration-out="100"
+                class="w-tabs"
+              >
+                <div
+                  class="card-property-forms-tabs-menu w-tab-menu"
+                  role="tablist"
+                >
+                  <a
+                    data-w-tab="Tab 1"
+                    class="card-property-forms-tab-link w-inline-block w-tab-link w--current"
+                    id="w-tabs-0-data-w-tab-0"
+                    href="#w-tabs-0-data-w-pane-0"
+                    role="tab"
+                    aria-controls="w-tabs-0-data-w-pane-0"
+                    aria-selected="true"
+                    ><div class="svg-icon _20x20 w-embed">
+                      <svg
+                        width="21"
+                        height="20"
+                        viewBox="0 0 21 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M13.7082 2.96663V3.42247L14.1621 3.4645C15.1939 3.56003 15.9057 3.90838 16.3797 4.41155C16.8394 4.89957 17.1204 5.58118 17.209 6.44996H3.29073C3.3793 5.58118 3.66036 4.89957 4.12007 4.41155C4.59404 3.90838 5.30585 3.56003 6.33763 3.4645L6.79153 3.42247V2.96663V1.66663C6.79153 1.63648 6.80382 1.6052 6.82946 1.57955C6.8551 1.55391 6.88638 1.54163 6.91653 1.54163C6.94668 1.54163 6.97796 1.55391 7.0036 1.57955C7.02925 1.6052 7.04153 1.63648 7.04153 1.66663V2.91663V3.41663H7.54153H12.9582H13.4582V2.91663V1.66663C13.4582 1.63648 13.4705 1.6052 13.4961 1.57955C13.5218 1.55391 13.5531 1.54163 13.5832 1.54163C13.6133 1.54163 13.6446 1.55391 13.6703 1.57955C13.6959 1.6052 13.7082 1.63648 13.7082 1.66663V2.96663Z"
+                          fill="#191A23"
+                          stroke="#191A23"
+                        ></path>
+                        <path
+                          d="M8.23735 15.5654L8.26427 15.5438L8.28798 15.5188C8.51998 15.2739 8.66667 14.9363 8.66667 14.5833C8.66667 14.2302 8.51998 13.8926 8.28798 13.6477L8.26427 13.6227L8.23735 13.6012L8.17485 13.5512L8.11235 13.5012L8.0954 13.4876L8.07735 13.4756C8.00506 13.4274 7.92666 13.3858 7.84216 13.3543C7.7635 13.318 7.67948 13.2905 7.59067 13.2749C7.33471 13.2251 7.06952 13.249 6.82542 13.3545C6.65002 13.4239 6.51875 13.5196 6.40718 13.62L6.39238 13.6333L6.37869 13.6477C6.14668 13.8926 6 14.2302 6 14.5833C6 14.9363 6.14668 15.2739 6.37869 15.5188L6.39238 15.5333L6.40718 15.5466C6.51986 15.648 6.65263 15.7445 6.83066 15.8141C6.98032 15.8756 7.1517 15.9166 7.33333 15.9166C7.42424 15.9166 7.50655 15.9044 7.55442 15.8973C7.56041 15.8964 7.56585 15.8956 7.57071 15.8949L7.57073 15.8951L7.5822 15.8931C7.67414 15.8778 7.76101 15.8497 7.84216 15.8123C7.92342 15.782 7.99905 15.7423 8.06902 15.6965C8.12155 15.6636 8.1637 15.6283 8.18633 15.609C8.19514 15.6015 8.20578 15.5923 8.21341 15.5857C8.21619 15.5833 8.21856 15.5813 8.22032 15.5797C8.22946 15.5719 8.23429 15.5678 8.23735 15.5654ZM8.26887 12.6213L8.27868 12.612L8.28798 12.6022C8.51998 12.3573 8.66667 12.0197 8.66667 11.6666C8.66667 11.3136 8.51998 10.976 8.28798 10.7311L8.28811 10.731L8.27855 10.7214C8.152 10.5948 8.00262 10.5012 7.8389 10.4369C7.34081 10.2263 6.76119 10.3483 6.38811 10.7214L6.38798 10.7213L6.37869 10.7311C6.14668 10.976 6 11.3136 6 11.6666C6 12.0197 6.14668 12.3573 6.37869 12.6022L6.38798 12.612L6.39779 12.6213C6.64269 12.8533 6.9803 13 7.33333 13C7.68637 13 8.02398 12.8533 8.26887 12.6213ZM11.1855 15.5379L11.1953 15.5286L11.2046 15.5188C11.4366 15.2739 11.5833 14.9363 11.5833 14.5833C11.5833 14.2302 11.4366 13.8926 11.2046 13.6477L11.2048 13.6476L11.1952 13.6381C10.9329 13.3758 10.5796 13.2604 10.25 13.2604C9.92041 13.2604 9.56706 13.3758 9.30478 13.6381L9.30465 13.6379L9.29536 13.6477C9.06335 13.8926 8.91667 14.2302 8.91667 14.5833C8.91667 14.9363 9.06335 15.2739 9.29536 15.5188L9.30465 15.5286L9.31446 15.5379C9.55936 15.7699 9.89696 15.9166 10.25 15.9166C10.603 15.9166 10.9406 15.7699 11.1855 15.5379ZM11.154 12.6487L11.1809 12.6272L11.2046 12.6022C11.4366 12.3573 11.5833 12.0197 11.5833 11.6666C11.5833 11.3136 11.4366 10.976 11.2046 10.7311L11.2048 10.731L11.1952 10.7214C10.8221 10.3483 10.2425 10.2263 9.74443 10.4369C9.58071 10.5012 9.43133 10.5948 9.30478 10.7214L9.30465 10.7213L9.29536 10.7311C9.06335 10.976 8.91667 11.3136 8.91667 11.6666C8.91667 12.0197 9.06335 12.3573 9.29536 12.6022L9.30465 12.612L9.31446 12.6213C9.55936 12.8533 9.89696 13 10.25 13C10.3409 13 10.4232 12.9877 10.4711 12.9806C10.4771 12.9798 10.4825 12.979 10.4874 12.9783L10.4874 12.9784L10.4989 12.9765C10.5908 12.9612 10.6777 12.9331 10.7588 12.8956C10.8433 12.8641 10.9217 12.8225 10.994 12.7743L11.0121 12.7623L11.029 12.7487L11.154 12.6487ZM14.1022 15.5379L14.112 15.5286L14.1213 15.5188C14.3533 15.2739 14.5 14.9363 14.5 14.5833C14.5 14.2302 14.3533 13.8926 14.1213 13.6477L14.1214 13.6476L14.1119 13.6381C13.8496 13.3758 13.4963 13.2604 13.1667 13.2604C12.8371 13.2604 12.4837 13.3758 12.2214 13.6381L12.2213 13.6379L12.212 13.6477C11.98 13.8926 11.8333 14.2302 11.8333 14.5833C11.8333 14.9363 11.98 15.2739 12.212 15.5188L12.2213 15.5286L12.2311 15.5379C12.476 15.7699 12.8136 15.9166 13.1667 15.9166C13.5197 15.9166 13.8573 15.7699 14.1022 15.5379ZM14.0707 12.6487L14.0976 12.6272L14.1213 12.6022C14.3533 12.3573 14.5 12.0197 14.5 11.6666C14.5 11.3136 14.3533 10.976 14.1213 10.7311L14.0976 10.7061L14.0707 10.6845L14.0082 10.6345L13.9457 10.5845L13.9287 10.571L13.9107 10.5589C13.8384 10.5107 13.76 10.4691 13.6755 10.4376C13.5968 10.4013 13.5128 10.3738 13.424 10.3582C13.1681 10.3085 12.9029 10.3323 12.6589 10.4378C12.4834 10.5072 12.3521 10.6029 12.2405 10.7033L12.2257 10.7166L12.212 10.7311C11.98 10.976 11.8333 11.3136 11.8333 11.6666C11.8333 12.0197 11.98 12.3573 12.212 12.6022L12.2213 12.612L12.2311 12.6213C12.476 12.8533 12.8136 13 13.1667 13C13.2535 13 13.3436 12.987 13.3943 12.9797C13.3977 12.9792 13.401 12.9787 13.404 12.9783L13.4041 12.9784L13.4155 12.9765C13.5075 12.9612 13.5943 12.9331 13.6755 12.8956C13.76 12.8641 13.8384 12.8225 13.9107 12.7743L13.9287 12.7623L13.9457 12.7487L14.0082 12.6987L14.0707 12.6487ZM3.58333 8.69995H16.9167C17.0989 8.69995 17.25 8.85109 17.25 9.03328V14.1666C17.25 15.34 16.9566 16.2414 16.394 16.8472C15.8377 17.4464 14.9464 17.8333 13.5833 17.8333H6.91667C5.55363 17.8333 4.66232 17.4464 4.10598 16.8472C3.54341 16.2414 3.25 15.34 3.25 14.1666V9.03328C3.25 8.85109 3.40114 8.69995 3.58333 8.69995Z"
+                          fill="currentColor"
+                          stroke="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="text-r-medium">Schedule a Tour</div></a
+                  ><a
+                    data-w-tab="Tab 2"
+                    class="card-property-forms-tab-link w-inline-block w-tab-link"
+                    tabindex="-1"
+                    id="w-tabs-0-data-w-tab-1"
+                    href="#w-tabs-0-data-w-pane-1"
+                    role="tab"
+                    aria-controls="w-tabs-0-data-w-pane-1"
+                    aria-selected="false"
+                    ><div class="svg-icon _20x20 w-embed">
+                      <svg
+                        width="21"
+                        height="20"
+                        viewBox="0 0 21 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M14.4165 1.66663H6.08317C3.78317 1.66663 1.9165 3.52496 1.9165 5.81663V10.8V11.6333C1.9165 13.925 3.78317 15.7833 6.08317 15.7833H7.33317C7.55817 15.7833 7.85817 15.9333 7.99984 16.1166L9.24984 17.775C9.79984 18.5083 10.6998 18.5083 11.2498 17.775L12.4998 16.1166C12.6582 15.9083 12.9082 15.7833 13.1665 15.7833H14.4165C16.7165 15.7833 18.5832 13.925 18.5832 11.6333V5.81663C18.5832 3.52496 16.7165 1.66663 14.4165 1.66663ZM11.0832 11.4583H6.08317C5.7415 11.4583 5.45817 11.175 5.45817 10.8333C5.45817 10.4916 5.7415 10.2083 6.08317 10.2083H11.0832C11.4248 10.2083 11.7082 10.4916 11.7082 10.8333C11.7082 11.175 11.4248 11.4583 11.0832 11.4583ZM14.4165 7.29163H6.08317C5.7415 7.29163 5.45817 7.00829 5.45817 6.66663C5.45817 6.32496 5.7415 6.04163 6.08317 6.04163H14.4165C14.7582 6.04163 15.0415 6.32496 15.0415 6.66663C15.0415 7.00829 14.7582 7.29163 14.4165 7.29163Z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="text-r-medium">Request Quote</div></a
+                  >
+                </div>
+                <div class="w-tab-content">
+                  <div
+                    data-w-tab="Tab 1"
+                    class="card-property-forms-tab-pane w-tab-pane w--tab-active"
+                    id="w-tabs-0-data-w-pane-0"
+                    role="tabpanel"
+                    aria-labelledby="w-tabs-0-data-w-tab-0"
+                  >
+                    <div class="form-block w-form">
+                      <form
+                        id="wf-form-Property-Schedule-Tour-Form"
+                        name="wf-form-Property-Schedule-Tour-Form"
+                        data-name="Property Schedule Tour Form"
+                        method="get"
+                        class="form"
+                        data-wf-page-id="64088004b78d3f1cf2fef3f7"
+                        data-wf-element-id="053d1046-6edc-bf11-b8cc-2cfe59d5d4d8"
+                        aria-label="Property Schedule Tour Form"
+                      >
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Phone-Number"
+                              data-name="Phone Number"
+                              placeholder="Phone Number"
+                              type="tel"
+                              id="Phone-Number-3"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M18.3082 15.275C18.3082 15.575 18.2415 15.8833 18.0998 16.1833C17.9582 16.4833 17.7748 16.7666 17.5332 17.0333C17.1248 17.4833 16.6748 17.8083 16.1665 18.0166C15.6665 18.225 15.1248 18.3333 14.5415 18.3333C13.6915 18.3333 12.7832 18.1333 11.8248 17.725C10.8665 17.3166 9.90817 16.7666 8.95817 16.075C7.99984 15.375 7.0915 14.6 6.22484 13.7416C5.3665 12.875 4.5915 11.9666 3.89984 11.0166C3.2165 10.0666 2.6665 9.11663 2.2665 8.17496C1.8665 7.22496 1.6665 6.31663 1.6665 5.44996C1.6665 4.88329 1.7665 4.34163 1.9665 3.84163C2.1665 3.33329 2.48317 2.86663 2.92484 2.44996C3.45817 1.92496 4.0415 1.66663 4.65817 1.66663C4.8915 1.66663 5.12484 1.71663 5.33317 1.81663C5.54984 1.91663 5.7415 2.06663 5.8915 2.28329L7.82484 5.00829C7.97484 5.21663 8.08317 5.40829 8.15817 5.59163C8.23317 5.76663 8.27484 5.94163 8.27484 6.09996C8.27484 6.29996 8.2165 6.49996 8.09984 6.69163C7.9915 6.88329 7.83317 7.08329 7.63317 7.28329L6.99984 7.94163C6.90817 8.03329 6.8665 8.14163 6.8665 8.27496C6.8665 8.34163 6.87484 8.39996 6.8915 8.46663C6.9165 8.53329 6.9415 8.58329 6.95817 8.63329C7.10817 8.90829 7.3665 9.26663 7.73317 9.69996C8.10817 10.1333 8.50817 10.575 8.9415 11.0166C9.3915 11.4583 9.82484 11.8666 10.2665 12.2416C10.6998 12.6083 11.0582 12.8583 11.3415 13.0083C11.3832 13.025 11.4332 13.05 11.4915 13.075C11.5582 13.1 11.6248 13.1083 11.6998 13.1083C11.8415 13.1083 11.9498 13.0583 12.0415 12.9666L12.6748 12.3416C12.8832 12.1333 13.0832 11.975 13.2748 11.875C13.4665 11.7583 13.6582 11.7 13.8665 11.7C14.0248 11.7 14.1915 11.7333 14.3748 11.8083C14.5582 11.8833 14.7498 11.9916 14.9582 12.1333L17.7165 14.0916C17.9332 14.2416 18.0832 14.4166 18.1748 14.625C18.2582 14.8333 18.3082 15.0416 18.3082 15.275Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Date"
+                              data-name="Date"
+                              placeholder="Select Date"
+                              type="text"
+                              id="Date-3"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M6.6665 1.66663V4.16663"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.3335 1.66663V4.16663"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M2.9165 7.57495H17.0832"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M17.5 7.08329V14.1666C17.5 16.6666 16.25 18.3333 13.3333 18.3333H6.66667C3.75 18.3333 2.5 16.6666 2.5 14.1666V7.08329C2.5 4.58329 3.75 2.91663 6.66667 2.91663H13.3333C16.25 2.91663 17.5 4.58329 17.5 7.08329Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.0791 11.4167H13.0866"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.0791 13.9167H13.0866"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M9.99607 11.4167H10.0036"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M9.99607 13.9167H10.0036"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M6.91209 11.4167H6.91957"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M6.91209 13.9167H6.91957"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Time"
+                              data-name="Time"
+                              placeholder="11:00 AM"
+                              type="text"
+                              id="Time-3"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M18.3332 9.99996C18.3332 14.6 14.5998 18.3333 9.99984 18.3333C5.39984 18.3333 1.6665 14.6 1.6665 9.99996C1.6665 5.39996 5.39984 1.66663 9.99984 1.66663C14.5998 1.66663 18.3332 5.39996 18.3332 9.99996Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.0919 12.65L10.5086 11.1083C10.0586 10.8416 9.69189 10.2 9.69189 9.67497V6.2583"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Email-Address"
+                              data-name="Email Address"
+                              placeholder="Email Address"
+                              type="email"
+                              id="Email-Address-4"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M14.1665 17.0833H5.83317C3.33317 17.0833 1.6665 15.8333 1.6665 12.9166V7.08329C1.6665 4.16663 3.33317 2.91663 5.83317 2.91663H14.1665C16.6665 2.91663 18.3332 4.16663 18.3332 7.08329V12.9166C18.3332 15.8333 16.6665 17.0833 14.1665 17.0833Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M14.1668 7.5L11.5585 9.58333C10.7002 10.2667 9.29183 10.2667 8.43349 9.58333L5.8335 7.5"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-property-forms-cta-wrap">
+                          <input
+                            type="submit"
+                            data-wait="Please wait..."
+                            class="button w-button"
+                            value="Schedule a Tour"
+                          />
+                        </div>
+                      </form>
+                      <div
+                        class="success-message w-form-done"
+                        tabindex="-1"
+                        role="region"
+                        aria-label="Property Schedule Tour Form success"
+                      >
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div
+                        class="error-message w-form-fail"
+                        tabindex="-1"
+                        role="region"
+                        aria-label="Property Schedule Tour Form failure"
+                      >
+                        <div>
+                          Oops! Something went wrong while submitting the form.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    data-w-tab="Tab 2"
+                    class="card-property-forms-tab-pane w-tab-pane"
+                    id="w-tabs-0-data-w-pane-1"
+                    role="tabpanel"
+                    aria-labelledby="w-tabs-0-data-w-tab-1"
+                  >
+                    <div class="form-block w-form">
+                      <form
+                        id="wf-form-Property-Request-Quote-Form"
+                        name="wf-form-Property-Request-Quote-Form"
+                        data-name="Property Request Quote Form"
+                        method="get"
+                        class="form"
+                        data-wf-page-id="64088004b78d3f1cf2fef3f7"
+                        data-wf-element-id="053d1046-6edc-bf11-b8cc-2cfe59d5d4f3"
+                        aria-label="Property Request Quote Form"
+                      >
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Phone-Number"
+                              data-name="Phone Number"
+                              placeholder="Phone Number"
+                              type="tel"
+                              id="Phone-Number-4"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M18.3082 15.275C18.3082 15.575 18.2415 15.8833 18.0998 16.1833C17.9582 16.4833 17.7748 16.7666 17.5332 17.0333C17.1248 17.4833 16.6748 17.8083 16.1665 18.0166C15.6665 18.225 15.1248 18.3333 14.5415 18.3333C13.6915 18.3333 12.7832 18.1333 11.8248 17.725C10.8665 17.3166 9.90817 16.7666 8.95817 16.075C7.99984 15.375 7.0915 14.6 6.22484 13.7416C5.3665 12.875 4.5915 11.9666 3.89984 11.0166C3.2165 10.0666 2.6665 9.11663 2.2665 8.17496C1.8665 7.22496 1.6665 6.31663 1.6665 5.44996C1.6665 4.88329 1.7665 4.34163 1.9665 3.84163C2.1665 3.33329 2.48317 2.86663 2.92484 2.44996C3.45817 1.92496 4.0415 1.66663 4.65817 1.66663C4.8915 1.66663 5.12484 1.71663 5.33317 1.81663C5.54984 1.91663 5.7415 2.06663 5.8915 2.28329L7.82484 5.00829C7.97484 5.21663 8.08317 5.40829 8.15817 5.59163C8.23317 5.76663 8.27484 5.94163 8.27484 6.09996C8.27484 6.29996 8.2165 6.49996 8.09984 6.69163C7.9915 6.88329 7.83317 7.08329 7.63317 7.28329L6.99984 7.94163C6.90817 8.03329 6.8665 8.14163 6.8665 8.27496C6.8665 8.34163 6.87484 8.39996 6.8915 8.46663C6.9165 8.53329 6.9415 8.58329 6.95817 8.63329C7.10817 8.90829 7.3665 9.26663 7.73317 9.69996C8.10817 10.1333 8.50817 10.575 8.9415 11.0166C9.3915 11.4583 9.82484 11.8666 10.2665 12.2416C10.6998 12.6083 11.0582 12.8583 11.3415 13.0083C11.3832 13.025 11.4332 13.05 11.4915 13.075C11.5582 13.1 11.6248 13.1083 11.6998 13.1083C11.8415 13.1083 11.9498 13.0583 12.0415 12.9666L12.6748 12.3416C12.8832 12.1333 13.0832 11.975 13.2748 11.875C13.4665 11.7583 13.6582 11.7 13.8665 11.7C14.0248 11.7 14.1915 11.7333 14.3748 11.8083C14.5582 11.8833 14.7498 11.9916 14.9582 12.1333L17.7165 14.0916C17.9332 14.2416 18.0832 14.4166 18.1748 14.625C18.2582 14.8333 18.3082 15.0416 18.3082 15.275Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Date"
+                              data-name="Date"
+                              placeholder="Select Date"
+                              type="text"
+                              id="Date-4"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M6.6665 1.66663V4.16663"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.3335 1.66663V4.16663"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M2.9165 7.57495H17.0832"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M17.5 7.08329V14.1666C17.5 16.6666 16.25 18.3333 13.3333 18.3333H6.66667C3.75 18.3333 2.5 16.6666 2.5 14.1666V7.08329C2.5 4.58329 3.75 2.91663 6.66667 2.91663H13.3333C16.25 2.91663 17.5 4.58329 17.5 7.08329Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.0791 11.4167H13.0866"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.0791 13.9167H13.0866"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M9.99607 11.4167H10.0036"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M9.99607 13.9167H10.0036"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M6.91209 11.4167H6.91957"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M6.91209 13.9167H6.91957"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Time"
+                              data-name="Time"
+                              placeholder="11:00 AM"
+                              type="text"
+                              id="Time-4"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M18.3332 9.99996C18.3332 14.6 14.5998 18.3333 9.99984 18.3333C5.39984 18.3333 1.6665 14.6 1.6665 9.99996C1.6665 5.39996 5.39984 1.66663 9.99984 1.66663C14.5998 1.66663 18.3332 5.39996 18.3332 9.99996Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M13.0919 12.65L10.5086 11.1083C10.0586 10.8416 9.69189 10.2 9.69189 9.67497V6.2583"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="position-relative">
+                            <input
+                              class="text-field has-icon w-input"
+                              maxlength="256"
+                              name="Email-Address"
+                              data-name="Email Address"
+                              placeholder="Email Address"
+                              type="email"
+                              id="Email-Address-5"
+                              required=""
+                            />
+                            <div class="svg-icon text-field-icon w-embed">
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M14.1665 17.0833H5.83317C3.33317 17.0833 1.6665 15.8333 1.6665 12.9166V7.08329C1.6665 4.16663 3.33317 2.91663 5.83317 2.91663H14.1665C16.6665 2.91663 18.3332 4.16663 18.3332 7.08329V12.9166C18.3332 15.8333 16.6665 17.0833 14.1665 17.0833Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M14.1668 7.5L11.5585 9.58333C10.7002 10.2667 9.29183 10.2667 8.43349 9.58333L5.8335 7.5"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-property-forms-cta-wrap">
+                          <input
+                            type="submit"
+                            data-wait="Please wait..."
+                            class="button w-button"
+                            value="Request Guide"
+                          />
+                        </div>
+                      </form>
+                      <div
+                        class="success-message w-form-done"
+                        tabindex="-1"
+                        role="region"
+                        aria-label="Property Request Quote Form success"
+                      >
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div
+                        class="error-message w-form-fail"
+                        tabindex="-1"
+                        role="region"
+                        aria-label="Property Request Quote Form failure"
+                      >
+                        <div>
+                          Oops! Something went wrong while submitting the form.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="horizontal-line"></div>
+        <div>
+          <div class="details-heading">
+            <h5 class="color-dark-100">Property Details</h5>
+          </div>
+          <div class="details-property-dropdowns">
+            <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
+                <div
+                  class="dropdown-toggle w-dropdown-toggle"
+                  id="w-dropdown-toggle-1"
+                  aria-controls="w-dropdown-list-1"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div class="text-l-bold">Interior Details</div>
+                  <div class="svg-icon _20x20 w-embed">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M16.5999 7.45831L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45831"
+                        stroke="#191A23"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <nav
+                  class="dropdown-menu static-menu w-dropdown-list"
+                  id="w-dropdown-list-1"
+                  aria-labelledby="w-dropdown-toggle-1"
+                >
+                  <div class="details-list">
+                    <div class="details-list-item">
+                      <div><div>Interior Details</div></div>
+                      <ul role="list" class="details-list-item-grid">
+                        <li>
+                          <div class="text-r-bold">
+                            Basement: Partial, Storage Space
+                          </div>
+                        </li>
+                        <li>
+                          <div class="text-r-bold">Number of Rooms: 10</div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="details-list-item">
+                      <div><div>Beds &amp; Baths</div></div>
+                      <ul role="list" class="details-list-item-grid">
+                        <li>
+                          <div class="text-r-bold">
+                            Bedrooms: {% if listing.0.BedroomsTotal %}{{ listing.0.BedroomsTotal }}{% else %}N/A{% endif %}
+                          </div>
+                        </li>
+                        <li>
+                          <div class="text-r-bold">
+                            Bathrooms: {% if listing.0.BathroomsTotalInteger %}{{ listing.0.BathroomsTotalInteger }}{% else %}N/A{% endif %}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="details-list-item">
+                      <div><div>Dimensions and Layout</div></div>
+                      <ul role="list" class="details-list-item-grid">
+                        <li>
+                          <div class="text-r-bold">
+                            Living Area: {{ listing.0.BuildingAreaTotal|default:"N/A" }} Square Feet
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="details-list-item">
+                      <div><div>Heating &amp; Cooling</div></div>
+                      <ul role="list" class="details-list-item-grid">
+                        <li>
+                          <div class="text-r-bold">
+                            Heating: {% if listing.0.Heating %}{{ listing.0.Heating }}{% else %}N/A{% endif %}
+                          </div>
+                        </li>
+                        <li>
+                          <div class="text-r-bold">
+                            Has Heating: {% if listing.0.Heating %}Yes{% else %}No{% endif %}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+              
+              <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
+                <div
+                  class="dropdown-toggle w-dropdown-toggle"
+                  id="w-dropdown-toggle-2"
+                  aria-controls="w-dropdown-list-2"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div class="text-l-bold">Property Size</div>
+                  <div class="svg-icon _20x20 w-embed">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M16.5999 7.45831L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45831"
+                        stroke="#191A23"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <nav
+                  class="dropdown-menu static-menu w-dropdown-list"
+                  id="w-dropdown-list-2"
+                  aria-labelledby="w-dropdown-toggle-2"
+                >
+                  <div class="details-list">
+                    <div class="details-list-item">
+                      <ul role="list" class="details-list-item-grid">
+                        <li>
+                          <div class="text-r-bold">
+                            Living Area: 
+                            {% if listing.0.BuildingAreaTotal %} 
+                              {{ listing.0.BuildingAreaTotal }} Square Feet
+                            {% else %} 
+                              N/A 
+                            {% endif %}
+                          </div>
+                        </li>
+                        <li>
+                          <div class="text-r-bold">
+                            Yard Area: 
+                            {% if listing.0.LotSizeArea %} 
+                              {{ listing.0.LotSizeArea }} Square Feet
+                            {% else %} 
+                              N/A 
+                            {% endif %}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+              
+              <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
+                <div
+                  class="dropdown-toggle w-dropdown-toggle"
+                  id="w-dropdown-toggle-3"
+                  aria-controls="w-dropdown-list-3"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div class="text-l-bold">Land Area</div>
+                  <div class="svg-icon _20x20 w-embed">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M16.5999 7.45831L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45831"
+                        stroke="#191A23"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <nav
+                  class="dropdown-menu static-menu w-dropdown-list"
+                  id="w-dropdown-list-3"
+                  aria-labelledby="w-dropdown-toggle-3"
+                >
+                  <div class="details-list">
+                    <div class="details-list-item">
+                      <ul role="list" class="details-list-item-grid">
+                        <li>
+                          <div class="text-r-bold">
+                            Size: 
+                            {% if listing.0.LandSizeWidth and listing.0.LandSizeLength %}
+                              {{ listing.0.LandSizeWidth }} x {{ listing.0.LandSizeLength }} m²
+                            {% else %}
+                              N/A
+                            {% endif %}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+              
+              <div data-hover="false" data-delay="0" class="dropdown w-dropdown">
+                <div
+                  class="dropdown-toggle w-dropdown-toggle"
+                  id="w-dropdown-toggle-4"
+                  aria-controls="w-dropdown-list-4"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div class="text-l-bold">Year Built</div>
+                  <div class="svg-icon _20x20 w-embed">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M16.5999 7.45831L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45831"
+                        stroke="#191A23"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <nav
+                  class="dropdown-menu static-menu w-dropdown-list"
+                  id="w-dropdown-list-4"
+                  aria-labelledby="w-dropdown-toggle-4"
+                >
+                  <div class="details-list">
+                    <div class="details-list-item">
+                      <ul role="list" class="details-list-item-grid">
+                        <li>
+                          <div class="text-r-bold">
+                            Established Since: 
+                            {% if listing.0.YearBuilt %}
+                              {{ listing.0.YearBuilt }}
+                            {% else %}
+                              N/A
+                            {% endif %}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+              
+          </div>
+        </div>
+        <div class="horizontal-line"></div>
+        <div>
+          <div class="details-heading">
+            <h5 class="color-dark-100">Listing by Agent</h5>
+          </div>
+          <div class="details-property-agent">
+            <div class="card-property-agent-details-wrap">
+              <div class="details-property-agent-photo">
+                <img
+                  loading="lazy"
+                  alt=""
+                  src="https://cdn.prod.website-files.com/64087d5b4d8daebee9cc0cf2/6408855c52688225ab1f7d5c_Estately%20Agent%20-%20Jane%20Cooper.png"
+                  class="image-full-cover"
+                />
+              </div>
+              <div>
+                <a href="#" class="w-inline-block"
+                  ><div class="text-l-bold">{{listing.0.ListAgentFullName}}</div></a
+                >
+                <div>Property Consultant</div>
+              </div>
+            </div>
+            <div class="details-property-agent-cta-wrap">
+              <a
+                href="mailto:{{listing.0.ListAgentEmail}}"
+                class="button button-outline w-button"
+                >Ask Question</a
+              ><a href="tel:{{listing.0.ListAgentDirectPhone}}" class="button button-outline w-button"
+                >Contact Agent</a
+              >
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="details-heading">
+            <h5 class="color-dark-100">Map View</h5>
+          </div>
+          <div>
+            <div class="map-wrap property-details">
+              <div class="map-image-wrap">
+                <img
+                  src="https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map.webp"
+                  loading="lazy"
+                  sizes="(max-width: 991px) 92vw, (max-width: 1439px) 93vw, 1160px"
+                  srcset="
+                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map-p-500.webp   500w,
+                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map-p-800.webp   800w,
+                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map-p-1080.webp 1080w,
+                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map.webp        1242w
+                  "
+                  alt="Homezy - Map"
+                  class="image-full-cover"
+                />
+              </div>
+              <div class="map-tools">
+                <div class="map-buttons-wrap">
+                  <a
+                    href="#"
+                    class="map-tools-button border-radius-all w-inline-block"
+                    ><div class="svg-icon _16x16 color-dark-100 w-embed">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g clip-path="url(#clip0_396_11008)">
+                          <path
+                            d="M14 2L9.66671 14C9.63746 14.0638 9.5905 14.1179 9.53141 14.1558C9.47232 14.1938 9.40359 14.2139 9.33338 14.2139C9.26317 14.2139 9.19444 14.1938 9.13535 14.1558C9.07626 14.1179 9.0293 14.0638 9.00005 14L6.66671 9.33333L2.00005 7C1.93622 6.97075 1.88213 6.92379 1.84421 6.8647C1.80629 6.80561 1.78613 6.73688 1.78613 6.66667C1.78613 6.59646 1.80629 6.52772 1.84421 6.46863C1.88213 6.40954 1.93622 6.36258 2.00005 6.33333L14 2Z"
+                            fill="currentColor"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_396_11008">
+                            <rect width="16" height="16" fill="white"></rect>
+                          </clipPath>
+                        </defs>
+                      </svg></div
+                  ></a>
+                </div>
+                <div class="map-buttons-wrap">
+                  <a
+                    href="#"
+                    class="map-tools-button border-radius-top w-inline-block"
+                    ><div class="svg-icon _16x16 color-dark-100 w-embed">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g clip-path="url(#clip0_396_11010)">
+                          <path
+                            d="M8 3.33337V12.6667"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                          <path
+                            d="M3.33325 8H12.6666"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_396_11010">
+                            <rect width="16" height="16" fill="white"></rect>
+                          </clipPath>
+                        </defs>
+                      </svg></div></a
+                  ><a
+                    href="#"
+                    class="map-tools-button border-radius-bottom w-inline-block"
+                    ><div class="svg-icon _16x16 color-dark-100 w-embed">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g clip-path="url(#clip0_396_11012)">
+                          <path
+                            d="M3.33325 8H12.6666"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></path>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_396_11012">
+                            <rect width="16" height="16" fill="white"></rect>
+                          </clipPath>
+                        </defs>
+                      </svg></div
+                  ></a>
+                </div>
+              </div>
+              <div class="map-type-tabs">
+                <a
+                  href="#"
+                  class="map-type-tab-button border-radius-left active w-inline-block"
+                  ><div class="text-s-bold">Map</div></a
+                ><a
+                  href="#"
+                  class="map-type-tab-button border-radius-right w-inline-block"
+                  ><div class="text-s">Satelite</div></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src='https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63dccc1ba88f450bf57ed4e1'></script>
+<script src='https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/js/webflow.f93fd1be0.js'></script>
+{% endblock content %}
