@@ -8,16 +8,21 @@ import os
 import json
 import re
 from .utils.auth import RETS_USERNAME, RETS_PASSWORD
+from django.core.paginator import Paginator
+
 
 # RETS Credentials
 RETS_LOGIN_URL = "https://matrixrets.pillarnine.com/rets/Login.ashx"
 RETS_SEARCH_URL = "https://matrixrets.pillarnine.com/rets/Search.ashx"
 RETS_GETOBJECT_URL = "https://matrixrets.pillarnine.com/rets/GetObject.ashx"
+RETS_METADATA_URL = "https://matrixrets.pillarnine.com/rets/GetMetadata.ashx"
+
 
 USERNAME = RETS_USERNAME
 PASSWORD = RETS_PASSWORD
 RETS_VERSION = "RETS/1.7.2"
 USER_AGENT = "MyRETSClient/1.0"
+
 
 
 def get_media(property_id):
@@ -59,6 +64,8 @@ def get_media(property_id):
     parts = response.content.split(b"--" + boundary)
 
     images = []  # Store saved image paths
+    media_dir = f"media/{property_id}"
+    os.makedirs(media_dir, exist_ok=True)  # Ensure directory exists
 
     for part in parts:
         if b"Content-Type:" in part:
@@ -78,12 +85,17 @@ def get_media(property_id):
             object_id_match = re.search(r"Object-ID:\s*(\d+)", headers)
             object_id = object_id_match.group(1) if object_id_match else "unknown"
 
-            # Save the image
-            media_dir = f"media/{property_id}"
-            os.makedirs(media_dir, exist_ok=True)
+            # Define file path
             filename = f"{property_id}_{object_id}.{extension}"
             file_path = os.path.join(media_dir, filename)
 
+            # **Check if the image already exists**
+            if os.path.exists(file_path):
+                print(f"⚠️ Image already exists: {filename}, skipping download.")
+                images.append(file_path)
+                continue  # Skip downloading
+
+            # Save the image
             with open(file_path, "wb") as f:
                 f.write(image_data.split(b"\r\n--")[0])
 
@@ -94,7 +106,6 @@ def get_media(property_id):
             print("Skipping non-image part.")
 
     return images  # Return list of image paths
-
 
 def get_single(listing_id):
     # Search query to fetch property details by Listing ID
@@ -140,18 +151,63 @@ def get_single(listing_id):
         print("Error:", response.status_code, response.text)
 
 
+def parse_metadata(xml_data):
+    """Parse XML response and extract lookup values."""
+    soup = BeautifulSoup(xml_data, "xml")
+    lookup_dict = {}
+
+    for lookup in soup.find_all("METADATA-LOOKUP_TYPE"):
+        lookup_name = lookup.get("Lookup", "").strip()  # Extract Lookup name
+        lookup_values = []
+
+        for entry in lookup.find_all("LookupType"):
+            value = entry.find("Value").text if entry.find("Value") else None
+            long_value = entry.find("LongValue").text if entry.find("LongValue") else value  # Default to value if missing
+            lookup_values.append({"value": value, "long_value": long_value})
+
+        lookup_dict[lookup_name] = lookup_values
+
+    return lookup_dict
 
 
-def fetch_properties():
+
+def get_metadata(resource="Property"):
+    """Fetch metadata from RETS MLS to get available filters."""
+    params = {
+        "Type": "METADATA-LOOKUP_TYPE",
+        "ID": resource,
+        "Format": "STANDARD-XML"
+    }
+
+    response = requests.get(
+        RETS_METADATA_URL,
+        params=params,
+        auth=HTTPDigestAuth(USERNAME, PASSWORD),
+        headers={"RETS-Version": RETS_VERSION, "User-Agent": USER_AGENT}
+    )
+
+    if response.status_code == 200:
+        fdata=parse_metadata(response.text)
+        open('metadata.json', 'w').write(json.dumps(fdata))
+       
+        return fdata  # XML Response (Parse it for filters)
+    else:
+        print(f"Error fetching metadata: {response.status_code}")
+        return None
+
+
+def fetch_properties(page=1, limit=4):
+    offset = (page - 1) * limit  # Calculate offset for pagination
     search_params = {
         "SearchType": "Property",
         "Class": "Property",
         "QueryType": "DMQL2",
-        "Query": "(StandardStatus=|A)",
+        "Query": "(PropertyType=|RESI)",
         "Format": "COMPACT-DECODED",
         "Count": 1,
         "StandardNames": 0,
-        "Limit": 4
+        "Limit": limit,
+        "Offset": offset,
     }
     
     response = requests.get(
@@ -165,6 +221,8 @@ def fetch_properties():
         return JsonResponse({"error": "Failed to fetch data"}, status=500)
     
     soup = BeautifulSoup(response.text, 'lxml')
+    count_tag = soup.find('count')
+    total_count = int(count_tag['records']) if count_tag and 'records' in count_tag.attrs else 0
     columns = soup.find('columns').text.strip().split('\t')
     data_rows = soup.find_all('data')
     data_dict = []
@@ -176,11 +234,11 @@ def fetch_properties():
         if listing_id:
             record["Media"] = get_media(listing_id)
         data_dict.append(record)
-    return data_dict
+    return data_dict ,total_count  
 
 def home(request):
-    data_dict= fetch_properties()
-    
+    data_dict,total_count = fetch_properties()
+    print(total_count)
     return render(request, 'home.html', {'properties': data_dict})
 
 def listing(request,id):
@@ -189,3 +247,30 @@ def listing(request,id):
         listing[0]["Media"] = get_media(id)
     print(listing)
     return render(request,'listing.html',{'listing':listing})
+def property(request):
+    page = request.GET.get('page', 1)  # Get page number from URL
+    limit = 9  # Number of properties per page
+
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+
+    properties, total_count = fetch_properties(page=page, limit=limit)  # Fetch data and count
+
+    paginator = Paginator(range(total_count), limit)  # Create paginator using actual count
+    # print(properties)
+    return render(request, 'properties.html', {
+        'properties': properties,
+        'paginator': paginator,
+        'current_page': page,
+        'total_count': total_count,
+    })
+
+    # return render(request,'properties.html')
+def about(request):
+    metadata_xml = get_metadata()
+    print(metadata_xml)
+    return render(request,'about.html')
+def contact(request):
+    return render(request,'contact.html')
