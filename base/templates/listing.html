@@ -132,79 +132,26 @@
           <script type="application/json" class="w-json">
             {
               "items": [
+              {% for media in listing.0.Media %}
                 {
                   "_id": "example_img",
                   "origFileName": "Estately Property - Featured Photo.webp",
                   "fileName": "Estately Property - Featured Photo.webp",
                   "fileSize": 56430,
                   "height": 600,
-                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954ab313f7e96fb2d3a03_Estately%20Property%20-%20Featured%20Photo.webp",
+                  "url": "http://127.0.0.1:8000/media/{{ media|cut:'media/' }}",
                   "width": 1441,
                   "caption": "View from Outside",
                   "type": "image"
                 },
+                {% endfor %}
                 {
                   "_id": "example_img",
                   "origFileName": "Estately Property - Photo Gallery 1.webp",
                   "fileName": "Estately Property - Photo Gallery 1.webp",
                   "fileSize": 29520,
                   "height": 702,
-                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b585ef9f70057fc639_Estately%20Property%20-%20Photo%20Gallery%201.webp",
-                  "width": 699,
-                  "caption": "Kitchen",
-                  "type": "image"
-                },
-                {
-                  "_id": "example_img",
-                  "origFileName": "Estately Property - Photo Gallery 2.webp",
-                  "fileName": "Estately Property - Photo Gallery 2.webp",
-                  "fileSize": 43410,
-                  "height": 702,
-                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b586523a3e281182de_Estately%20Property%20-%20Photo%20Gallery%202.webp",
-                  "width": 699,
-                  "caption": "Living Room",
-                  "type": "image"
-                },
-                {
-                  "_id": "example_img",
-                  "origFileName": "Estately Property - Photo Gallery 3.webp",
-                  "fileName": "Estately Property - Photo Gallery 3.webp",
-                  "fileSize": 73040,
-                  "height": 702,
-                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b6a5623bf6b0cc19e5_Estately%20Property%20-%20Photo%20Gallery%203.webp",
-                  "width": 699,
-                  "caption": "Living Room",
-                  "type": "image"
-                },
-                {
-                  "_id": "example_img",
-                  "origFileName": "Estately Property - Photo Gallery 4.webp",
-                  "fileName": "Estately Property - Photo Gallery 4.webp",
-                  "fileSize": 49842,
-                  "height": 702,
-                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b698a4d37102ac50ea_Estately%20Property%20-%20Photo%20Gallery%204.webp",
-                  "width": 699,
-                  "caption": "Balcony",
-                  "type": "image"
-                },
-                {
-                  "_id": "example_img",
-                  "origFileName": "Estately Property - Photo Gallery 5.webp",
-                  "fileName": "Estately Property - Photo Gallery 5.webp",
-                  "fileSize": 46622,
-                  "height": 702,
-                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b58291c6a208fd10aa_Estately%20Property%20-%20Photo%20Gallery%205.webp",
-                  "width": 699,
-                  "caption": "Bedroom",
-                  "type": "image"
-                },
-                {
-                  "_id": "example_img",
-                  "origFileName": "Estately Property - Photo Gallery 6.webp",
-                  "fileName": "Estately Property - Photo Gallery 6.webp",
-                  "fileSize": 25378,
-                  "height": 702,
-                  "url": "https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b54109b237b4a5bfb9_Estately%20Property%20-%20Photo%20Gallery%206.webp",
+                  "url": "dd://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b585ef9f70057fc639_Estately%20Property%20-%20Photo%20Gallery%201.webp",
                   "width": 699,
                   "caption": "Kitchen",
                   "type": "image"

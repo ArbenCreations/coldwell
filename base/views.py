@@ -133,7 +133,7 @@ def get_media(property_id):
     
     # If the directory exists, return the list of existing images
     if os.path.exists(media_dir):
-        images = [os.path.join(media_dir, img) for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
+        images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
         print(f"📂 Using cached images for Property ID: {property_id}")
         return images
     
