@@ -29,5 +29,6 @@ def metadata_context(request):
     # Filter cities that are only in Alberta
     filtered_cities = [city for city in cities if city["long_value"] in alberta_cities]
     property_subtypes = metadata.get("PropertySubType", [])
+    property_types = metadata.get("PropertyType", [])
     # print(property_subtypes)
-    return {"metadata": metadata,"cities":filtered_cities,"property_subtypes":property_subtypes}
+    return {"metadata": metadata,"cities":filtered_cities,"property_subtypes":property_subtypes,"property_types":property_types}

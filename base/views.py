@@ -292,10 +292,10 @@ def get_metadata(resource="Property"):
         print(f"Error fetching metadata: {response.status_code}")
         return None
 
-def fetch_properties(page=1, limit=4, location=None, min_price=None, max_price=0, property_type=None):
+def fetch_properties(page=1, limit=4, location=None, min_price=None, max_price=0, property_type=None,property_Subtype=None):
     
     offset = (page - 1) * limit  # Calculate offset for pagination
-    query_parts = ["(PropertyType=|RESI)"]
+    query_parts = []
     
     if location:
         query_parts.append(f"(City=|{location})")
@@ -308,9 +308,11 @@ def fetch_properties(page=1, limit=4, location=None, min_price=None, max_price=0
         query_parts.append(f"(ListPrice=-{max_price})")  # Less than max price
 
     # Fix property type query
-   
     if property_type:
-            query_parts.append(f'(PropertySubType=|{property_type})')
+            query_parts.append(f'(PropertyType=|{property_type})')
+
+    if property_Subtype:
+            query_parts.append(f'(PropertySubType=|{property_Subtype})')
     
     query_string = ','.join(query_parts)
     print(query_string)
@@ -379,7 +381,7 @@ def property(request):
     location = request.GET.get('location')
     price_range = request.GET.get('Price')
     property_type = request.GET.get('propertyType')
-    
+    property_Subtype=request.GET.get('property_Subtype')
     min_price, max_price = None, None
     if price_range:
         price_match = re.match(r'\$(\d+)-\$(\d+)', price_range)
@@ -393,7 +395,7 @@ def property(request):
     except ValueError:
         page = 1
     
-    properties, total_count = fetch_properties(page=page, limit=limit, location=location, min_price=min_price, max_price=max_price, property_type=property_type)  # Fetch data and count
+    properties, total_count = fetch_properties(page=page, limit=limit, location=location, min_price=min_price, max_price=max_price, property_type=property_type,property_Subtype=property_Subtype)  # Fetch data and count
     
     paginator = Paginator(range(total_count), limit)  # Create paginator using actual count
     

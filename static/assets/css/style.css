@@ -523,4 +523,11 @@ footer .more-info ul li {
         border-bottom-left-radius: 0;
         border-top-right-radius: 15px;
     }
+    .navbar-collapse {
+        background-color: #fff !important;
+    }
+    .navbar-nav {
+        justify-content: center;
+        align-items: center;
+    }
 }

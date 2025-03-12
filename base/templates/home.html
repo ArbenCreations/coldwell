@@ -110,7 +110,7 @@
 
           <div class="d-flex flex-column SearchInputs">
             <label for="propertyType">Property Type </label>
-            <select name="propertyType" id="propertyType">
+            <select name="property_Subtype" id="propertyType">
                 <option value="">Type</option>
               
                 {% for subtype in property_subtypes %}
@@ -647,12 +647,12 @@
         />
       </div>
       <div class="col-xl-6">
-        <h3 class="fs24 p-0 m-0">{{property_subtypes.0.long_value}}</h3>
+        <h3 class="fs24 p-0 m-0">{{property_types.0.long_value}}</h3>
         <p class="">100+ listings</p>
       </div>
 
       <div>
-        <a href="/property?propertyType={{property_subtypes.0.value}}" class="d-flex fs18 fw-bold align-items-center gap-2 m-0 p-0"
+        <a href="/property?propertyType={{property_types.0.value}}" class="d-flex fs18 fw-bold align-items-center gap-2 m-0 p-0"
           >view
           <svg
             width="21"
@@ -693,12 +693,12 @@
         />
       </div>
       <div class="col-xl-6">
-        <h3 class="fs24 p-0 m-0">{{property_subtypes.1.long_value}}</h3>
+        <h3 class="fs24 p-0 m-0">{{property_types.6.long_value}}</h3>
         <p class="">100+ listings</p>
       </div>
 
       <div>
-        <a href="/property?propertyType={{property_subtypes.1.value}}" class="d-flex fs18 fw-bold align-items-center gap-2 m-0 p-0"
+        <a href="/property?propertyType={{property_types.6.value}}" class="d-flex fs18 fw-bold align-items-center gap-2 m-0 p-0"
           >view
           <svg
             width="21"
@@ -739,12 +739,12 @@
         />
       </div>
       <div class="col-xl-6">
-        <h3 class="fs24 p-0 m-0">{{property_subtypes.2.long_value}}</h3>
+        <h3 class="fs24 p-0 m-0">{{property_types.5.long_value}}</h3>
         <p class="">100+ listings</p>
       </div>
 
       <div>
-        <a href="/property?propertyType={{property_subtypes.2.value}}" class="d-flex fs18 fw-bold align-items-center gap-2 m-0 p-0"
+        <a href="/property?propertyType={{property_types.5.value}}" class="d-flex fs18 fw-bold align-items-center gap-2 m-0 p-0"
           >view
           <svg
             width="21"
