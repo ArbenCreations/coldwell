@@ -9,6 +9,7 @@ import json
 import re
 from .utils.auth import RETS_USERNAME, RETS_PASSWORD
 from django.core.paginator import Paginator
+from pathlib import Path
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 METADATA_FILE = os.path.join(BASE_DIR, "static", "metadata.json")
@@ -133,10 +134,10 @@ def get_media(property_id):
     print(media_dir)
     print(os.path.exists(media_dir))
     # If the directory exists, return the list of existing images
-    # if os.path.exists(media_dir):
-    #     images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
-    #     print(f"📂 Using cached images for Property ID: {property_id}")
-    #     return images
+    if os.path.exists(media_dir) and any(os.scandir(media_dir)):  # Ensure folder is not empty
+        images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
+        print(f"📂 Using cached images for Property ID: {property_id}")
+        return images
     
     print(f"Fetching media for Property ID: {property_id}")
     params = {
@@ -191,7 +192,7 @@ def get_media(property_id):
             filename = f"{property_id}_{object_id}.{extension}"
             file_path = os.path.join(media_dir, filename)
 
-            if os.path.exists(file_path):
+            if Path(file_path).is_file():
                 print(f"⚠️ Image already exists: {filename}, skipping download.")
                 images.append(file_path)
                 continue
