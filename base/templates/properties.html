@@ -1622,7 +1622,7 @@
                 </div>
                 <div class="pagination search-result">
                     {% if current_page > 1 %}
-                    <a href="?page={{ current_page|add:'-1' }}" class="pagination-button arrow w-inline-block">
+                    <a href="{{ request.get_full_path }}&page={{ current_page|add:'-1' }}" class="pagination-button arrow w-inline-block">
                         <div class="svg-icon _24x24 w-embed">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -1636,15 +1636,15 @@
 
                     {% for num in paginator.page_range %}
                     {% if num == current_page %}
-                    <a href="?page={{ num }}" class="pagination-button active w-inline-block">
+                    <a href="{{ request.get_full_path }}&page={{ num }}" class="pagination-button active w-inline-block">
                         <div class="text-xl">{{ num }}</div>
                     </a>
-                    {% elif num > current_page|add:'-3' and num < current_page|add:'3' %} <a href="?page={{ num }}"
+                    {% elif num > current_page|add:'-3' and num < current_page|add:'3' %} <a href="{{ request.get_full_path }}&page={{ num }}"
                         class="pagination-button w-inline-block">
                         <div class="text-xl">{{ num }}</div>
                         </a>
                         {% elif num == 1 or num == paginator.num_pages %}
-                        <a href="?page={{ num }}" class="pagination-button w-inline-block">
+                        <a href="{{ request.get_full_path }}&page={{ num }}" class="pagination-button w-inline-block">
                             <div class="text-xl">{{ num }}</div>
                         </a>
                         {% elif num == current_page|add:'-3' or num == current_page|add:'3' %}
@@ -1654,7 +1654,7 @@
                         {% endif %}
                         {% endfor %}
 
-                        {% if current_page < paginator.num_pages %} <a href="?page={{ current_page|add:'1' }}"
+                        {% if current_page < paginator.num_pages %} <a href="{{ request.get_full_path }}&page={{ current_page|add:'1' }}"
                             class="pagination-button arrow w-inline-block">
                             <div class="svg-icon _24x24 w-embed">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
