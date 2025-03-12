@@ -130,7 +130,8 @@ USER_AGENT = "MyRETSClient/1.0"
 
 def get_media(property_id):
     media_dir = f"media/{property_id}"
-    
+    print(media_dir)
+    print(os.path.exists(media_dir))
     # If the directory exists, return the list of existing images
     if os.path.exists(media_dir):
         images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
