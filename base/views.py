@@ -10,6 +10,8 @@ import re
 from .utils.auth import RETS_USERNAME, RETS_PASSWORD
 from django.core.paginator import Paginator
 from pathlib import Path
+from django.conf import settings
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 METADATA_FILE = os.path.join(BASE_DIR, "static", "metadata.json")
@@ -130,15 +132,21 @@ USER_AGENT = "MyRETSClient/1.0"
 #     return images  # Return list of image paths
 
 def get_media(property_id):
-    media_dir = f"media/{property_id}"
-    print(media_dir)
-    print(os.path.exists(media_dir))
-    # If the directory exists, return the list of existing images
-    # if os.path.exists(media_dir) and any(os.scandir(media_dir)):  # Ensure folder is not empty
-    #     images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
-    #     print(f"📂 Using cached images for Property ID: {property_id}")
-    #     return images
+    media_root = settings.MEDIA_ROOT if hasattr(settings, "MEDIA_ROOT") else Path(__file__).resolve().parent / "media"
     
+    # Ensure media directory is consistent across local & server
+    media_dir = os.path.join(media_root, str(property_id))
+    print(f"Media directory: {media_dir}")
+    
+    # Ensure directory exists at correct location
+    os.makedirs(media_dir, exist_ok=True)
+    
+    # If the directory exists and is not empty, return the list of existing images
+    if any(Path(media_dir).iterdir()):
+        images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
+        print(f"📂 Using cached images for Property ID: {property_id}")
+        return images
+
     print(f"Fetching media for Property ID: {property_id}")
     params = {
         "Resource": "Property",
