@@ -132,20 +132,21 @@ USER_AGENT = "MyRETSClient/1.0"
 #     return images  # Return list of image paths
 
 def get_media(property_id):
+    # Ensure `MEDIA_ROOT` is used for saving files
     media_root = settings.MEDIA_ROOT if hasattr(settings, "MEDIA_ROOT") else Path(__file__).resolve().parent / "media"
-    
-    # Ensure media directory is consistent across local & server
     media_dir = os.path.join(media_root, str(property_id))
-    print(f"Media directory: {media_dir}")
+    os.makedirs(media_dir, exist_ok=True)  # Ensure directory exists
     
-    # Ensure directory exists at correct location
-    os.makedirs(media_dir, exist_ok=True)
+    # Check if images already exist
+    existing_images = [
+        f"/media/{property_id}/{img}"  # Convert absolute path to URL path
+        for img in os.listdir(media_dir) 
+        if img.endswith(('jpg', 'jpeg', 'png', 'gif'))
+    ]
     
-    # If the directory exists and is not empty, return the list of existing images
-    # if any(Path(media_dir).iterdir()):
-    #     images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
-    #     print(f"📂 Using cached images for Property ID: {property_id}")
-    #     return images
+    if existing_images:
+        print(f"📂 Using cached images for Property ID: {property_id}")
+        return existing_images  # Return `/media/` URLs
 
     print(f"Fetching media for Property ID: {property_id}")
     params = {
@@ -178,7 +179,6 @@ def get_media(property_id):
 
     boundary = boundary_match.group(1).encode()
     parts = response.content.split(b"--" + boundary)
-    os.makedirs(media_dir, exist_ok=True)  # Ensure directory exists
     
     images = []
     for part in parts:
@@ -202,17 +202,16 @@ def get_media(property_id):
 
             if Path(file_path).is_file():
                 print(f"⚠️ Image already exists: {filename}, skipping download.")
-                images.append(file_path)
+                images.append(f"/media/{property_id}/{filename}")
                 continue
 
             with open(file_path, "wb") as f:
                 f.write(image_data.split(b"\r\n--")[0])
 
             print(f"✅ Saved image: {filename}")
-            images.append(file_path)
+            images.append(f"/media/{property_id}/{filename}")  # Use `/media/` path
 
     return images
-
 
 def get_single(listing_id):
     # Search query to fetch property details by Listing ID
