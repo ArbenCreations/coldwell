@@ -339,7 +339,7 @@ def fetch_properties(page=1, limit=4, location=None, min_price=None, max_price=0
         return JsonResponse({"error": "Failed to fetch data"}, status=500)
     
     soup = BeautifulSoup(response.text, 'lxml')
-    print(soup)
+    # print(soup)
     rets_tag = soup.find('rets')
     if rets_tag and "No Records Found" in rets_tag.get("replytext", ""):
         return [], 0  # Return empty list and count 0
@@ -372,7 +372,7 @@ def listing(request,id):
     listing=get_single(id)
     if id:
         listing[0]["Media"] = get_media(id)
-    print(listing)
+    # print(listing)
     return render(request,'listing.html',{'listing':listing})
 
 def property(request):
