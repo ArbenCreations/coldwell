@@ -390,6 +390,8 @@ def property(request):
     location = request.GET.get('location')
     price_range = request.GET.get('Price')
     property_type = request.GET.get('propertyType')
+    if not property_type:
+        property_type='RESI'
     property_Subtype=request.GET.get('property_Subtype')
     min_price, max_price = None, None
     if price_range:
