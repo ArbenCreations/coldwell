@@ -142,10 +142,10 @@ def get_media(property_id):
     os.makedirs(media_dir, exist_ok=True)
     
     # If the directory exists and is not empty, return the list of existing images
-    if any(Path(media_dir).iterdir()):
-        images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
-        print(f"📂 Using cached images for Property ID: {property_id}")
-        return images
+    # if any(Path(media_dir).iterdir()):
+    #     images = [os.path.join(media_dir, img).replace("\\", "/") for img in os.listdir(media_dir) if img.endswith(('jpg', 'jpeg', 'png', 'gif'))]
+    #     print(f"📂 Using cached images for Property ID: {property_id}")
+    #     return images
 
     print(f"Fetching media for Property ID: {property_id}")
     params = {
