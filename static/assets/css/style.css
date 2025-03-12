@@ -37,8 +37,7 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
     font-family: "Syne", sans-serif;
 }
 
@@ -174,6 +173,7 @@ h2 {
 }
 
 .SearchInputs select {
+    width: 100px;
     font-weight: 700;
     border: none;
     background: transparent;
@@ -394,8 +394,9 @@ a {
     /* height: 100%; */
     /* width: 100%; */
     background-image: url(../media/63e486a98b1e3f344556828a_Hero\ Vector\ 1.svg);
-    /* background-position: start center; */
-    background-size: auto;
+    background-position-y: center;
+    /* background-position-x: left; */
+    background-size: 150%;
 }
 
 .subs {
@@ -414,10 +415,83 @@ a {
     border: none;
 }
 
+.navbar.scrolled {
+    background-color: rgb(255, 255, 255);
+    /* Adjust color as needed */
+    transition: background-color 0.3s ease-in-out;
+    z-index: 999999;
+    padding: 10px 0px !important;
+    transition: .5s all;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.288);
+}
+
+footer h6 {
+    color: var(--font-color-2);
+    /* font-weight: bold; */
+}
+
+footer li {
+    list-style: none;
+}
+
+footer ul {
+    padding: 0;
+}
+
+footer .social-icons-2 {
+    display: flex;
+    gap: 10px;
+}
+
+footer .social-icons-2 a {
+    width: 30px;
+    height: 30px;
+    background-color: var(--font-color-1);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+footer .more-info ul li {
+    margin: 15px 0px;
+}
+
 
 /* end Home page */
 
 @media screen and (max-width:500px) {
+    #Newsletter {
+        height: 500px;
+    }
+    .subsIMG {
+        background-position: center;
+    }
+    .part1 {
+        height: 1%;
+    }
+    .subs {
+        border: 0;
+        background-color: transparent;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .subs input {
+        background-color: white;
+        border-radius: 15px;
+        height: 50px;
+        width: 100%;
+        padding: 0 10px;
+    }
+    .subs button.btn_blue {
+        background-color: var(--secondary);
+    }
+    .subs button.btn_blue:hover {
+        background-color: transparent;
+        border: 2px solid var(--secondary);
+        color: var(--bgcolor);
+    }
     .w100 {
         width: 100% !important;
     }
@@ -427,5 +501,26 @@ a {
     .AgentCards {
         display: grid;
         grid-template-columns: 1fr;
+    }
+    .fs72 {
+        font-size: 37px;
+    }
+    .fs48 {
+        font-size: 24px;
+    }
+    .fs18 {
+        font-size: 12px;
+    }
+    .fs40 {
+        font-size: 22px;
+    }
+    .amenities {
+        row-gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .propImg img {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 15px;
     }
 }

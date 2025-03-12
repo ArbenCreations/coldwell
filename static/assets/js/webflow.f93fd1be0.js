@@ -1620,24 +1620,7 @@ __p+='`),
           e(l).attr("style", m ? "display: none !important;" : "");
         }
         function f() {
-          var m = e('<a class="w-webflow-badge"></a>').attr(
-              "href",
-              "https://webflow.com?utm_campaign=brandjs"
-            ),
-            y = e("<img>")
-              .attr(
-                "src",
-                "https://d3e54v103j8qbb.cloudfront.net/img/webflow-badge-icon-d2.89e12c322e.svg"
-              )
-              .attr("alt", "")
-              .css({ marginRight: "4px", width: "26px" }),
-            T = e("<img>")
-              .attr(
-                "src",
-                "https://d3e54v103j8qbb.cloudfront.net/img/webflow-badge-text-d2.c82cec3b78.svg"
-              )
-              .attr("alt", "Made in Webflow");
-          return m.append(y, T), m[0];
+         
         }
         function E() {
           var m = i.children(o),
@@ -24295,13 +24278,13 @@ Webflow.require("ix2").init({
       },
       mediaQueries: ["main", "medium", "small", "tiny"],
       target: {
-        id: "64088004b78d3f1cf2fef3f7|faf893fc-85de-68ed-db8e-fddcebeb5e75",
+        id: "64088004b78d3f1cf2fef3f766666|faf893fc-85de-68ed-db8e-fddcebeb5e75",
         appliesTo: "ELEMENT",
         styleBlockIds: [],
       },
       targets: [
         {
-          id: "64088004b78d3f1cf2fef3f7|faf893fc-85de-68ed-db8e-fddcebeb5e75",
+          id: "64088004b78d3f1cf2fef3f766666|faf893fc-85de-68ed-db8e-fddcebeb5e75",
           appliesTo: "ELEMENT",
           styleBlockIds: [],
         },
@@ -24330,13 +24313,13 @@ Webflow.require("ix2").init({
       },
       mediaQueries: ["main", "medium", "small", "tiny"],
       target: {
-        id: "64088004b78d3f1cf2fef3f7|faf893fc-85de-68ed-db8e-fddcebeb5e85",
+        id: "64088004b78d3f1cf2fef3f766666|faf893fc-85de-68ed-db8e-fddcebeb5e85",
         appliesTo: "ELEMENT",
         styleBlockIds: [],
       },
       targets: [
         {
-          id: "64088004b78d3f1cf2fef3f7|faf893fc-85de-68ed-db8e-fddcebeb5e85",
+          id: "64088004b78d3f1cf2fef3f766666|faf893fc-85de-68ed-db8e-fddcebeb5e85",
           appliesTo: "ELEMENT",
           styleBlockIds: [],
         },
@@ -25410,13 +25393,13 @@ Webflow.require("ix2").init({
       },
       mediaQueries: ["main"],
       target: {
-        id: "64088004b78d3f1cf2fef3f7",
+        id: "64088004b78d3f1cf2fef3f766666",
         appliesTo: "PAGE",
         styleBlockIds: [],
       },
       targets: [
         {
-          id: "64088004b78d3f1cf2fef3f7",
+          id: "64088004b78d3f1cf2fef3f766666",
           appliesTo: "PAGE",
           styleBlockIds: [],
         },
@@ -25452,13 +25435,13 @@ Webflow.require("ix2").init({
       },
       mediaQueries: ["main"],
       target: {
-        id: "64088004b78d3f1cf2fef3f7",
+        id: "64088004b78d3f1cf2fef3f766666",
         appliesTo: "PAGE",
         styleBlockIds: [],
       },
       targets: [
         {
-          id: "64088004b78d3f1cf2fef3f7",
+          id: "64088004b78d3f1cf2fef3f766666",
           appliesTo: "PAGE",
           styleBlockIds: [],
         },
@@ -25486,13 +25469,13 @@ Webflow.require("ix2").init({
       },
       mediaQueries: ["main"],
       target: {
-        id: "64088004b78d3f1cf2fef3f7",
+        id: "64088004b78d3f1cf2fef3f766666",
         appliesTo: "PAGE",
         styleBlockIds: [],
       },
       targets: [
         {
-          id: "64088004b78d3f1cf2fef3f7",
+          id: "64088004b78d3f1cf2fef3f766666",
           appliesTo: "PAGE",
           styleBlockIds: [],
         },
@@ -25531,13 +25514,13 @@ Webflow.require("ix2").init({
       },
       mediaQueries: ["main"],
       target: {
-        id: "64088004b78d3f1cf2fef3f7",
+        id: "64088004b78d3f1cf2fef3f766666",
         appliesTo: "PAGE",
         styleBlockIds: [],
       },
       targets: [
         {
-          id: "64088004b78d3f1cf2fef3f7",
+          id: "64088004b78d3f1cf2fef3f766666",
           appliesTo: "PAGE",
           styleBlockIds: [],
         },

@@ -12,7 +12,7 @@
         <div data-w-id="e8bac7ac-e048-a58a-d463-91befe401b41" style="opacity: 1;" class="browse-property-forms-wrap">
             <div class="browse-form-wrap">
                 <div class="form-block w-form">
-                    <form id="wf-form-Browse-Form" name="wf-form-Browse-Form" data-name="Browse Form" method="get"
+                    <form action='{% url "property" %}'  method="get"
                         class="browse-form-group" data-wf-page-id="63f4a1a2596f1aa29b03deee"
                         data-wf-element-id="181da630-aece-a6b8-c354-297b2716727f" aria-label="Browse Form">
                         <div class="browse-form-item">
@@ -28,12 +28,13 @@
                                     </svg></div>
                             </div>
                             <div>
-                                <div class="text-s">Location</div><select id="Location" name="Location"
-                                    data-name="Location" required="" class="raw-select-field w-select">
-                                    <option value="California, US">California, US</option>
-                                    <option value="London, UK">London, UK</option>
-                                    <option value="Rome, Italia">Rome, Italia</option>
-                                    <option value="Paris, France">Paris, France</option>
+                                <div class="text-s">Location</div><select id="Location" name="location"
+                                    data-name="Location" class="raw-select-field w-select">
+                                    <option value="">City</option>
+
+                {% for city in cities %}
+                <option value="{{ city.value }}">{{ city.long_value }}</option>
+            {% endfor %}
                                 </select>
                             </div>
                         </div>
@@ -51,11 +52,12 @@
                             </div>
                             <div>
                                 <div class="text-s">Price</div><select id="Price" name="Price" data-name="Price"
-                                    required="" class="raw-select-field w-select">
-                                    <option value="$1500-$2500">$1500-$2500</option>
-                                    <option value="$2500-$5000">$2500-$5000</option>
-                                    <option value="$5000-$8000">$5000-$8000</option>
-                                    <option value="$8000+">$8000+</option>
+                                     class="raw-select-field w-select">
+                                    <option value="">Price</option>
+              <option value="$15000-$25000">$15000-$25000</option>
+              <option value="$25000-$50000">$25000-$50000</option>
+              <option value="$50000-$80000">$50000-$80000</option>
+              <option value="$80000+">$80000+</option>
                                 </select>
                             </div>
                         </div>
@@ -84,16 +86,17 @@
                                     </svg></div>
                             </div>
                             <div>
-                                <div class="text-s">Type of Property</div><select id="Category" name="Category"
-                                    data-name="Category" required="" class="raw-select-field w-select">
-                                    <option value="Apartment">Apartment</option>
-                                    <option value="Studio">Studio</option>
-                                    <option value="Office">Office</option>
+                                <div class="text-s">Type of Property</div><select id="Category" name="propertyType"
+                                    data-name="Category"  class="raw-select-field w-select">
+                                    <option value="">Type</option>
+                                    {% for subtype in property_subtypes %}
+                <option value="{{ subtype.value }}">{{ subtype.long_value }}</option>
+            {% endfor %}
                                 </select>
                             </div>
                         </div>
-                        <div class="browse-form-cta-wrap"><a href="/properties-v1"
-                                class="button button-l w-button">Browse</a></div>
+                        <div class="browse-form-cta-wrap"><button 
+                                class="button button-l w-button">Browse</button></div>
                     </form>
                     <div class="success-message w-form-done" tabindex="-1" role="region"
                         aria-label="Browse Form success">

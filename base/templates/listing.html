@@ -23,7 +23,7 @@
               stroke-linejoin="round"
             ></path>
           </svg></div></a
-      ><a href="/properties-v1" class="w-inline-block"
+      ><a href="{% url "property" %}" class="w-inline-block"
         ><div class="text-l-medium">Back To Search</div></a
       >
     </div>
@@ -503,7 +503,7 @@
                         data-name="Property Schedule Tour Form"
                         method="get"
                         class="form"
-                        data-wf-page-id="64088004b78d3f1cf2fef3f7"
+                        data-wf-page-id="64088004b78d3f1cf2fef3f766666"
                         data-wf-element-id="053d1046-6edc-bf11-b8cc-2cfe59d5d4d8"
                         aria-label="Property Schedule Tour Form"
                       >
@@ -756,7 +756,7 @@
                         data-name="Property Request Quote Form"
                         method="get"
                         class="form"
-                        data-wf-page-id="64088004b78d3f1cf2fef3f7"
+                        data-wf-page-id="64088004b78d3f1cf2fef3f766666"
                         data-wf-element-id="053d1046-6edc-bf11-b8cc-2cfe59d5d4f3"
                         aria-label="Property Request Quote Form"
                       >
@@ -1443,5 +1443,5 @@
   </div>
 </div>
 <script src='https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63dccc1ba88f450bf57ed4e1'></script>
-<script src='https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/js/webflow.f93fd1be0.js'></script>
+<script src='{% static "assets/js/webflow.f93fd1be0.js" %}'></script>
 {% endblock content %}
