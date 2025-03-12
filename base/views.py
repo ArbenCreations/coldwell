@@ -364,7 +364,7 @@ def home(request):
 
     # print(metaData)
     
-    data_dict,total_count = fetch_properties()
+    data_dict,total_count = fetch_properties(property_type='RESI')
     print(total_count)
     return render(request, 'home.html', {'properties': data_dict})
 
