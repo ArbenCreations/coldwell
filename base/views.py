@@ -301,28 +301,24 @@ def get_metadata(resource="Property"):
         print(f"Error fetching metadata: {response.status_code}")
         return None
 
-def fetch_properties(page=1, limit=4, location=None, min_price=None, max_price=0, property_type=None,property_Subtype=None):
-    
+def fetch_properties(page=1, limit=4, **filters):
     offset = (page - 1) * limit  # Calculate offset for pagination
     query_parts = []
     
-    if location:
-        query_parts.append(f"(City=|{location})")
-    # Fix price range query
-    if min_price and max_price:
-        query_parts.append(f"(ListPrice={min_price}-{max_price})")  # Use correct RETS range syntax
-    elif min_price:
-        query_parts.append(f"(ListPrice={min_price}+)")  # Greater than min price
-    elif max_price:
-        query_parts.append(f"(ListPrice=-{max_price})")  # Less than max price
-
-    # Fix property type query
-    if property_type:
-            query_parts.append(f'(PropertyType=|{property_type})')
-
-    if property_Subtype:
-            query_parts.append(f'(PropertySubType=|{property_Subtype})')
-    
+    for key, value in filters.items():
+        if value is None:
+            continue
+        
+        if isinstance(value, (list, tuple)):
+            query_parts.append(f'({key}=|{"|".join(map(str, value))})')  # Multiple values OR condition
+        elif isinstance(value, dict) and "min" in value and "max" in value:
+            query_parts.append(f'({key}={value["min"]}-{value["max"]})')  # Range filter
+        elif isinstance(value, dict) and "min" in value:
+            query_parts.append(f'({key}={value["min"]}+)')  # Greater than min
+        elif isinstance(value, dict) and "max" in value:
+            query_parts.append(f'({key}=-{value["max"]})')  # Less than max
+        else:
+            query_parts.append(f'({key}=|{value})')  # Single value
     query_string = ','.join(query_parts)
     print(query_string)
     search_params = {
@@ -372,8 +368,11 @@ def fetch_properties(page=1, limit=4, location=None, min_price=None, max_price=0
 def home(request):
 
     # print(metaData)
-    
-    data_dict,total_count = fetch_properties(property_type='RESI')
+    filters={}
+    # if property_type := request.GET.get('propertyType', 'RESI'):
+    filters["PropertyType"] = 'RESI'
+
+    data_dict,total_count = fetch_properties(**filters)
     print(total_count)
     return render(request, 'home.html', {'properties': data_dict})
 
@@ -385,38 +384,47 @@ def listing(request,id):
     return render(request,'listing.html',{'listing':listing})
 
 def property(request):
-    page = request.GET.get('page', 1)  # Get page number from URL
+    page = request.GET.get('page', 1)
     limit = 9  # Number of properties per page
-    location = request.GET.get('location')
+
+    filters = {}
+
+    # Extract filters dynamically
+    if location := request.GET.get('location'):
+        filters["City"] = location
+
+    if property_type := request.GET.get('propertyType', 'RESI'):
+        filters["PropertyType"] = property_type
+
+    if property_subtype := request.GET.get('property_Subtype'):
+        filters["PropertySubType"] = property_subtype
+
+    # Handle price range filtering
     price_range = request.GET.get('Price')
-    property_type = request.GET.get('propertyType')
-    if not property_type:
-        property_type='RESI'
-    property_Subtype=request.GET.get('property_Subtype')
-    min_price, max_price = None, None
     if price_range:
         price_match = re.match(r'\$(\d+)-\$(\d+)', price_range)
         if price_match:
-            min_price, max_price = price_match.groups()
-        elif price_range == "$8000+":
-            min_price = "8000"
-    
+            filters["ListPrice"] = {"min": price_match.group(1), "max": price_match.group(2)}
+        elif price_range.startswith("$") and price_range.endswith("+"):
+            filters["ListPrice"] = {"min": price_range[1:-1]}  # Extract min price from "$8000+"
+
     try:
         page = int(page)
     except ValueError:
         page = 1
-    
-    properties, total_count = fetch_properties(page=page, limit=limit, location=location, min_price=min_price, max_price=max_price, property_type=property_type,property_Subtype=property_Subtype)  # Fetch data and count
-    
-    paginator = Paginator(range(total_count), limit)  # Create paginator using actual count
-    
+
+    # Fetch properties using the dynamic filters
+    properties, total_count = fetch_properties(page=page, limit=limit, **filters)
+
+    # Set up pagination
+    paginator = Paginator(range(total_count), limit)
+
     return render(request, 'properties.html', {
         'properties': properties,
         'paginator': paginator,
         'current_page': page,
         'total_count': total_count,
     })
-
 
     # return render(request,'properties.html')
 def about(request):

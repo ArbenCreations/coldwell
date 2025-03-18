@@ -1261,128 +1261,7 @@
             <h5 class="color-dark-100">Map View</h5>
           </div>
           <div>
-            <div class="map-wrap property-details">
-              <div class="map-image-wrap">
-                <img
-                  src="https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map.webp"
-                  loading="lazy"
-                  sizes="(max-width: 991px) 92vw, (max-width: 1439px) 93vw, 1160px"
-                  srcset="
-                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map-p-500.webp   500w,
-                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map-p-800.webp   800w,
-                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map-p-1080.webp 1080w,
-                    https://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/63ecb989859f6a5fd823e440_Map.webp        1242w
-                  "
-                  alt="Homezy - Map"
-                  class="image-full-cover"
-                />
-              </div>
-              <div class="map-tools">
-                <div class="map-buttons-wrap">
-                  <a
-                    href="#"
-                    class="map-tools-button border-radius-all w-inline-block"
-                    ><div class="svg-icon _16x16 color-dark-100 w-embed">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clip-path="url(#clip0_396_11008)">
-                          <path
-                            d="M14 2L9.66671 14C9.63746 14.0638 9.5905 14.1179 9.53141 14.1558C9.47232 14.1938 9.40359 14.2139 9.33338 14.2139C9.26317 14.2139 9.19444 14.1938 9.13535 14.1558C9.07626 14.1179 9.0293 14.0638 9.00005 14L6.66671 9.33333L2.00005 7C1.93622 6.97075 1.88213 6.92379 1.84421 6.8647C1.80629 6.80561 1.78613 6.73688 1.78613 6.66667C1.78613 6.59646 1.80629 6.52772 1.84421 6.46863C1.88213 6.40954 1.93622 6.36258 2.00005 6.33333L14 2Z"
-                            fill="currentColor"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          ></path>
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_396_11008">
-                            <rect width="16" height="16" fill="white"></rect>
-                          </clipPath>
-                        </defs>
-                      </svg></div
-                  ></a>
-                </div>
-                <div class="map-buttons-wrap">
-                  <a
-                    href="#"
-                    class="map-tools-button border-radius-top w-inline-block"
-                    ><div class="svg-icon _16x16 color-dark-100 w-embed">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clip-path="url(#clip0_396_11010)">
-                          <path
-                            d="M8 3.33337V12.6667"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          ></path>
-                          <path
-                            d="M3.33325 8H12.6666"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          ></path>
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_396_11010">
-                            <rect width="16" height="16" fill="white"></rect>
-                          </clipPath>
-                        </defs>
-                      </svg></div></a
-                  ><a
-                    href="#"
-                    class="map-tools-button border-radius-bottom w-inline-block"
-                    ><div class="svg-icon _16x16 color-dark-100 w-embed">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <g clip-path="url(#clip0_396_11012)">
-                          <path
-                            d="M3.33325 8H12.6666"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          ></path>
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_396_11012">
-                            <rect width="16" height="16" fill="white"></rect>
-                          </clipPath>
-                        </defs>
-                      </svg></div
-                  ></a>
-                </div>
-              </div>
-              <div class="map-type-tabs">
-                <a
-                  href="#"
-                  class="map-type-tab-button border-radius-left active w-inline-block"
-                  ><div class="text-s-bold">Map</div></a
-                ><a
-                  href="#"
-                  class="map-type-tab-button border-radius-right w-inline-block"
-                  ><div class="text-s">Satelite</div></a
-                >
-              </div>
-            </div>
+            <div id="map"></div>
           </div>
         </div>
       </div>
@@ -1391,4 +1270,20 @@
 </div>
 <script src='https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=63dccc1ba88f450bf57ed4e1'></script>
 <script src='{% static "assets/js/webflow.f93fd1be0.js" %}'></script>
+
+
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet-src.js" integrity="sha512-x4B5AXtD8SqDqEpzOFXxCE0OOUhQ0Fep3Qka6WtUa3tw7z4fC7eOI4Vjm191HB63//4Y554Zxydbt2Hi8b+bVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> {% endcomment %}
+<script>
+  var map = L.map('map').setView([{{ listing.0.Latitude }}, {{ listing.0.Longitude }}], 15);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  L.marker([{{ listing.0.Latitude }}, {{ listing.0.Longitude }}])
+      .addTo(map)
+      .bindPopup(`<b>{{ listing.0.StreetNumber }} {{ listing.0.StreetName }} {{ listing.0.StreetSuffix }}, {{ listing.0.City }}</b><br>Price: ${{ listing.0.ListPrice }}`)
+      .openPopup();
+</script>
 {% endblock content %}
