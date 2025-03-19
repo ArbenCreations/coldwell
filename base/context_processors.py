@@ -2,6 +2,7 @@ import json
 import os
 from django.conf import settings
 
+
 def metadata_context(request):
     """
     Context processor to make metadata globally available in templates.
@@ -27,8 +28,20 @@ def metadata_context(request):
     cities = metadata.get("City", [])
     # print(cities)
     # Filter cities that are only in Alberta
-    filtered_cities = [city for city in cities if city["long_value"] in alberta_cities]
+    filtered_cities = [
+        city for city in cities if city["long_value"] in alberta_cities]
     property_subtypes = metadata.get("PropertySubType", [])
     property_types = metadata.get("PropertyType", [])
+    Basement_types = metadata.get("Basement", [])
+    ArchitecturalStyle = metadata.get("ArchitecturalStyle", [])
+    AssociationAmenities=metadata.get("AssociationAmenities",[])
     # print(property_subtypes)
-    return {"metadata": metadata,"cities":filtered_cities,"property_subtypes":property_subtypes,"property_types":property_types}
+    conDATA = {"metadata": metadata, 
+            "cities": filtered_cities, 
+            "property_subtypes": property_subtypes,
+            "property_types": property_types, 
+            "Basement_types": Basement_types,
+            "ArchitecturalStyle":ArchitecturalStyle,
+            "AssociationAmenities":AssociationAmenities,
+            }
+    return conDATA

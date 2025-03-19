@@ -40,7 +40,7 @@
 
           <div class="d-flex flex-column SearchInputs">
             <label for="location">Location</label>
-            <select name="location" id="location">
+            <select name="City" id="location">
               <option value="">City</option>
 
                 {% for city in cities %}
@@ -75,12 +75,12 @@
 
           <div class="d-flex flex-column SearchInputs">
             <label for="Price">Price</label>
-            <select name="Price" id="Price">
+            <select name="ListPrice" id="Price">
               <option value="">Price</option>
-              <option value="$15000-$25000">$15000-$25000</option>
-              <option value="$25000-$50000">$25000-$50000</option>
-              <option value="$50000-$80000">$50000-$80000</option>
-              <option value="$80000+">$80000+</option>
+              <option value="$150000-$250000">$150000-$250000</option>
+              <option value="$250000-$500000">$250000-$500000</option>
+              <option value="$500000-$80000">$500000-$80000</option>
+              <option value="$800000+">$80000+</option>
             </select>
           </div>
         </div>
@@ -110,7 +110,7 @@
 
           <div class="d-flex flex-column SearchInputs">
             <label for="propertyType">Property Type </label>
-            <select name="property_Subtype" id="propertyType">
+            <select name="PropertySubType" id="propertyType">
                 <option value="">Type</option>
               
                 {% for subtype in property_subtypes %}
@@ -125,6 +125,8 @@
         </div>
       </div>
       </form>
+
+      
     </div>
 
     <div class="col-xl-5 heroImages gap-4">

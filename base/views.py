@@ -1,5 +1,5 @@
 # rets/views.py
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import JsonResponse
 import requests
 from requests.auth import HTTPDigestAuth
@@ -376,6 +376,37 @@ def home(request):
     print(total_count)
     return render(request, 'home.html', {'properties': data_dict})
 
+
+def advFilter(request):
+    if request.method == 'POST':
+        print(request.POST)  # Debugging: Print the raw form data
+
+        filters = {}
+
+        # Capture all non-empty fields dynamically
+        for key, value in request.POST.lists():  # Use .lists() to handle multi-select fields
+            if key == "csrfmiddlewaretoken":  # Skip CSRF token
+                continue
+
+            # Handle multiple selections (checkboxes, multi-selects)
+            if len(value) > 1:  
+                filters[key] = ",".join(value)  # Convert list to comma-separated values
+            elif value[0]:  
+                filters[key] = value[0]  # Store single values normally
+
+        query_string = "&".join(f"{key}={value}" for key, value in filters.items())  
+        print(query_string)  # Debugging: Print the generated query string
+
+        return redirect(f"/property?{query_string}")  # Redirect to property view with filters
+
+    return render(request, 'advFilter.html')
+
+# def advFilter(request):
+#     filters = {key: value for key, value in request.GET.items() if value}  # Capture all non-empty fields dynamically
+#     query_string = "&".join(f"{key}={value}" for key, value in filters.items())  # Convert to URL query string
+#     return redirect(f"/property?{query_string}")  # Redirect to the property view with filters
+
+
 def listing(request,id):
     listing=get_single(id)
     if id:
@@ -389,24 +420,45 @@ def property(request):
 
     filters = {}
 
-    # Extract filters dynamically
-    if location := request.GET.get('location'):
-        filters["City"] = location
+    for key, value in request.GET.items():
+        if key in ["page", "csrfmiddlewaretoken"] or not value.strip():  # Skip empty values
+            continue
 
-    if property_type := request.GET.get('propertyType', 'RESI'):
-        filters["PropertyType"] = property_type
+        # Handle min-max filters dynamically
+        if key.startswith("min_") or key.startswith("max_"):
+            base_key = key.replace("min_", "").replace("max_", "")  # Extract actual field name
 
-    if property_subtype := request.GET.get('property_Subtype'):
-        filters["PropertySubType"] = property_subtype
+            if base_key not in filters:
+                filters[base_key] = {}  # Initialize min-max dictionary
 
-    # Handle price range filtering
-    price_range = request.GET.get('Price')
-    if price_range:
-        price_match = re.match(r'\$(\d+)-\$(\d+)', price_range)
-        if price_match:
-            filters["ListPrice"] = {"min": price_match.group(1), "max": price_match.group(2)}
-        elif price_range.startswith("$") and price_range.endswith("+"):
-            filters["ListPrice"] = {"min": price_range[1:-1]}  # Extract min price from "$8000+"
+            if key.startswith("min_"):
+                filters[base_key]["min"] = value
+            else:
+                filters[base_key]["max"] = value
+
+        # Handle min-max ranges for specific fields like Price
+        elif key.lower() in ["listprice", "living_space"]:
+            price_match = re.match(r'\$(\d+)-\$(\d+)', value)
+            if price_match:
+                filters[key] = {"min": price_match.group(1), "max": price_match.group(2)}
+            elif value.startswith("$") and value.endswith("+"):
+                filters[key] = {"min": value[1:-1]}  # Extract min value from "$8000+"
+            else:
+                filters[key] = value
+
+        else:
+            filters[key] = value  # Store normal filters
+
+    # Remove duplicate min/max fields (like min_bedroom and max_bedroom)
+    min_max_keys = [key for key in filters.keys() if key.startswith("min_") or key.startswith("max_")]
+    for key in min_max_keys:
+        del filters[key]
+
+    # Default PropertyType if no filters exist
+    if not filters:
+        filters["PropertyType"] = "RESI"
+
+    print("aa", filters)  # Debugging output
 
     try:
         page = int(page)
@@ -419,11 +471,11 @@ def property(request):
     # Set up pagination
     paginator = Paginator(range(total_count), limit)
 
-    return render(request, 'properties.html', {
-        'properties': properties,
-        'paginator': paginator,
-        'current_page': page,
-        'total_count': total_count,
+    return render(request, "properties.html", {
+        "properties": properties,
+        "paginator": paginator,
+        "current_page": page,
+        "total_count": total_count,
     })
 
     # return render(request,'properties.html')

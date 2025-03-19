@@ -8,6 +8,7 @@ urlpatterns = [
     path('property',property,name='property'),
     path('about',about,name='about'),
     path('contact',contact,name='contact'),
+    path('advance-filter',advFilter,name='advFilter'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:

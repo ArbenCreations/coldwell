@@ -28,7 +28,7 @@
                                     </svg></div>
                             </div>
                             <div>
-                                <div class="text-s">Location</div><select id="Location" name="location"
+                                <div class="text-s">Location</div><select id="Location" name="City"
                                     data-name="Location" class="raw-select-field w-select">
                                     <option value="">City</option>
 
@@ -51,7 +51,7 @@
                                     </svg></div>
                             </div>
                             <div>
-                                <div class="text-s">Price</div><select id="Price" name="Price" data-name="Price"
+                                <div class="text-s">Price</div><select id="Price" name="ListPrice" data-name="Price"
                                      class="raw-select-field w-select">
                                     <option value="">Price</option>
               <option value="$15000-$25000">$15000-$25000</option>
@@ -86,7 +86,7 @@
                                     </svg></div>
                             </div>
                             <div>
-                                <div class="text-s">Type of Property</div><select id="Category" name="property_Subtype"
+                                <div class="text-s">Type of Property</div><select id="Category" name="PropertySubType"
                                     data-name="Category"  class="raw-select-field w-select">
                                     <option value="">Type</option>
                                     {% for subtype in property_subtypes %}
@@ -108,7 +108,9 @@
                 </div>
             </div>
             <div data-hover="false" data-delay="0" class="dropdown more-filter w-dropdown">
-                <div class="dropdown-button w-dropdown-toggle" id="w-dropdown-toggle-1"
+                <a href='{% url "advFilter" %}'>
+                    
+                    <div class="dropdown-button w-dropdown-toggle" id="w-dropdown-toggle-1"
                     aria-controls="w-dropdown-list-1" aria-haspopup="menu" aria-expanded="false" role="button"
                     tabindex="0">
                     <div class="svg-icon _24x24 w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -122,13 +124,16 @@
                         </svg></div>
                     <div class="text-r-medium">More Filter</div>
                 </div>
+                </a>
                 <nav class="dropdown-menu right-alignment w-dropdown-list" id="w-dropdown-list-1"
                     aria-labelledby="w-dropdown-toggle-1">
-                    <div class="more-filter-content-wrap">
-                        <div class="more-filter-title">
-                            <h6 class="color-dark-100">More Filter</h6>
-                        </div>
-                        <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100"
+                        <a href='{% url "advFilter" %}'>  
+                            <div class="more-filter-content-wrap">
+                                <div class="more-filter-title">
+                                    <h6 class="color-dark-100">More Filter</h6>
+                                </div>
+                        </a>
+                        {% comment %} <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100"
                             class="w-tabs">
                             <div class="tabs-menu w-tab-menu" role="tablist"><a data-w-tab="Tab 1"
                                     class="tab-link w-inline-block w-tab-link" tabindex="-1" id="w-tabs-0-data-w-tab-0"
@@ -659,7 +664,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </nav>
             </div>
