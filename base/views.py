@@ -11,6 +11,9 @@ from .utils.auth import RETS_USERNAME, RETS_PASSWORD
 from django.core.paginator import Paginator
 from pathlib import Path
 from django.conf import settings
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from datetime import datetime, timedelta
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -213,6 +216,90 @@ def get_media(property_id):
 
     return images
 
+
+def get_media_AG(property_id):
+    # Ensure `MEDIA_ROOT` is used for saving files
+    media_root = settings.MEDIA_ROOT if hasattr(settings, "MEDIA_ROOT") else Path(__file__).resolve().parent / "media"
+    media_dir = os.path.join(media_root, str(property_id))
+    os.makedirs(media_dir, exist_ok=True)  # Ensure directory exists
+    
+    # Check if images already exist
+    existing_images = [
+        f"/media/{property_id}/{img}"  # Convert absolute path to URL path
+        for img in os.listdir(media_dir) 
+        if img.endswith(('jpg', 'jpeg', 'png', 'gif'))
+    ]
+    
+    if existing_images:
+        print(f"📂 Using cached images for Agent ID: {property_id}")
+        return existing_images  # Return `/media/` URLs
+
+    print(f"Fetching media for Agent ID: {property_id}")
+    params = {
+        "Resource": "Member",
+        "Type": "AgentPhoto",  # Adjust as needed: "Large", "Thumbnail"
+        "ID": f"{property_id}:*",
+        "Location": 0
+    }
+    # print
+    response = requests.get(
+        RETS_GETOBJECT_URL,
+        params=params,
+        auth=HTTPDigestAuth(USERNAME, PASSWORD),
+        headers={"RETS-Version": RETS_VERSION, "User-Agent": USER_AGENT},
+        stream=True
+    )
+
+    content_type = response.headers.get("Content-Type", "")
+    print(f"Response Content-Type: {content_type}")
+
+    if "text/xml" in content_type:
+        print("Received an XML response instead of images:")
+        print(response.text)
+        return []
+
+    boundary_match = re.search(r'boundary="?([^";]+)"?', content_type)
+    if not boundary_match:
+        print("Boundary not found. Check response headers:", content_type)
+        return []
+
+    boundary = boundary_match.group(1).encode()
+    parts = response.content.split(b"--" + boundary)
+    
+    images = []
+    for part in parts:
+        if b"Content-Type:" in part:
+            headers, image_data = part.split(b"\r\n\r\n", 1)
+            headers = headers.decode(errors="ignore")
+
+            content_type_match = re.search(r"Content-Type:\s*(image/\w+)", headers)
+            if content_type_match:
+                content_type = content_type_match.group(1)
+                extension = content_type.split("/")[-1]
+            else:
+                print("Could not determine content type, skipping.")
+                continue
+
+            object_id_match = re.search(r"Object-ID:\s*(\d+)", headers)
+            object_id = object_id_match.group(1) if object_id_match else "unknown"
+
+            filename = f"{property_id}_{object_id}.{extension}"
+            file_path = os.path.join(media_dir, filename)
+
+            if Path(file_path).is_file():
+                print(f"⚠️ Image already exists: {filename}, skipping download.")
+                images.append(f"/media/{property_id}/{filename}")
+                continue
+
+            with open(file_path, "wb") as f:
+                f.write(image_data.split(b"\r\n--")[0])
+
+            print(f"✅ Saved image: {filename}")
+            images.append(f"/media/{property_id}/{filename}")  # Use `/media/` path
+
+    return images
+
+
 def get_single(listing_id):
     # Search query to fetch property details by Listing ID
     search_params = {
@@ -301,7 +388,7 @@ def get_metadata(resource="Property"):
         print(f"Error fetching metadata: {response.status_code}")
         return None
 
-def fetch_properties(page=1, limit=4, **filters):
+def fetch_properties(seven_days=None, page=1, limit=4, **filters):
     offset = (page - 1) * limit  # Calculate offset for pagination
     query_parts = []
     
@@ -321,6 +408,11 @@ def fetch_properties(page=1, limit=4, **filters):
             query_parts.append(f'({key}=|{value})')  # Single value
     query_string = ','.join(query_parts)
     print(query_string)
+    if not query_string:
+        query_string = "(MlsStatus=Active)"
+    if seven_days:
+        query_string+=f",{seven_days}"
+    # query_string = "(ListOfficeName=Coldwell Banker YAD Realty)"
     search_params = {
         "SearchType": "Property",
         "Class": "Property",
@@ -331,8 +423,9 @@ def fetch_properties(page=1, limit=4, **filters):
         "StandardNames": 0,
         "Limit": limit,
         "Offset": offset,
+        "Sort": "ModificationTimestamp-",
     }
-    
+    print(search_params)
     response = requests.get(
         RETS_SEARCH_URL,
         params=search_params,
@@ -359,8 +452,38 @@ def fetch_properties(page=1, limit=4, **filters):
         values = row.text.strip().split('\t')
         record = {columns[i]: values[i] if i < len(values) else '' for i in range(len(columns))}
         listing_id = record.get("ListingKeyNumeric")
+      
         if listing_id:
+         # Extracting address components
+            street_number = record.get("StreetNumber", "").strip()
+            street_name = record.get("StreetName", "").strip()
+            street_suffix = record.get("StreetSuffix", "").strip()
+            street_dir_prefix = record.get("StreetDirPrefix", "").strip()
+            street_dir_suffix = record.get("StreetDirSuffix", "").strip()
+            unit_number = record.get("UnitNumber", "").strip()
+            city = record.get("City", "").strip()
+            state = record.get("StateOrProvince", "").strip()
+            postal_code = record.get("PostalCode", "").strip()
+
+            # Constructing "Name" field (without unit, state, postal code)
+            record["Name"] = f"{street_number} {street_name} {street_suffix} {street_dir_suffix}, {city}".strip().replace(" ,", ",")
+
+            # Constructing "FullAddress" field
+            full_address_parts = [
+                # f"Unit {unit_number}" if unit_number else "",
+                f"{street_number} {street_name} {street_suffix} {street_dir_suffix}".strip(),
+                city,
+                state,
+                postal_code
+            ]
+            record["FullAddress"] = ", ".join(filter(None, full_address_parts))  # Remove empty parts
+            AgentID = record.get("ListAgentKeyNumeric", "").strip()
+            
             record["Media"] = get_media(listing_id)
+            record["AgentMedia"] = get_media_AG(AgentID)
+            # print(
+            #     get_media_AG(AgentID)
+            # )
         data_dict.append(record)
     
     return data_dict, total_count
@@ -371,8 +494,13 @@ def home(request):
     filters={}
     # if property_type := request.GET.get('propertyType', 'RESI'):
     filters["PropertyType"] = 'RESI'
+    filters["City"] = '0046'
+    # Get listings updated in the last 7 days
+    seven_days_ago = (datetime.utcnow() - timedelta(days=7)).strftime('%Y-%m-%dT%H:%M:%S')
 
-    data_dict,total_count = fetch_properties(**filters)
+    query = f"(ModificationTimestamp={seven_days_ago}+)"
+    # filters['ListingContractDate']='ASE'
+    data_dict,total_count = fetch_properties(query,**filters)
     print(total_count)
     return render(request, 'home.html', {'properties': data_dict})
 
@@ -411,6 +539,8 @@ def listing(request,id):
     listing=get_single(id)
     if id:
         listing[0]["Media"] = get_media(id)
+        listing[0]["AgentMedia"] = get_media_AG(listing[0]['ListAgentKeyNumeric'])
+
     # print(listing)
     return render(request,'listing.html',{'listing':listing})
 
@@ -465,9 +595,12 @@ def property(request):
     except ValueError:
         page = 1
 
+    # filters['ListAgentFullName']='Kanwal Bhangu'
+    # filters['ListingId']='207109916'
+    # filters['MlsStatus']='Active'
     # Fetch properties using the dynamic filters
     properties, total_count = fetch_properties(page=page, limit=limit, **filters)
-
+    # print(properties)
     # Set up pagination
     paginator = Paginator(range(total_count), limit)
 
@@ -483,5 +616,42 @@ def about(request):
     metadata_xml = get_metadata()
     print(metadata_xml)
     return render(request,'about.html')
+
+
+
+def send_email(name, email, phone, message, price_range):
+    subject = f"New Contact Form Submission from {name}"
+    body = f"""
+    <html>
+        <body>
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> {name}</p>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Phone:</strong> {phone}</p>
+            <p><strong>Price Range:</strong> {price_range}</p>
+            <p><strong>Message:</strong></p>
+            <p>{message}</p>
+        </body>
+    </html>
+    """
+    from_email = "pricetrackerprod@gmail.com"  # Replace with your email
+    recipient_list = [email]  # Replace with the recipient email
+
+    email_message = EmailMessage(subject, body, from_email, recipient_list)
+    email_message.content_subtype = "html"  # Set content type to HTML
+    email_message.send()
+
 def contact(request):
-    return render(request,'contact.html')
+    if request.method == 'POST':
+        print(request.POST)
+        name = f"{request.POST['First-Name']} {request.POST['Last-Name']}"
+        email = request.POST['Email-Address']
+        phone = request.POST['Phone-Number']
+        message = request.POST['Message']
+        price_range = request.POST.get('Price-Range', 'Not specified')  # Avoid KeyError
+        
+        send_email(name, email, phone, message,price_range)  # Sending email
+
+        return render(request, 'contact.html', {'message': 'Email sent successfully'})
+        
+    return render(request, 'contact.html')

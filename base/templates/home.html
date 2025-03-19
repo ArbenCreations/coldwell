@@ -1,10 +1,12 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} {% load static %}
+{% load humanize %}
+ {% block content %}
 <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
 
 <section class="container-fluid col-xl-11 mx-auto py-5" id="Herosection">
   <div class="content_conatiner row justify-content-between gap-xl-0 gap-4">
-    <div class="col-xl-6">
-      <h1 class="fs72">We help people to realize their dream property</h1>
+    <div class="col-xl-6 wow animate__animated animate__fadeInUp">
+      <h1 class="fs72 ">We help people to realize their dream property</h1>
 
       <p class="fs20 py-4 col-xl-10 pe-xl-3">
         We are creative people who provide the best way to you who want to have
@@ -77,10 +79,10 @@
             <label for="Price">Price</label>
             <select name="ListPrice" id="Price">
               <option value="">Price</option>
-              <option value="$150000-$250000">$150000-$250000</option>
-              <option value="$250000-$500000">$250000-$500000</option>
-              <option value="$500000-$80000">$500000-$80000</option>
-              <option value="$800000+">$80000+</option>
+
+             {% for price in price_ranges %}
+            <option value="{{ price.value }}">{{ price.label }}</option>
+        {% endfor %}
             </select>
           </div>
         </div>
@@ -131,11 +133,11 @@
 
     <div class="col-xl-5 heroImages gap-4">
       <div class="d-flex align-items-start position-relative">
-        <img src="{% static 'assets/media/hero1.webp' %}" alt="" class="img1" />
-        <img src="{% static 'assets/media/hero3.webp' %}" class="img2" alt="" />
+        <img src="{% static 'assets/media/hero1.webp' %}" alt="" data-wow-duration=".5s" data-wow-delay="1s" class="wow animate__animated  animate__zoomIn img1" />
+        <img src="{% static 'assets/media/hero3.webp' %}" data-wow-duration=".5s" data-wow-delay="1.3s" class="wow animate__animated  animate__zoomIn img2" alt="" />
       </div>
       <div class="img3">
-        <img src="{% static 'assets/media/heroImg2.webp' %}" alt="" />
+        <img src="{% static 'assets/media/heroImg2.webp' %}" data-wow-duration=".5s" data-wow-delay="1.5s" class="wow animate__animated  animate__zoomIn" alt="" />
       </div>
     </div>
   </div>
@@ -145,7 +147,7 @@
 </section>
 
 <section
-  class="container-fluid col-xl-11 mx-auto py-xl-5"
+  class="container-fluid col-xl-11 mx-auto py-xl-5 "
   id="FeaturedListings"
 >
   <div
@@ -183,7 +185,7 @@
     </a>
   </div>
 
-  <div class="property_card_big row mx-xl-0 mx-1">
+  <div class="property_card_big row mx-xl-0 mx-1 wow animate__animated  animate__slideInUp">
     <div class="col-xl-5 px-0 propImg">
       <img src="{{properties.0.Media.0}}" class="img-fluid h-100" alt="" />
       <div class="imgLabel">
@@ -218,56 +220,26 @@
         class="d-flex align-items-center justify-content-between flex-wrap gap-3 gap-xl-0 flex-xl-nowrap"
       >
         <h3>
-          <span class="d-inline-block fs40">{{properties.0.ListPrice}}</span>
+          <span class="d-inline-block fs40"> ${{ properties.0.ListPrice|floatformat:2|intcomma }}
+          </span>
 
-          <span class="d-inline-block fs18 text-black-50">/month</span>
+          {% comment %} <span class="d-inline-block fs18 text-black-50">/month</span> {% endcomment %}
         </h3>
         <div class="d-flex align-items-center justify-content-between gap-3">
-          <div class="agentPic">
-            <img
-              src="{% static 'assets/media/agent.png' %}"
-              class="img100 rounded-circle"
-              alt=""
-            />
-          </div>
-          <div>
-            <h4 class="fs18 fw-bold p-0 m-0">Edwin Martins</h4>
-            <p class="p-0 m-0">Property Advisor</p>
-          </div>
-          <div class="">
-            <a
-              href=""
-              class="p-2 bg-black d-flex justify-content-center align-items-center rounded-circle text-white"
-            >
-              <svg
-                width="17"
-                height="17"
-                viewBox="0 0 17 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.9782 13.3087C15.9782 13.5727 15.9195 13.844 15.7948 14.108C15.6702 14.372 15.5088 14.6214 15.2962 14.856C14.9368 15.252 14.5408 15.538 14.0935 15.7214C13.6535 15.9047 13.1768 16 12.6635 16C11.9155 16 11.1162 15.824 10.2728 15.4647C9.4295 15.1054 8.58616 14.6214 7.75016 14.0127C6.90683 13.3967 6.1075 12.7147 5.34483 11.9594C4.5895 11.1967 3.9075 10.3974 3.29883 9.56137C2.6975 8.72537 2.2135 7.88937 1.8615 7.06071C1.5095 6.22471 1.3335 5.42537 1.3335 4.66271C1.3335 4.16404 1.4215 3.68737 1.5975 3.24737C1.7735 2.80004 2.05216 2.38937 2.44083 2.02271C2.91016 1.56071 3.4235 1.33337 3.96616 1.33337C4.1715 1.33337 4.37683 1.37737 4.56016 1.46537C4.75083 1.55337 4.9195 1.68537 5.0515 1.87604L6.75283 4.27404C6.88483 4.45737 6.98016 4.62604 7.04616 4.78737C7.11216 4.94137 7.14883 5.09537 7.14883 5.23471C7.14883 5.41071 7.0975 5.58671 6.99483 5.75537C6.8995 5.92404 6.76016 6.10004 6.58416 6.27604L6.02683 6.85537C5.94616 6.93604 5.9095 7.03137 5.9095 7.14871C5.9095 7.20737 5.91683 7.25871 5.9315 7.31737C5.9535 7.37604 5.9755 7.42004 5.99016 7.46404C6.12216 7.70604 6.3495 8.02137 6.67216 8.40271C7.00216 8.78404 7.35416 9.17271 7.7355 9.56137C8.1315 9.95004 8.51283 10.3094 8.9015 10.6394C9.28283 10.962 9.59816 11.182 9.8475 11.314C9.88416 11.3287 9.92816 11.3507 9.9795 11.3727C10.0382 11.3947 10.0968 11.402 10.1628 11.402C10.2875 11.402 10.3828 11.358 10.4635 11.2774L11.0208 10.7274C11.2042 10.544 11.3802 10.4047 11.5488 10.3167C11.7175 10.214 11.8862 10.1627 12.0695 10.1627C12.2088 10.1627 12.3555 10.192 12.5168 10.258C12.6782 10.324 12.8468 10.4194 13.0302 10.544L15.4575 12.2674C15.6482 12.3994 15.7802 12.5534 15.8608 12.7367C15.9342 12.92 15.9782 13.1034 15.9782 13.3087Z"
-                  stroke="currentColor"
-                  stroke-miterlimit="10"
-                ></path>
-              </svg>
-            </a>
-          </div>
+          
+          <a class="nav-link" aria-current="page" href="/contact">
+            <button class="btn btn_outlined_blue">
+                Contact
+            </button>
+
+        </a>
         </div>
       </div>
 
       <div class="propContent pt-5">
         <h2 class="fs40">
           <a href='{% url "listing" id=properties.0.ListingKeyNumeric %}'>
-            {{properties.0.ListOfficeName}}</a
-          >
-        </h2>
-
-        <div
-          class="d-flex justify-content-start gap-2 align-items-center text-black-50"
-        >
-          <svg
+            <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -284,10 +256,18 @@
               stroke="currentColor"
               stroke-width="1.5"
             ></path>
-          </svg>
-          2699 Green Valley, Highland Lake, FL
+          </svg> {{properties.0.Name}}</a
+          >
+        </h2>
+
+        <div
+          class="d-flex justify-content-start gap-2 align-items-center  text-black-50"
+        >
+          
+          {{properties.0.FullAddress}}
         </div>
         <p class="py-3">
+          
           Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
           sint. Velit officia consequat duis enim velit mollit. Exercitation
         </p>
@@ -348,7 +328,7 @@
           </div>
 
           <div class="amenitiesItem">
-            <div class="text-white fw-light">Environment</div>
+            <div class="text-white fw-light">Year Built</div>
             <div class="fw-bold d-flex align-items-center gap-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.5 19.5V18H4.5C3.95 18 3.45 17.78 3.09 17.41C2.72 17.05 2.5 16.55 2.5 16C2.5 14.97 3.3 14.11 4.31 14.01C4.37 14 4.43 14 4.5 14H19.5C19.57 14 19.63 14 19.69 14.01C20.17 14.05 20.59 14.26 20.91 14.59C21.32 14.99 21.54 15.56 21.49 16.18C21.4 17.23 20.45 18 19.39 18H14.5V19.5C14.5 20.88 13.38 22 12 22C10.62 22 9.5 20.88 9.5 19.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -356,19 +336,23 @@
                     <path d="M7.99023 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     <path d="M12 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                   </svg>
-              {% if listing.0.Heating %}{{ listing.0.Heating }}{% else %}N/A{% endif %}
+              {% if listing.0.YearBuilt %}{{ listing.0.YearBuilt }}{% else %}N/A{% endif %}
             </div>
+            
           </div>
+          
         </div>
+        {% comment %} {{properties.0.ModificationTimestamp}} {% endcomment %}
       </div>
     </div>
+    
   </div>
 
   <div class="d-flex flex-wrap flex-xl-nowrap py-5 gap-4">
     {% for i in properties|slice:"1:" %}
     <a
       href="/listing/{{i.ListingKeyNumeric}}"
-      class="propCards col-12 card p-0 col-xl-4 rounded-15 overflow-hidden d-inline-block"
+      class="wow animate__animated  animate__slideInUp propCards col-12 card p-0 col-xl-4 rounded-15 overflow-hidden d-inline-block"
     >
       <div class="">
         <div>
@@ -376,15 +360,16 @@
         </div>
         <div class="card-body">
           <h3>
-            <span class="d-inline-block fs32">${{i.ListPrice}}</span>
+            <span class="d-inline-block fs32">${{i.ListPrice|floatformat:2|intcomma }}</span>
 
-            <span class="d-inline-block fs18 text-black-50">/month</span>
+            {% comment %} <span class="d-inline-block fs18 text-black-50">/month</span> {% endcomment %}
           </h3>
-          <h3 class="d-inline-block fs24">{{i.ListOfficeName}}</h3>
+          <h3 class="d-inline-block fs24">{{i.Name}}</h3>
+          {% comment %} {{i.ModificationTimestamp}} {% endcomment %}
           <div
             class="d-flex justify-content-start gap-2 align-items-center text-black-50"
           >
-            2699 Green Valley, Highland Lake, FL
+            {{i.FullAddress}}
           </div>
 
           <div class="row py-4">
@@ -505,7 +490,7 @@
   </div>
 
   <div class="d-flex justify-content-between flex-wrap flex-xl-nowrap gap-4">
-    <div class="col-xl-4 col-12 serviceCard p-5">
+    <div  data-wow-delay=".2s" class="col-xl-4 col-12 serviceCard p-5 wow animate__animated  animate__fadeInUp">
       <div class="icon mb-5">
         <svg
           width="48"
@@ -536,7 +521,7 @@
       </p>
     </div>
 
-    <div class="col-xl-4 col-12 serviceCard p-5">
+    <div   data-wow-delay=".5s"class="col-xl-4 col-12 serviceCard p-5 wow animate__animated  animate__fadeInUp">
       <div class="icon mb-5">
         <svg
           width="48"
@@ -567,7 +552,7 @@
       </p>
     </div>
 
-    <div class="col-xl-4 col-12 serviceCard p-5">
+    <div   data-wow-delay=".8s"class="col-xl-4 col-12 serviceCard p-5 wow animate__animated  animate__fadeInUp">
       <div class="icon mb-5">
         <svg
           width="48"
@@ -636,10 +621,10 @@
     </a>
   </div>
 
-  <div class="d-flex justify-content-between flex-wrap flex-xl-nowrap gap-4">
+  <div class="d-flex justify-content-start flex-wrap flex-xl-nowrap gap-4">
   
     <div
-      class="col-xl-4 col-12 CategoriesCard p-4 d-flex align-items-center justify-content-between"
+      class="col-xl-4 col-12 wow animate__animated  animate__slideInUp CategoriesCard p-4 d-flex align-items-center justify-content-between"
     >
       <div class="icon">
         <img
@@ -684,54 +669,10 @@
       </div>
     </div>
 
-    <div
-      class="col-xl-4 col-12 CategoriesCard p-4 d-flex align-items-center justify-content-between"
-    >
-      <div class="icon">
-        <img
-          src="{% static 'assets/media/6409961cf73feb82abb7cc0e_Estately Property Category - Studio.png' %}"
-          class="img-fluid"
-          alt=""
-        />
-      </div>
-      <div class="col-xl-6">
-        <h3 class="fs24 p-0 m-0">{{property_types.6.long_value}}</h3>
-        <p class="">100+ listings</p>
-      </div>
-
-      <div>
-        <a href="/property?propertyType={{property_types.6.value}}" class="d-flex fs18 fw-bold align-items-center gap-2 m-0 p-0"
-          >view
-          <svg
-            width="21"
-            height="20"
-            viewBox="0 0 21 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16.1672 4.16666L4.50049 15.8333"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M16.1672 12.725V4.16666H7.60889"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
-        </a>
-      </div>
-    </div>
+  
 
     <div
-      class="col-xl-4 col-12 CategoriesCard p-4 d-flex align-items-center justify-content-between"
+      class="col-xl-4 col-12 wow animate__animated  animate__slideInUp CategoriesCard p-4 d-flex align-items-center justify-content-between"
     >
       <div class="icon">
         <img
@@ -814,219 +755,82 @@
     </a>
   </div>
 
-  <div class="d-flex flex-wrap flex-xl-nowrap py-5 gap-4">
-    <div class="propCards col-12 card p-0 col-xl-4 rounded-15 overflow-hidden">
-      <div>
-        <img
-          src="{% static '/assets/media/city1.webp' %}"
-          class="card-img-top"
-          alt=" "
-        />
-      </div>
-      <div class="card-body">
-        <h3 class="d-inline-block fs24"><a href='/property?location={{cities.0.value}}'>{{cities.0.long_value}}, Alberta </a></h3>
+  <div class="d-flex flex-wrap gap-3 gap-xl-0 justify-content-xl-start justify-content-center">
 
-        <div
-          class="d-flex justify-content-start gap-2 align-items-center text-black-50"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+    {% for fcity in cities|slice:":5" %}
+    <div class='p-xl-3 col-xl-4 col-12 wow animate__animated  animate__slideInUp'>
+      <div class="propCards col-12 card p-0 col-xl-12 rounded-15 overflow-hidden">
+        <div>
+          <img
+            src="{% static '/assets/media/city1.webp' %}"
+            class="card-img-top"
+            alt=" "
+          />
+        </div>
+        <div class="card-body">
+          <h3 class="d-inline-block fs24"><a href='/property?City={{fcity.value}}'>{{fcity.long_value}}, Alberta </a></h3>
+  
+          <div
+            class="d-flex justify-content-start gap-2 align-items-center text-black-50"
           >
-            <path
-              d="M2 22H22"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M2.9502 22L3.00019 9.96999C3.00019 9.35999 3.2902 8.78004 3.7702 8.40004L10.7702 2.95003C11.4902 2.39003 12.5002 2.39003 13.2302 2.95003L20.2302 8.39003C20.7202 8.77003 21.0002 9.34999 21.0002 9.96999V22"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M13 17H11C10.17 17 9.5 17.67 9.5 18.5V22H14.5V18.5C14.5 17.67 13.83 17 13 17Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M9.5 13.75H7.5C6.95 13.75 6.5 13.3 6.5 12.75V11.25C6.5 10.7 6.95 10.25 7.5 10.25H9.5C10.05 10.25 10.5 10.7 10.5 11.25V12.75C10.5 13.3 10.05 13.75 9.5 13.75Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M16.5 13.75H14.5C13.95 13.75 13.5 13.3 13.5 12.75V11.25C13.5 10.7 13.95 10.25 14.5 10.25H16.5C17.05 10.25 17.5 10.7 17.5 11.25V12.75C17.5 13.3 17.05 13.75 16.5 13.75Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M18.9998 7L18.9698 4H14.5698"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
-          100+ listings
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 22H22"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M2.9502 22L3.00019 9.96999C3.00019 9.35999 3.2902 8.78004 3.7702 8.40004L10.7702 2.95003C11.4902 2.39003 12.5002 2.39003 13.2302 2.95003L20.2302 8.39003C20.7202 8.77003 21.0002 9.34999 21.0002 9.96999V22"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M13 17H11C10.17 17 9.5 17.67 9.5 18.5V22H14.5V18.5C14.5 17.67 13.83 17 13 17Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M9.5 13.75H7.5C6.95 13.75 6.5 13.3 6.5 12.75V11.25C6.5 10.7 6.95 10.25 7.5 10.25H9.5C10.05 10.25 10.5 10.7 10.5 11.25V12.75C10.5 13.3 10.05 13.75 9.5 13.75Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M16.5 13.75H14.5C13.95 13.75 13.5 13.3 13.5 12.75V11.25C13.5 10.7 13.95 10.25 14.5 10.25H16.5C17.05 10.25 17.5 10.7 17.5 11.25V12.75C17.5 13.3 17.05 13.75 16.5 13.75Z"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M18.9998 7L18.9698 4H14.5698"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+            100+ listings
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="propCards col-12 card p-0 col-xl-4 rounded-15 overflow-hidden">
-      <div>
-        <img
-          src="{% static '/assets/media/city1.webp' %}"
-          class="card-img-top"
-          alt=" "
-        />
-      </div>
-      <div class="card-body">
-        <h3 class="d-inline-block fs24"><a href='/property?location={{cities.2.value}}'>{{cities.2.long_value}}, Alberta </a></h3>
-
-        <div
-          class="d-flex justify-content-start gap-2 align-items-center text-black-50"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M2 22H22"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M2.9502 22L3.00019 9.96999C3.00019 9.35999 3.2902 8.78004 3.7702 8.40004L10.7702 2.95003C11.4902 2.39003 12.5002 2.39003 13.2302 2.95003L20.2302 8.39003C20.7202 8.77003 21.0002 9.34999 21.0002 9.96999V22"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M13 17H11C10.17 17 9.5 17.67 9.5 18.5V22H14.5V18.5C14.5 17.67 13.83 17 13 17Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M9.5 13.75H7.5C6.95 13.75 6.5 13.3 6.5 12.75V11.25C6.5 10.7 6.95 10.25 7.5 10.25H9.5C10.05 10.25 10.5 10.7 10.5 11.25V12.75C10.5 13.3 10.05 13.75 9.5 13.75Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M16.5 13.75H14.5C13.95 13.75 13.5 13.3 13.5 12.75V11.25C13.5 10.7 13.95 10.25 14.5 10.25H16.5C17.05 10.25 17.5 10.7 17.5 11.25V12.75C17.5 13.3 17.05 13.75 16.5 13.75Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M18.9998 7L18.9698 4H14.5698"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
-          100+ listings
-        </div>
-      </div>
-    </div>
-
-    <div class="propCards col-12 card p-0 col-xl-4 rounded-15 overflow-hidden">
-      <div>
-        <img
-          src="{% static '/assets/media/city1.webp' %}"
-          class="card-img-top"
-          alt=" "
-        />
-      </div>
-      <div class="card-body">
-        <h3 class="d-inline-block fs24"><a href='/property?location={{cities.1.value}}'>{{cities.1.long_value}}, Alberta </a></h3>
-
-        <div
-          class="d-flex justify-content-start gap-2 align-items-center text-black-50"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M2 22H22"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M2.9502 22L3.00019 9.96999C3.00019 9.35999 3.2902 8.78004 3.7702 8.40004L10.7702 2.95003C11.4902 2.39003 12.5002 2.39003 13.2302 2.95003L20.2302 8.39003C20.7202 8.77003 21.0002 9.34999 21.0002 9.96999V22"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M13 17H11C10.17 17 9.5 17.67 9.5 18.5V22H14.5V18.5C14.5 17.67 13.83 17 13 17Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M9.5 13.75H7.5C6.95 13.75 6.5 13.3 6.5 12.75V11.25C6.5 10.7 6.95 10.25 7.5 10.25H9.5C10.05 10.25 10.5 10.7 10.5 11.25V12.75C10.5 13.3 10.05 13.75 9.5 13.75Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M16.5 13.75H14.5C13.95 13.75 13.5 13.3 13.5 12.75V11.25C13.5 10.7 13.95 10.25 14.5 10.25H16.5C17.05 10.25 17.5 10.7 17.5 11.25V12.75C17.5 13.3 17.05 13.75 16.5 13.75Z"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linejoin="round"
-            ></path>
-            <path
-              d="M18.9998 7L18.9698 4H14.5698"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
-          100+ listings
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </section>
 
@@ -1557,7 +1361,7 @@
   </div>
 </section> {% endcomment %}
 
-<section id="Newsletter" class="row container-fluid col-xl-11 mx-auto my-xl-5">
+<section id="Newsletter" class="wow animate__animated  animate__slideInUp row container-fluid col-xl-11 mx-auto my-xl-5">
   <div class="row justify-content-between">
     <div class="col-xl-5 p-xl-5 pt-4 px-4 part1">
       <h3 class="fs48 text-white">Subscribe To Our Newsletter</h3>

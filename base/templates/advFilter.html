@@ -93,10 +93,9 @@
                   class="raw-select-field w-select"
                 >
                   <option value="">Price</option>
-                  <option value="$150000-$250000">$150000-$250000</option>
-                  <option value="$250000-$500000">$250000-$500000</option>
-                  <option value="$500000-$800000">$500000-$800000</option>
-                  <option value="$800000+">$800000+</option>
+                  {% for price in price_ranges %}
+                  <option value="{{ price.value }}">{{ price.label }}</option>
+              {% endfor %}
                 </select>
               </div>
             </div>

@@ -7,11 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         #map { width: 100%; height: 500px; }
     </style>
@@ -21,10 +25,11 @@
 <body>
 
 
-    <nav class="navbar position-sticky top-0 navbar-expand-lg col-xl-12 mx-auto py-4">
+    <nav class="navbar  position-sticky top-0 navbar-expand-lg col-xl-12 mx-auto py-4">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{% static '/assets/media/coldwell_logo.svg' %}" class="img-fluid" alt="">
+                {% comment %} <img src="{% static '/assets/media/coldwell_logo.svg' %}" class="img-fluid" alt=""> {% endcomment %}
+                <img src="{% static '/assets/media/logo2.jpeg' %}" class="img-fluid" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -63,8 +68,8 @@
 
     </div>
 
-    <footer class="footer">
-        <div class="container">
+    <footer class="footer col-xxl-11 col-xl-12 col-lg-12 mx-auto">
+        <div class="col-xl-11 mx-auto">
             <div class="row justify-content-between">
                 <div class="footer-p col-md-3">
                     <div class='py-3'>
@@ -78,45 +83,34 @@
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
-                <div class="row col-xl-7 py-xl-0 py-3">
+                <div class="row col-xl-7 py-xl-0 py-3 justify-content-end">
                     <div class="more-info col-md-3 col-6">
                         <h6>Pages</h6>
                         <ul>
-                            <li><a href="#">Home V1</a></li>
-                            <li><a href="#">Home V2</a></li>
-                            <li><a href="#">Home V3</a></li>
-                            <li><a href="#">Search Properties V1</a></li>
-                            <li><a href="#">Search Properties V2</a></li>
-                            <li><a href="#">Property Details V1</a></li>
-                            <li><a href="#">Property Details V2</a></li>
-                            <li><a href="#">Agent List V1</a></li>
-                            <li><a href="#">Agent List V2</a></li>
+                            <li><a href="{% url "home" %}">Home</a></li>
+                            <li><a href="{% url "about" %}">About</a></li>
+                            <li><a href="{% url "property" %}">Properties</a></li>
+                            <li><a href="{% url "contact" %}">Contact Us</a></li>
+                            <li><a href="#">Terms & Condition</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </div>
 
                     <div class="more-info col-md-3 col-6">
+                        <h6>Cities</h6>
+
                         <ul>
-                            <li><a href="#">Agent Details V1</a></li>
-                            <li><a href="#">Agent Details V2</a></li>
-                            <li><a href="#">About Us V1</a></li>
-                            <li><a href="#">About Us V2</a></li>
-                            <li><a href="#">Contact Us V1</a></li>
-                            <li><a href="#">Contact Us V2</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            {% for ffcity in cities|slice:":5" %}
+                            <li><a href="/property?City={{ffcity.value}}">{{ffcity.long_value}}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="more-info col-md-3">
-                        <h6>Utility Pages</h6>
+                        <h6>Property Types</h6>
                         <ul>
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">Sign Up</a></li>
-                            <li><a href="#">Forgot Password</a></li>
-                            <li><a href="#">Reset Password</a></li>
-                            <li><a href="#">404 Error Page</a></li>
-                            <li><a href="#">Protected Page</a></li>
-                            <li><a href="#">Style Guide</a></li>
-                            <li><a href="#">Licenses</a></li>
-                            <li><a href="#">Changelog</a></li>
+                            {% for property_type in property_types %}
+                            <li><a href="/property?PropertyType={{property_type.value}}">{{property_type.long_value}}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -142,6 +136,13 @@
             });
         });
       
+    </script>
+
+        
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js'></script>
+
+    <script>
+        new WOW().init();
     </script>
 </body>
 
