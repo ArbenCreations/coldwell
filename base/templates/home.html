@@ -101,7 +101,7 @@
         </div>
 
         <div class="searchItem d-flex align-items-center gap-3 w100">
-          <button class="btn btn_blue w100">Browse</button>
+          <button class="btn btn_blue w100">Search</button>
         </div>
       </div>
       </form>
@@ -165,7 +165,9 @@
 
   <div class="property_card_big row mx-xl-0 mx-1 wow animate__animated  animate__slideInUp">
     <div class="col-xl-5 px-0 propImg">
+      <a href='{% url "listing" id=properties.0.ListingKeyNumeric %}'>
       <img src="{{properties.0.Media.0}}" class="img-fluid h-100" alt="" />
+      </a>
       <div class="imgLabel">
         <svg
           width="16"
@@ -601,14 +603,14 @@
     </div>
   </div>
 </section>
-<section id="Cities" class="container-fluid col-xl-11 mx-auto py-5">
+<section id="Cities" class="Areas container-fluid col-xl-11 mx-auto py-5">
   <div
     class="d-flex justify-content-between py-5 align-items-center flex-wrap flex-xl-nowrap gap-0 gap-xl-0"
   >
-    <h2 class="fs48 fw-bold">Explore Cities</h2>
+    <h2 class="fs48 fw-bold">Explore Calgary</h2>
 
     <a href="" class="d-flex fs18 fw-bold align-items-center gap-3">
-      Browse All Cities
+      Browse All Areas
 
       <svg
         width="24"
@@ -639,76 +641,18 @@
 
   <div class="d-flex flex-wrap gap-3 gap-xl-0 justify-content-xl-start justify-content-center">
 
-    {% for fcity in cities|slice:":5" %}
+    {% for citya in city_area %}
     <div class='p-xl-3 col-xl-4 col-12 wow animate__animated  animate__slideInUp'>
-      <div class="propCards col-12 card p-0 col-xl-12 rounded-15 overflow-hidden">
+      <div class="propCards position-relative col-12 card p-0 col-xl-12 rounded-15 overflow-hidden">
         <div>
           <img
-            src="{% static '/assets/media/city1.webp' %}"
+            src="{% static citya.image %}"
             class="card-img-top"
             alt=" "
           />
         </div>
-        <div class="card-body">
-          <h3 class="d-inline-block fs24"><a href='/property?City={{fcity.value}}'>{{fcity.long_value}}, Alberta </a></h3>
-  
-          <div
-            class="d-flex justify-content-start gap-2 align-items-center text-black-50"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2 22H22"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M2.9502 22L3.00019 9.96999C3.00019 9.35999 3.2902 8.78004 3.7702 8.40004L10.7702 2.95003C11.4902 2.39003 12.5002 2.39003 13.2302 2.95003L20.2302 8.39003C20.7202 8.77003 21.0002 9.34999 21.0002 9.96999V22"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M13 17H11C10.17 17 9.5 17.67 9.5 18.5V22H14.5V18.5C14.5 17.67 13.83 17 13 17Z"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M9.5 13.75H7.5C6.95 13.75 6.5 13.3 6.5 12.75V11.25C6.5 10.7 6.95 10.25 7.5 10.25H9.5C10.05 10.25 10.5 10.7 10.5 11.25V12.75C10.5 13.3 10.05 13.75 9.5 13.75Z"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M16.5 13.75H14.5C13.95 13.75 13.5 13.3 13.5 12.75V11.25C13.5 10.7 13.95 10.25 14.5 10.25H16.5C17.05 10.25 17.5 10.7 17.5 11.25V12.75C17.5 13.3 17.05 13.75 16.5 13.75Z"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M18.9998 7L18.9698 4H14.5698"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </svg>
-            100+ listings
-          </div>
+        <div class="card-body w-100 h-100  position-absolute">
+          <h3 class="d-inline-block fs24"><a href='/property?District={{citya.District}}'>{{citya.name}}</a></h3>
         </div>
       </div>
     </div>
@@ -893,7 +837,7 @@
       <div class="propCards col-12 card p-0 col-xl-12 rounded-15 overflow-hidden">
         <div>
           <img
-            src="{% static '/assets/media/city1.webp' %}"
+            src="{% static fcity.image %}"
             class="card-img-top"
             alt=" "
           />
@@ -1499,10 +1443,8 @@
       <p class="fs18 text-white-50">
         Join our newsletter to stay up to date on features and releases.
       </p>
-      <div class="subs w100">
-      
-        <button class="btn btn_blue w100" >Contact</button>
-      </div>
+      <button class="btn btn_white w100" >Contact</button>
+     
     </div>
     <div class="col-xl-6 subsIMG"></div>
   </div>

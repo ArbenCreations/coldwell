@@ -2113,16 +2113,16 @@ textarea.w-select {
     --background: #fbfaff;
     --dark--80: #686a79;
     --dark--100: #191a23;
-    --lavender--100: #b592ff;
-    --lavender--20: #f7f2ff;
-    --lavender--40: #e7dcff;
+    --lavender--100: #062877;
+    --lavender--20: #0628771e;
+    --lavender--40: #0628773a;
     --white: white;
     --dark--60: #868893;
-    --lavender--60: #cfb9fd;
+    --lavender--60: #06287788;
     --dark--40: #b7b8c1;
     --carnation--20: #fff1f9;
     --carnation--40: #ffe1f2;
-    --lavender--80: #c1a5ff;
+    --lavender--80: #062877cd;
     --dark--20: #d6d7e0;
     --carnation--100: #fda5d6;
     --carnation--80: #ffb4de;
@@ -2852,7 +2852,7 @@ figcaption {
 }
 
 .browse-form-item-icon-wrap {
-    background-color: var(--lavender--40);
+    background-color: var(--lavender--100);
     border-radius: 15px;
     flex: none;
     justify-content: center;
@@ -3018,7 +3018,7 @@ figcaption {
 }
 
 .card-property-facilities {
-    grid-column-gap: 24px;
+    grid-column-gap: 16px;
     grid-row-gap: 12px;
     border-top: 1px solid var(--lavender--20);
     flex-flow: wrap;
@@ -4071,8 +4071,9 @@ figcaption {
 }
 
 .dropdown {
-    border: 1px solid var(--lavender--40);
-    background-color: var(--lavender--20);
+    border: 1px solid var(--lavender--100);
+    background-color: var(--lavender--100);
+    color: var(--background);
     border-radius: 15px;
     flex-direction: column;
     align-items: stretch;
@@ -4091,7 +4092,8 @@ figcaption {
 .dropdown-button {
     grid-row-gap: 12px;
     border: 2px solid var(--dark--100);
-    background-color: var(--lavender--40);
+    background-color: var(--lavender--100);
+    color: var(--background);
     text-align: center;
     white-space: nowrap;
     border-radius: 15px;
@@ -4464,11 +4466,16 @@ figcaption {
     display: flex
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
+
 .details-property-facilities {
     grid-column-gap: 56px;
     grid-row-gap: 32px;
-    border: 1px solid var(--lavender--40);
-    background-color: var(--lavender--20);
+    border: 1px solid var(--lavender--100);
+    background-color: var(--lavender--100);
+    color: var(--background);
     border-radius: 15px;
     flex-flow: wrap;
     justify-content: space-between;
@@ -4505,7 +4512,8 @@ figcaption {
     align-items: center;
     width: 100%;
     padding: 16px;
-    display: flex
+    display: flex;
+    color: white;
 }
 
 .dropdown-menu {
