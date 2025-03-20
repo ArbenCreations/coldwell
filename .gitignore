@@ -11,6 +11,9 @@ coldwell/media/
 *.log
 gunicorn.log
 
+
+!static/assets/media/
+
 # Ignore static files
 # staticfiles/
 
