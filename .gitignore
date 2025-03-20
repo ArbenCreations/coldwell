@@ -12,7 +12,7 @@ coldwell/media/
 gunicorn.log
 
 # Ignore static files
-staticfiles/
+# staticfiles/
 
 # Ignore environment files
 .env
