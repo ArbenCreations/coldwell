@@ -8364,7 +8364,7 @@ a.color-dark-50 {
         display: flex
     }
     .hero-about-us-stats-grid h2 {
-        font-size: 36px !important;
+        font-size: 30px !important;
     }
     .hero-about-us-stats-grid {
         grid-column-gap: 40px;
