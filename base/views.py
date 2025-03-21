@@ -762,7 +762,7 @@ def about(request):
 
 def send_email(name, email, phone, message, price_range):
     if price_range:
-        pq=f'<p><strong>Price Range:</strong> {price_range}</p>'
+        pq=f'<p><strong>Postal code/Area of Interest:</strong> {price_range}</p>'
     else:
         pq=''
 
@@ -798,7 +798,7 @@ def contact(request):
         email = request.POST['Email-Address']
         phone = request.POST['Phone-Number']
         message = request.POST['Message']
-        price_range = request.POST.get('Price-Range', 'Not specified')  # Avoid KeyError
+        price_range = request.POST.get('Postal-code', 'Not specified')  # Avoid KeyError
         
         send_email(name, email, phone, message,price_range)  # Sending email
 
