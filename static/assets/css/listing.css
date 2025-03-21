@@ -2379,7 +2379,7 @@ figcaption {
 }
 
 .navbar {
-    background-color: var(--background);
+    /* background-color: var(--background);
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -2387,7 +2387,7 @@ figcaption {
     height: 100px;
     display: flex;
     position: fixed;
-    inset: 0% 0% auto
+    inset: 0% 0% auto */
 }
 
 .container {
@@ -4071,7 +4071,7 @@ figcaption {
 }
 
 .dropdown {
-    border: 1px solid var(--lavender--100);
+    /* border: 1px solid var(--lavender--100);
     background-color: var(--lavender--100);
     color: var(--background);
     border-radius: 15px;
@@ -4080,7 +4080,7 @@ figcaption {
     width: 100%;
     display: flex;
     position: relative;
-    overflow: hidden
+    overflow: hidden */
 }
 
 .dropdown.more-filter {
@@ -4524,13 +4524,13 @@ a.color-dark-50 {
 }
 
 .dropdown-toggle {
-    flex-direction: row;
+    /* flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 16px;
     display: flex;
-    color: white;
+    color: white; */
 }
 
 .dropdown-menu {
@@ -5749,18 +5749,18 @@ a.color-dark-50 {
 }
 
 .dropdown-toggle-plus-icon-wrap {
-    flex-direction: column;
+    /* flex-direction: column;
     flex: none;
     justify-content: center;
     align-items: center;
     width: 24px;
     height: 24px;
     display: flex;
-    position: relative
+    position: relative */
 }
 
 .dropdown-toggle-plus-icon {
-    position: absolute
+    /* position: absolute */
 }
 
 .template-frames-wrap {
@@ -7340,7 +7340,7 @@ a.color-dark-50 {
         padding-bottom: 120px
     }
     .navbar {
-        height: 72px
+        /* height: 72px */
     }
     .container,
     .container.mobile-container {

@@ -2,15 +2,17 @@
 {% load static %}
 {% load humanize %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'assets/css/listing.css' %}">
 <div class="section first-section">
     <div class="container w-container">
         <div class="heading margin-s">
             <div class="heading-title d-flex gap-3 align-items-center">
-                <a href='{% url "property" %}' class="{% if 'property' in request.get_full_path %}color-dark-100  {% else %}color-dark-50{% endif %}"><h2 class="">Search Properties</h2></a>
-                |
-                <a href='{% url "activelisting"  %}' class="{% if 'active-listing' in request.get_full_path %}color-dark-100  {% else %}color-dark-50{% endif %}  "><h2 class="color-dark-50">My Active Listing</h2> </a>
-            </div>
+                {% if 'property' in request.get_full_path %}
+                
+                <h2 class="color-dark-100">Search Properties</h2>
+                {% else %}
+                <h2 class="color-dark-100">My Active Listing</h2>
+                {% endif %}
+                </div>
         </div>
         <div data-w-id="e8bac7ac-e048-a58a-d463-91befe401b41" style="opacity: 1;" class="browse-property-forms-wrap">
             <div class="browse-form-wrap">
@@ -679,7 +681,7 @@
                         {% for property in properties %}
 
                         <div role="listitem" class="card-property raw w-dyn-item">
-                            <div class="box-image-border-radius"><a href='/listing/{{i.ListingKeyNumeric}}'
+                            <div class="box-image-border-radius"><a href='/listing/{{property.ListingKeyNumeric}}'
                                     class="box-ratio-3-4 w-inline-block"><img loading="lazy" alt="Riverbend Retreat"
                                         src="{{property.Media.0}}" class="image-full-absolute-cover"></a></div>
                             <div class="card-property-content-wrap pop-card">

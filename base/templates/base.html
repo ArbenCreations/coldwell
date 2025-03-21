@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
+<link rel="stylesheet" href="{% static 'assets/css/listing.css' %}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -47,7 +49,19 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav mx-auto gap-xl-5">
                     <a class="nav-link active" aria-current="page" href="{% url "home" %}">Home</a>
-                    <a class="nav-link" href="{% url "property" %}">Properties</a>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Properties 
+
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url "property" %}">All Listings</a></li>
+                          <li><a class="dropdown-item" href="{% url "activelisting" %}">My Active Listings</a></li>
+                        </ul>
+                      </li>
+              
                     <a class="nav-link" href="{% url "sell" %}">Sell</a>
                     <a class="nav-link" href="{% url "about" %}">About</a>
                 </div>
@@ -70,7 +84,7 @@
 
     </div>
 
-    <footer class="footer col-xxl-11 col-xl-12 col-lg-12 mx-auto">
+    <footer class="footer col-xxl-11 col-xl-12 col-lg-12 col-10 mx-auto">
         <div class="col-xl-11 mx-auto">
             <div class="row justify-content-between">
                 <div class="footer-p col-md-3">

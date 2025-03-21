@@ -133,6 +133,10 @@ h2 {
 
 /* ? Navbar  */
 
+.navbar {
+    z-index: 999999;
+}
+
 .nav-link {
     font-size: 18px;
     color: var(--font-color-2);
