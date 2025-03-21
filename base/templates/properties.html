@@ -6,8 +6,10 @@
 <div class="section first-section">
     <div class="container w-container">
         <div class="heading margin-s">
-            <div class="heading-title">
-                <h2 class="color-dark-100">Search Properties</h2>
+            <div class="heading-title d-flex gap-3 align-items-center">
+                <a href='{% url "property" %}' class="{% if 'property' in request.get_full_path %}color-dark-100  {% else %}color-dark-50{% endif %}"><h2 class="">Search Properties</h2></a>
+                |
+                <a href='{% url "activelisting"  %}' class="{% if 'active-listing' in request.get_full_path %}color-dark-100  {% else %}color-dark-50{% endif %}  "><h2 class="color-dark-50">My Active Listing</h2> </a>
             </div>
         </div>
         <div data-w-id="e8bac7ac-e048-a58a-d463-91befe401b41" style="opacity: 1;" class="browse-property-forms-wrap">
@@ -682,7 +684,7 @@
                                         src="{{property.Media.0}}" class="image-full-absolute-cover"></a></div>
                             <div class="card-property-content-wrap pop-card">
                                 <div class="card-property-label on-pop-card">
-                                   
+            
                                     <div class="text-s"> {{properties.0.MlsStatus}}</div>
                                 </div>
                                 <div class="card-property-details-wrap">
@@ -691,14 +693,11 @@
                                         
                                     </div><a href='/listing/{{property.ListingKeyNumeric}}'
                                         class="card-property-name w-inline-block">
-                                        <h5>{{property.ListOfficeName}}</h5>
+                                        <h5>{{property.Name}}</h5>
                                     </a>
                                     <div class="horizontal-card-property-description">
-                                        <div>{{ property.StreetNumber|default:"" }}
-                                            {{property.StreetName|default:"" }} {{ property.StreetSuffix|default:"" }}
-                                            {{property.StreetDirSuffix|default:"" }}, {{ property.City|default:"" }},
-                                            {{property.StateOrProvince|default:"" }} {{property.PostalCode|default:""}},
-                                            {{property.CountyOrParish|default:"" }}</div>
+                                        <div>{{ property.FullAddress|default:"" }}
+                                           </div>
                                     </div>
                                 </div>
                                 <div class="card-property-facilities">
@@ -755,7 +754,7 @@
                                                     </clipPath>
                                                 </defs>
                                             </svg></div>
-                                        <div class="text-s-medium">{{property.LivingAreaSF|floatformat:0|intcomma}} sqft</div>
+                                        <div class="text-s-medium">{% if property.LivingAreaS %} {{property.LivingAreaSF|floatformat:0|intcomma}} {% else %} N/A {% endif %}  sqft</div>
                                     </div>
                                 </div>
                             </div>
@@ -769,7 +768,20 @@
                 </div>
                 <div class="pagination search-result">
                     {% if current_page > 1 %}
-                    <a href="{{ request.get_full_path }}&page={{ current_page|add:'-1' }}" class="pagination-button arrow w-inline-block">
+<a href="{% if '?' in request.get_full_path %}
+    {% if '?' in request.get_full_path %}
+    {{ request.get_full_path }}&
+{% else %}
+   {{ request.get_full_path }}?
+{% endif %}&
+{% else %}
+   {% if '?' in request.get_full_path %}
+    {{ request.get_full_path }}&
+{% else %}
+   {{ request.get_full_path }}?
+{% endif %}?
+{% endif %}page={{ current_page|add:'-1' }}" class="pagination-button arrow w-inline-block">
+
                         <div class="svg-icon _24x24 w-embed">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -783,15 +795,27 @@
 
                     {% for num in paginator.page_range %}
                     {% if num == current_page %}
-                    <a href="{{ request.get_full_path }}&page={{ num }}" class="pagination-button active w-inline-block">
+                    <a href="{% if '?' in request.get_full_path %}
+    {{ request.get_full_path }}&
+{% else %}
+   {{ request.get_full_path }}?
+{% endif %}&page={{ num }}" class="pagination-button active w-inline-block">
                         <div class="text-xl">{{ num }}</div>
                     </a>
-                    {% elif num > current_page|add:'-3' and num < current_page|add:'3' %} <a href="{{ request.get_full_path }}&page={{ num }}"
+                    {% elif num > current_page|add:'-3' and num < current_page|add:'3' %} <a href="{% if '?' in request.get_full_path %}
+    {{ request.get_full_path }}&
+{% else %}
+   {{ request.get_full_path }}?
+{% endif %}&page={{ num }}"
                         class="pagination-button w-inline-block">
                         <div class="text-xl">{{ num }}</div>
                         </a>
                         {% elif num == 1 or num == paginator.num_pages %}
-                        <a href="{{ request.get_full_path }}&page={{ num }}" class="pagination-button w-inline-block">
+                        <a href="{% if '?' in request.get_full_path %}
+    {{ request.get_full_path }}&
+{% else %}
+   {{ request.get_full_path }}?
+{% endif %}&page={{ num }}" class="pagination-button w-inline-block">
                             <div class="text-xl">{{ num }}</div>
                         </a>
                         {% elif num == current_page|add:'-3' or num == current_page|add:'3' %}
@@ -801,7 +825,11 @@
                         {% endif %}
                         {% endfor %}
 
-                        {% if current_page < paginator.num_pages %} <a href="{{ request.get_full_path }}&page={{ current_page|add:'1' }}"
+                        {% if current_page < paginator.num_pages %} <a href="{% if '?' in request.get_full_path %}
+    {{ request.get_full_path }}&
+{% else %}
+   {{ request.get_full_path }}?
+{% endif %}&page={{ current_page|add:'1' }}"
                             class="pagination-button arrow w-inline-block">
                             <div class="svg-icon _24x24 w-embed">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -823,6 +851,39 @@
 
 
     <script>
+
+        
+    function formatNumber(num) {
+        return num.toLocaleString();
+    }
+        function createPropertyCard(property) {
+            return `
+                <div role="listitem" class="card-property raw w-dyn-item">
+                    <div class="box-image-border-radius">
+                        <a href='/listing/${property.ListingKeyNumeric}' class="box-ratio-3-4 w-inline-block">
+                            <img loading="lazy" alt="Property Image" src="${property.Media[0] || ''}" class="image-full-absolute-cover">
+                        </a>
+                    </div>
+                    <div class="card-property-content-wrap pop-card">
+                        <div class="card-property-label on-pop-card">
+                            <div class="text-s">${property.MlsStatus || 'N/A'}</div>
+                        </div>
+                        <div class="card-property-details-wrap">
+                            <div class="card-property-price">
+                                <h4 class="color-dark-100 fs-5" >$${formatNumber(property.ListPrice)}</h4>
+                            </div>
+                            <a href='/listing/${property.ListingKeyNumeric}'  class="fs-6 card-property-name w-inline-block">
+                                <h5 class='fs-4'>${property.Name || 'N/A'}</h5>
+                            </a>
+                            <div class="horizontal-card-property-description">
+                                <div>${property.FullAddress || ''}</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>`;
+        }
+        
         var map = L.map('map').setView([53.9333,-116.5765], 6);  // Default to San Francisco
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -834,7 +895,7 @@
         properties.forEach(property => {
             L.marker([property.Latitude, property.Longitude])
                 .addTo(map)
-                .bindPopup(`<div class='d-flex gap-2'><img src="${property.Media[0]}" width="100">  <div><b class='fs-5'>${property.StreetNumber}  ${ property.StreetName } ${ property.StreetSuffix }, ${ property.City }</b><br><b class='fs-6'>$${property.ListPrice}</b>    </div></div>`);
+                .bindPopup(createPropertyCard(property));
         });
     </script>
     {% endblock content %}

@@ -4377,14 +4377,24 @@ figcaption {
     margin-top: 40px
 }
 
+a.color-dark-50 {
+    color: var(--dark--50);
+}
+
+#dateLabel4,
+#dateLabel {
+    color: var(--lavender--100);
+}
+
 .pagination-button {
     color: var(--dark--60);
     border-radius: 10px;
     flex: none;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    padding: 5px 13px;
+    /* width: 40px; */
+    /* height: 40px; */
     display: flex;
     overflow: hidden
 }

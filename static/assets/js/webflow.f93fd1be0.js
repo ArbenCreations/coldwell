@@ -10294,21 +10294,9 @@ __p+='`),
           r.design =
           r.preview =
             function () {
-              N(), !E && !m && F();
+               !E && !m && F();
             };
-        function N() {
-          (s = e("html").attr("data-wf-site")),
-            (y = "https://webflow.com/api/v1/form/" + s),
-            a &&
-              y.indexOf("https://webflow.com") >= 0 &&
-              (y = y.replace(
-                "https://webflow.com",
-                "https://formdata.webflow.com"
-              )),
-            (T = `${y}/signFile`),
-            (i = e(u + " form")),
-            i.length && i.each(L);
-        }
+        
         function L(W, H) {
           var h = e(H),
             p = e.data(H, u);

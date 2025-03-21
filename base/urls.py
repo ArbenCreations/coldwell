@@ -6,6 +6,7 @@ urlpatterns = [
     path('',home,name='home'),
     path('listing/<int:id>/',listing,name='listing'),
     path('property',property,name='property'),
+    path('active-listing',activelisting,name='activelisting'),
     path('about',about,name='about'),
     path('contact',contact,name='contact'),
     path('advance-filter',advFilter,name='advFilter'),

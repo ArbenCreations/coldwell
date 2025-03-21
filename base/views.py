@@ -336,7 +336,47 @@ def get_single(listing_id):
         for row in data_rows:
             values = row.text.strip().split('\t')
             record = {columns[i]: values[i] if i < len(values) else '' for i in range(len(columns))}
+            street_number = record.get("StreetNumber", "").strip()
+            street_name = record.get("StreetName", "").strip()
+            street_suffix = record.get("StreetSuffix", "").strip()
+            street_dir_prefix = record.get("StreetDirPrefix", "").strip()
+            street_dir_suffix = record.get("StreetDirSuffix", "").strip()
+            unit_number = record.get("UnitNumber", "").strip()
+            city = record.get("City", "").strip()
+            state = record.get("StateOrProvince", "").strip()
+            postal_code = record.get("PostalCode", "").strip()
+
+
+            days_on_market = int(record.get("DaysOnMarket", 0))
+            years = days_on_market // 365
+            months = (days_on_market % 365) // 30
+            days = (days_on_market % 365) % 30
+
+            if years > 0 and months > 0:
+                formatted_days = f"{years} year{'s' if years > 1 else ''}, {months} month{'s' if months > 1 else ''}"
+            elif years > 0:
+                formatted_days = f"{years} year{'s' if years > 1 else ''}"
+            elif months > 0:
+                formatted_days = f"{months} month{'s' if months > 1 else ''}"
+            else:
+                formatted_days = f"{days} days"
+
+            record["FormattedDaysOnMarket"] = formatted_days 
+            # Constructing "Name" field (without unit, state, postal code)
+            record["Name"] = f"{street_number} {street_name} {street_suffix} {street_dir_suffix}, {city}".strip().replace(" ,", ",")
+
+            # Constructing "FullAddress" field
+            full_address_parts = [
+                # f"Unit {unit_number}" if unit_number else "",
+                f"{street_number} {street_name} {street_suffix} {street_dir_suffix}".strip(),
+                city,
+                state,
+                postal_code
+            ]
+            record["FullAddress"] = ", ".join(filter(None, full_address_parts))  # Remove empty parts
+            AgentID = record.get("ListAgentKeyNumeric", "").strip()
             data_dict.append(record)
+            
 
         # Convert to JSON and print
         return data_dict
@@ -403,16 +443,20 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         elif isinstance(value, dict) and "min" in value:
             query_parts.append(f'({key}={value["min"]}+)')  # Greater than min
         elif isinstance(value, dict) and "max" in value:
-            query_parts.append(f'({key}=-{value["max"]})')  # Less than max
+            query_parts.append(f'({key}={value["max"]}-)')  # Less than max
         else:
             query_parts.append(f'({key}=|{value})')  # Single value
     query_string = ','.join(query_parts)
     print(query_string)
     if not query_string:
-        query_string = "(MlsStatus=Active)"
+        query_string = "(MlsStatus=A)"
     if seven_days:
         query_string+=f",{seven_days}"
-    # query_string = "(ListOfficeName=Coldwell Banker YAD Realty)"
+    try:
+        if filters['ListAgentFullName']:
+            query_string = f"(ListAgentFullName={filters['ListAgentFullName']}),(MlsStatus=A)"
+    except:
+        pass
     search_params = {
         "SearchType": "Property",
         "Class": "Property",
@@ -452,9 +496,8 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         values = row.text.strip().split('\t')
         record = {columns[i]: values[i] if i < len(values) else '' for i in range(len(columns))}
         listing_id = record.get("ListingKeyNumeric")
-      
         if listing_id:
-         # Extracting address components
+            # Extracting address components
             street_number = record.get("StreetNumber", "").strip()
             street_name = record.get("StreetName", "").strip()
             street_suffix = record.get("StreetSuffix", "").strip()
@@ -533,9 +576,40 @@ def advFilter(request):
 #     filters = {key: value for key, value in request.GET.items() if value}  # Capture all non-empty fields dynamically
 #     query_string = "&".join(f"{key}={value}" for key, value in filters.items())  # Convert to URL query string
 #     return redirect(f"/property?{query_string}")  # Redirect to the property view with filters
+from django.http import JsonResponse
 
 
 def listing(request,id):
+
+    if request.method=='POST':
+        try:
+            data = json.loads(request.body)  # Parse JSON request body
+            print("Parsed JSON Data:", data)  # Debugging
+
+            if data.get('FORMTYPE') == 'Schedule Tour':
+                email = data.get('Email-Address', '')
+                phone = data.get('Phone-Number', '')
+                listingname = data.get('property', '')
+                meetdate = data.get('Date', '')
+                meetTime = data.get('Time', '')
+                message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
+                send_email(listingname, email, phone, message, None)  # Sending email
+                return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
+            
+            if data.get('FORMTYPE') == 'Request Quote':
+                email = data.get('Email-Address', '')
+                phone = data.get('Phone-Number', '')
+                listingname = data.get('property', '')
+                meetdate = data.get('Date', '')
+                meetTime = data.get('Time', '')
+                message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
+                send_email(listingname, email, phone, message, None)  # Sending email
+                return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
+        except json.JSONDecodeError:
+            print("Invalid JSON received")
+            return JsonResponse({"success": False, "error": "Invalid JSON format"}, status=400)
+
+
     listing=get_single(id)
     if id:
         listing[0]["Media"] = get_media(id)
@@ -543,6 +617,73 @@ def listing(request,id):
 
     # print(listing)
     return render(request,'listing.html',{'listing':listing})
+
+
+def activelisting(request):
+    page = request.GET.get('page', 1)
+    limit = 9  # Number of properties per page
+    filters = {}
+    for key, value in request.GET.items():
+        if key in ["page", "csrfmiddlewaretoken"] or not value.strip():  # Skip empty values
+            continue
+
+        # Handle min-max filters dynamically
+        if key.startswith("min_") or key.startswith("max_"):
+            base_key = key.replace("min_", "").replace("max_", "")  # Extract actual field name
+
+            if base_key not in filters:
+                filters[base_key] = {}  # Initialize min-max dictionary
+
+            if key.startswith("min_"):
+                filters[base_key]["min"] = value
+            else:
+                filters[base_key]["max"] = value
+
+        # Handle min-max ranges for specific fields like Price
+        elif key.lower() in ["listprice", "living_space"]:
+            price_match = re.match(r'\$(\d+)-\$(\d+)', value)
+            if price_match:
+                filters[key] = {"min": price_match.group(1), "max": price_match.group(2)}
+            elif value.startswith("$") and value.endswith("+"):
+                filters[key] = {"min": value[1:-1]}  # Extract min value from "$8000+"
+            else:
+                filters[key] = value
+
+        else:
+            filters[key] = value  # Store normal filters
+
+    # Remove duplicate min/max fields (like min_bedroom and max_bedroom)
+    min_max_keys = [key for key in filters.keys() if key.startswith("min_") or key.startswith("max_")]
+    for key in min_max_keys:
+        del filters[key]
+
+    # Default PropertyType if no filters exist
+    if not filters:
+        filters["PropertyType"] = "RESI"
+
+    print("aa", filters)  # Debugging output
+
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+
+    filters['ListAgentFullName']='Kanwal Bhangu'
+    # filters['ListingId']='207109916'
+    # filters['MlsStatus']='Active'
+    # Fetch properties using the dynamic filters
+    properties, total_count = fetch_properties(page=page, limit=limit, **filters)
+    # print(properties)
+    # Set up pagination
+    paginator = Paginator(range(total_count), limit)
+
+    return render(request, "properties.html", {
+        "properties": properties,
+        "paginator": paginator,
+        "current_page": page,
+        "total_count": total_count,
+    })
+
 
 def property(request):
     page = request.GET.get('page', 1)
@@ -620,15 +761,24 @@ def about(request):
 
 
 def send_email(name, email, phone, message, price_range):
+    if price_range:
+        pq=f'<p><strong>Price Range:</strong> {price_range}</p>'
+    else:
+        pq=''
+
+    if name:
+        nam=f'<p><strong>Name:</strong> {name}</p>'
+    else:
+        nam=''
     subject = f"New Contact Form Submission from {name}"
     body = f"""
     <html>
         <body>
             <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> {name}</p>
+            {nam}
             <p><strong>Email:</strong> {email}</p>
             <p><strong>Phone:</strong> {phone}</p>
-            <p><strong>Price Range:</strong> {price_range}</p>
+            {pq}
             <p><strong>Message:</strong></p>
             <p>{message}</p>
         </body>

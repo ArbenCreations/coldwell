@@ -74,18 +74,23 @@
                 class="image-full-absolute-cover"
               />
             </div>
+
+          
             <div
               role="listitem"
               class="box-ratio-2-3 grid-images-item-wrap w-dyn-item w-dyn-repeater-item"
             >
-              <img
-                loading="lazy"
-                alt=""
-                src="{{listing.0.Media.2}}"
-                sizes="(max-width: 767px) 28vw, (max-width: 1439px) 29vw, 365.3333435058594px"
-               
-                class="image-full-absolute-cover"
-              />
+            {% if listing.0.Media.2 %}
+            <img
+            loading="lazy"
+            alt=""
+            src="{{listing.0.Media.2}}"
+            sizes="(max-width: 767px) 28vw, (max-width: 1439px) 29vw, 365.3333435058594px"
+           
+            class="image-full-absolute-cover"
+          />
+            {% endif %}
+             
             </div>
           </div>
           <div class="empty-state w-dyn-hide w-dyn-empty">
@@ -93,6 +98,7 @@
           </div>
         </div>
       </div>
+      {% if listing.0.Media.2 %}
       <div class="details-property-header-cta-wrap">
         <a
           href="#"
@@ -153,7 +159,7 @@
                   "fileName": "Estately Property - Photo Gallery 1.webp",
                   "fileSize": 29520,
                   "height": 702,
-                  "url": "dd://cdn.prod.website-files.com/63dccc1ba88f450bf57ed4e1/640954b585ef9f70057fc639_Estately%20Property%20-%20Photo%20Gallery%201.webp",
+                  "url": "/",
                   "width": 699,
                   "caption": "Kitchen",
                   "type": "image"
@@ -164,6 +170,8 @@
           </script></a
         >
       </div>
+      {% endif %}
+     
     </div>
     <div
       data-w-id="faf893fc-85de-68ed-db8e-fddcebeb5e85"
@@ -179,8 +187,8 @@
             <div class="details-main-heading-inner-wrap">
               {% comment %} <div><h3 class="color-dark-100">Beach Pros Realty Inc.</h3></div> {% endcomment %}
               <div>
-                <div class="text-xl color-dark-100">
-                    {{ listing.0.StreetNumber|default:"" }} {{ listing.0.StreetName|default:"" }} {{ listing.0.StreetSuffix|default:"" }} {{ listing.0.StreetDirSuffix|default:"" }}, {{ listing.0.City|default:"" }}, {{ listing.0.StateOrProvince|default:"" }} {{ listing.0.PostalCode|default:"" }}, {{ listing.0.CountyOrParish|default:"" }}
+                <div class="text-xl color-dark-100 fw-bold fs-3">
+                    {{ listing.0.FullAddress|default:"" }}
 
                 </div>
               </div>
@@ -342,6 +350,185 @@
                 <div class="text-r-bold ">{{listing.0.LivingAreaSF|floatformat:0|intcomma}} sqft</div>
               </div>
             </div>
+
+            <div class="big-card-property-facility">
+              <div>Year Built</div>
+              <div class="big-card-property-facility-details">
+                <div class="svg-icon _24x24  w-embed">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_48_5110)">
+                      <path
+                        d="M10.5979 18.6525L4.14766 12.2022C3.41758 11.4722 3.41758 10.1279 4.14766 9.3978L10.5979 2.94759C11.328 2.2175 12.6722 2.2175 13.4023 2.94759L19.8525 9.3978C20.5826 10.1279 20.5826 11.4722 19.8525 12.2022L13.4023 18.6525C12.6722 19.3825 11.328 19.3825 10.5979 18.6525V18.6525Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M2.3999 15.8057L7.63636 21.0421"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M16.3633 21.0421L21.5997 15.8057"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_48_5110">
+                        <rect width="24" height="24" fill="white"></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="text-r-bold ">{{listing.0.YearBuilt}} </div>
+              </div>
+            </div>
+
+            <div class="big-card-property-facility">
+              <div>In market</div>
+              <div class="big-card-property-facility-details">
+                <div class="svg-icon _24x24  w-embed">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_48_5110)">
+                      <path
+                        d="M10.5979 18.6525L4.14766 12.2022C3.41758 11.4722 3.41758 10.1279 4.14766 9.3978L10.5979 2.94759C11.328 2.2175 12.6722 2.2175 13.4023 2.94759L19.8525 9.3978C20.5826 10.1279 20.5826 11.4722 19.8525 12.2022L13.4023 18.6525C12.6722 19.3825 11.328 19.3825 10.5979 18.6525V18.6525Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M2.3999 15.8057L7.63636 21.0421"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M16.3633 21.0421L21.5997 15.8057"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_48_5110">
+                        <rect width="24" height="24" fill="white"></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="text-r-bold ">{{listing.0.FormattedDaysOnMarket}} days</div>
+              </div>
+            </div>
+
+            <div class="big-card-property-facility">
+              <div>Mls Number</div>
+              <div class="big-card-property-facility-details">
+                <div class="svg-icon _24x24  w-embed">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_48_5110)">
+                      <path
+                        d="M10.5979 18.6525L4.14766 12.2022C3.41758 11.4722 3.41758 10.1279 4.14766 9.3978L10.5979 2.94759C11.328 2.2175 12.6722 2.2175 13.4023 2.94759L19.8525 9.3978C20.5826 10.1279 20.5826 11.4722 19.8525 12.2022L13.4023 18.6525C12.6722 19.3825 11.328 19.3825 10.5979 18.6525V18.6525Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M2.3999 15.8057L7.63636 21.0421"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M16.3633 21.0421L21.5997 15.8057"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_48_5110">
+                        <rect width="24" height="24" fill="white"></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="text-r-bold ">{{listing.0.ListingId}}</div>
+              </div>
+            </div>
+            <div class="big-card-property-facility">
+              <div>Mls Status</div>
+              <div class="big-card-property-facility-details">
+                <div class="svg-icon _24x24  w-embed">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_48_5110)">
+                      <path
+                        d="M10.5979 18.6525L4.14766 12.2022C3.41758 11.4722 3.41758 10.1279 4.14766 9.3978L10.5979 2.94759C11.328 2.2175 12.6722 2.2175 13.4023 2.94759L19.8525 9.3978C20.5826 10.1279 20.5826 11.4722 19.8525 12.2022L13.4023 18.6525C12.6722 19.3825 11.328 19.3825 10.5979 18.6525V18.6525Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M2.3999 15.8057L7.63636 21.0421"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M16.3633 21.0421L21.5997 15.8057"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_48_5110">
+                        <rect width="24" height="24" fill="white"></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="text-r-bold ">{{listing.0.MlsStatus}}</div>
+              </div>
+            </div>
            
           </div>
         </div>
@@ -447,16 +634,17 @@
                   >
                     <div class="form-block w-form">
                       <form
-                        id="wf-form-Property-Schedule-Tour-Form"
-                        name="wf-form-Property-Schedule-Tour-Form"
+                        id=""
+                        name=""
                         data-name="Property Schedule Tour Form"
-                        method="get"
-                        class="form"
-                        data-wf-page-id="64088004b78d3f1cf2fef3f766666"
-                        data-wf-element-id="053d1046-6edc-bf11-b8cc-2cfe59d5d4d8"
+                        method="POST"
+                        class="form1 form"
                         aria-label="Property Schedule Tour Form"
                       >
+                      {% csrf_token %}
                         <div class="form-row">
+                          <input type='hidden' name='FORMTYPE' value='Schedule Tour'>
+                          <input type='hidden' name='property' value='{{listing.0.Name}}'>
                           <div class="position-relative">
                             <input
                               class="text-field has-icon w-input"
@@ -494,12 +682,14 @@
                               name="Date"
                               data-name="Date"
                               placeholder="Select Date"
-                              type="text"
+                              type="date"
                               id="Date-3"
                               required=""
+                              style="opacity: 0; position: absolute;"
                             />
                             <div class="svg-icon text-field-icon w-embed">
-                              <svg
+                              <label for="Date-3" id="dateLabel">
+                                <svg
                                 width="20"
                                 height="20"
                                 viewBox="0 0 20 20"
@@ -581,7 +771,15 @@
                                   stroke-linejoin="round"
                                 ></path>
                               </svg>
+                              </label>
                             </div>
+                            <input
+                              type="text"
+                              id="customDateInput"
+                              class="text-field has-icon w-input"
+                              placeholder="Select Date"
+                              
+                            />
                           </div>
                         </div>
                         <div class="form-row">
@@ -592,7 +790,7 @@
                               name="Time"
                               data-name="Time"
                               placeholder="11:00 AM"
-                              type="text"
+                              type="time"
                               id="Time-3"
                               required=""
                             />
@@ -698,17 +896,74 @@
                     role="tabpanel"
                     aria-labelledby="w-tabs-0-data-w-tab-1"
                   >
+
+
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const form = document.querySelector(".form1");
+                        const successMessage = document.querySelector(".success-message");
+                        const errorMessage = document.querySelector(".error-message");
+                        const submitBTN=document.querySelector('input[value="Schedule a Tour"]')
+                        form.addEventListener("submit", function (event) {
+                            event.preventDefault(); // Prevent default form submission
+                            submitBTN.value = "Please wait..."; // Change button text on submit
+                            submitBTN.disabled = true; // Disable button to prevent multiple submissions
+                    
+                            let formData = new FormData(form); // Capture form data
+                            let jsonData = {};
+                            formData.forEach((value, key) => {
+                                jsonData[key] = value; // Convert FormData to JSON
+                            });
+                    
+                            fetch("{{request.build_absolute_uri}}", {  // Replace with your API endpoint
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value, // For Django CSRF
+                                },
+                                body: JSON.stringify(jsonData),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                
+                                if (data.success) {
+                                    successMessage.style.display = "block"; // Show success message
+                                    errorMessage.style.display = "none";
+                                    form.style.display = "none";
+                                    submitBTN.value='Done'
+
+                                    form.reset(); // Clear the form
+                                } else {
+                                    successMessage.style.display = "none";
+                                    errorMessage.style.display = "block"; // Show error message
+                                    submitBTN.value = "Schedule a Tour"; // Reset button text on failure
+
+                                    submitBTN.disabled=false;
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error:", error);
+                                successMessage.style.display = "none";
+                                errorMessage.style.display = "block";
+                            });
+                        });
+                    });
+                    </script>
                     <div class="form-block w-form">
                       <form
-                        id="wf-form-Property-Request-Quote-Form"
-                        name="wf-form-Property-Request-Quote-Form"
+                        id="fo"
+                        name="fo"
                         data-name="Property Request Quote Form"
-                        method="get"
-                        class="form"
-                        data-wf-page-id="64088004b78d3f1cf2fef3f766666"
-                        data-wf-element-id="053d1046-6edc-bf11-b8cc-2cfe59d5d4f3"
+                        method="post"
+                        class="form2"
+                      
                         aria-label="Property Request Quote Form"
                       >
+                      {% csrf_token %}
+                      <input type='hidden' name='FORMTYPE' value='Request Quote'>
+                      <input type='hidden' name='property' value='{{listing.0.Name}}'>
+
                         <div class="form-row">
                           <div class="position-relative">
                             <input
@@ -747,12 +1002,14 @@
                               name="Date"
                               data-name="Date"
                               placeholder="Select Date"
-                              type="text"
+                              type="date"
                               id="Date-4"
                               required=""
+                              style="opacity: 0; position: absolute;"
                             />
                             <div class="svg-icon text-field-icon w-embed">
-                              <svg
+                              <label for="Date-4" id="dateLabel4">
+                                <svg
                                 width="20"
                                 height="20"
                                 viewBox="0 0 20 20"
@@ -834,7 +1091,15 @@
                                   stroke-linejoin="round"
                                 ></path>
                               </svg>
+                              </label>
                             </div>
+                            <input
+                              type="text"
+                              id="customDateInput4"
+                              class="text-field has-icon w-input"
+                              placeholder="Select Date"
+                              
+                            />
                           </div>
                         </div>
                         <div class="form-row">
@@ -845,7 +1110,7 @@
                               name="Time"
                               data-name="Time"
                               placeholder="11:00 AM"
-                              type="text"
+                              type="time"
                               id="Time-4"
                               required=""
                             />
@@ -925,7 +1190,7 @@
                         </div>
                       </form>
                       <div
-                        class="success-message w-form-done"
+                        class="success-message s1 w-form-done"
                         tabindex="-1"
                         role="region"
                         aria-label="Property Request Quote Form success"
@@ -933,7 +1198,7 @@
                         <div>Thank you! Your submission has been received!</div>
                       </div>
                       <div
-                        class="error-message w-form-fail"
+                        class="error-message e1 w-form-fail"
                         tabindex="-1"
                         role="region"
                         aria-label="Property Request Quote Form failure"
@@ -949,6 +1214,57 @@
             </div>
           </div>
         </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+              const form = document.querySelector(".form2");
+              const successMessage = document.querySelector(".success-message.s1");
+              const errorMessage = document.querySelector(".error-message.e1");
+              const submitBTN=document.querySelector('input[value="Request Guide"]')
+              form.addEventListener("submit", function (event) {
+                  event.preventDefault(); // Prevent default form submission
+                  submitBTN.value = "Please wait..."; // Change button text on submit
+                  submitBTN.disabled = true; // Disable button to prevent multiple submissions
+          
+                  let formData = new FormData(form); // Capture form data
+                  let jsonData = {};
+                  formData.forEach((value, key) => {
+                      jsonData[key] = value; // Convert FormData to JSON
+                  });
+          
+                  fetch("{{request.build_absolute_uri}}", {  // Replace with your API endpoint
+                      method: "POST",
+                      headers: {
+                          "Content-Type": "application/json",
+                          "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value, // For Django CSRF
+                      },
+                      body: JSON.stringify(jsonData),
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      
+                      if (data.success) {
+                          successMessage.style.display = "block"; // Show success message
+                          errorMessage.style.display = "none";
+                          form.style.display = "none";
+                          submitBTN.value='Done'
+
+                          form.reset(); // Clear the form
+                      } else {
+                          successMessage.style.display = "none";
+                          errorMessage.style.display = "block"; // Show error message
+                          submitBTN.value = "Request Guide"; // Reset button text on failure
+                          submitBTN.disabled=false;
+                      }
+                  })
+                  .catch(error => {
+                      console.error("Error:", error);
+                      successMessage.style.display = "none";
+                      errorMessage.style.display = "block";
+                  });
+              });
+          });
+          </script>
         <div class="horizontal-line"></div>
         <div>
           <div class="details-heading">
@@ -1287,5 +1603,27 @@
       .addTo(map)
       .bindPopup(`<b>{{ listing.0.StreetNumber }} {{ listing.0.StreetName }} {{ listing.0.StreetSuffix }}, {{ listing.0.City }}</b><br>Price: ${{ listing.0.ListPrice }}`)
       .openPopup();
+</script>
+
+<script>
+  document.getElementById("dateLabel").addEventListener("click", function () {
+    let dateInput = document.getElementById("Date-3");
+    dateInput.showPicker();
+  });
+
+  document.getElementById("Date-3").addEventListener("change", function () {
+    document.getElementById("customDateInput").value = this.value;
+  });
+</script>
+
+<script>
+  document.getElementById("dateLabel4").addEventListener("click", function () {
+    let dateInput = document.getElementById("Date-4");
+    dateInput.showPicker();
+  });
+
+  document.getElementById("Date-4").addEventListener("change", function () {
+    document.getElementById("customDateInput4").value = this.value;
+  });
 </script>
 {% endblock content %}
