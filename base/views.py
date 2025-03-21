@@ -754,8 +754,8 @@ def property(request):
 
     # return render(request,'properties.html')
 def about(request):
-    metadata_xml = get_metadata()
-    print(metadata_xml)
+    # metadata_xml = get_metadata()
+    # print(metadata_xml)
     return render(request,'about.html')
 
 

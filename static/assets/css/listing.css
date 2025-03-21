@@ -4373,6 +4373,13 @@ figcaption {
     margin-top: 24px
 }
 
+.agentImg {
+    width: 100%;
+    background-color: var(--lavender--80);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
 .pagination.agents-v2 {
     margin-top: 40px
 }
@@ -6231,7 +6238,7 @@ a.color-dark-50 {
 }
 
 .hero-about-us-v1-illustration-wrap {
-    z-index: -1;
+    z-index: 1;
     width: 530px;
     height: 100%;
     max-height: 623px;
