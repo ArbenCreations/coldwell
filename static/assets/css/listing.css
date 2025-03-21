@@ -8347,6 +8347,31 @@ a.color-dark-50 {
     #w-node-f2063e7c-7919-7c5b-7f49-d73c318b8c43-f4c7e837 {
         grid-area: span 1/span 2/span 1/span 2
     }
+    .hero-about-us-v1-title {
+        max-width: 100%;
+        width: 100%;
+    }
+    .hero-about-us-v1-description {
+        max-width: 100%;
+        width: 100%;
+        margin-top: 24px
+    }
+    .hero-about-us-v1-content-wrap {
+        width: 100%;
+        grid-row-gap: 56px;
+        flex-direction: column;
+        align-items: flex-start;
+        display: flex
+    }
+    .hero-about-us-stats-grid h2 {
+        font-size: 36px !important;
+    }
+    .hero-about-us-stats-grid {
+        grid-column-gap: 40px;
+        grid-row-gap: 48px;
+        max-width: auto;
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:479px) {
