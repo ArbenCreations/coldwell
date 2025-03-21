@@ -6899,7 +6899,7 @@ a.color-dark-50 {
     }
     .benefits-grid.about-us-v1,
     .benefits-grid.vertical-stretch {
-        display: none
+        grid-template-columns: 1fr;
     }
     .card-benefit.about-us-v1.second-item,
     .card-benefit.about-us-v1.third-item,
@@ -6926,7 +6926,7 @@ a.color-dark-50 {
         padding-bottom: 92px
     }
     .slider.tablet-benefits-slider {
-        display: block
+        display: none
     }
     .card-subscription {
         padding: 48px 56px
@@ -7849,7 +7849,7 @@ a.color-dark-50 {
         overflow: hidden
     }
     .hero-about-us-v1-illustration-wrap {
-        transform: translate(-36px)
+        transform: translate(0px)
     }
     .meet-our-teams-grid {
         grid-template-columns: 1fr;
