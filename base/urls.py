@@ -9,6 +9,7 @@ urlpatterns = [
     path('active-listing',activelisting,name='activelisting'),
     path('about',about,name='about'),
     path('contact',contact,name='contact'),
+    path('sell',sell,name='sell'),
     path('advance-filter',advFilter,name='advFilter'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

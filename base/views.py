@@ -805,3 +805,19 @@ def contact(request):
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
         
     return render(request, 'contact.html')
+
+
+def sell(request):
+    if request.method == 'POST':
+        print(request.POST)
+        name = f"{request.POST['First-Name']} {request.POST['Last-Name']}"
+        email = request.POST['Email-Address']
+        phone = request.POST['Phone-Number']
+        message = request.POST['Message']
+        
+        send_email(name, email, phone, message,None)  # Sending email
+
+        return render(request, 'sell.html', {'message': 'Email sent successfully'})
+        
+    return render(request, 'sell.html')
+
