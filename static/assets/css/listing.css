@@ -4070,8 +4070,8 @@ figcaption {
     display: flex
 }
 
-.dropdown {
-    /* border: 1px solid var(--lavender--100);
+.listing .dropdown {
+    border: 1px solid var(--lavender--100);
     background-color: var(--lavender--100);
     color: var(--background);
     border-radius: 15px;
@@ -4080,7 +4080,7 @@ figcaption {
     width: 100%;
     display: flex;
     position: relative;
-    overflow: hidden */
+    overflow: hidden
 }
 
 .dropdown.more-filter {
@@ -4483,8 +4483,8 @@ a.color-dark-50 {
     display: flex
 }
 
-.dropdown-toggle::after {
-    display: none;
+.listing .dropdown-toggle::after {
+    display: none !important;
 }
 
 .details-property-facilities {
@@ -4523,14 +4523,14 @@ a.color-dark-50 {
     display: flex
 }
 
-.dropdown-toggle {
-    /* flex-direction: row;
+.listing .dropdown-toggle {
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 16px;
     display: flex;
-    color: white; */
+    color: white;
 }
 
 .dropdown-menu {
@@ -5748,19 +5748,19 @@ a.color-dark-50 {
     display: flex
 }
 
-.dropdown-toggle-plus-icon-wrap {
-    /* flex-direction: column;
+.listing .dropdown-toggle-plus-icon-wrap {
+    flex-direction: column;
     flex: none;
     justify-content: center;
     align-items: center;
     width: 24px;
     height: 24px;
     display: flex;
-    position: relative */
+    position: relative
 }
 
-.dropdown-toggle-plus-icon {
-    /* position: absolute */
+.listing .dropdown-toggle-plus-icon {
+    position: absolute
 }
 
 .template-frames-wrap {
