@@ -323,6 +323,7 @@ a {
 .propImg img {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    height: 100%;
 }
 
 .propCards img {
