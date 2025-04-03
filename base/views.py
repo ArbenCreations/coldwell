@@ -148,10 +148,10 @@ def get_media(property_id):
     ]
     
     if existing_images:
-        print(f"📂 Using cached images for Property ID: {property_id}")
+        # print(f"📂 Using cached images for Property ID: {property_id}")
         return existing_images  # Return `/media/` URLs
 
-    print(f"Fetching media for Property ID: {property_id}")
+    # print(f"Fetching media for Property ID: {property_id}")
     params = {
         "Resource": "Property",
         "Type": "XLarge",  # Adjust as needed: "Large", "Thumbnail"
@@ -168,16 +168,16 @@ def get_media(property_id):
     )
 
     content_type = response.headers.get("Content-Type", "")
-    print(f"Response Content-Type: {content_type}")
+    # print(f"Response Content-Type: {content_type}")
 
     if "text/xml" in content_type:
-        print("Received an XML response instead of images:")
-        print(response.text)
+        # print("Received an XML response instead of images:")
+        # print(response.text)
         return []
 
     boundary_match = re.search(r'boundary="?([^";]+)"?', content_type)
     if not boundary_match:
-        print("Boundary not found. Check response headers:", content_type)
+        # print("Boundary not found. Check response headers:", content_type)
         return []
 
     boundary = boundary_match.group(1).encode()
@@ -194,7 +194,7 @@ def get_media(property_id):
                 content_type = content_type_match.group(1)
                 extension = content_type.split("/")[-1]
             else:
-                print("Could not determine content type, skipping.")
+                # print("Could not determine content type, skipping.")
                 continue
 
             object_id_match = re.search(r"Object-ID:\s*(\d+)", headers)
@@ -204,14 +204,14 @@ def get_media(property_id):
             file_path = os.path.join(media_dir, filename)
 
             if Path(file_path).is_file():
-                print(f"⚠️ Image already exists: {filename}, skipping download.")
+                # print(f"⚠️ Image already exists: {filename}, skipping download.")
                 images.append(f"/media/{property_id}/{filename}")
                 continue
 
             with open(file_path, "wb") as f:
                 f.write(image_data.split(b"\r\n--")[0])
 
-            print(f"✅ Saved image: {filename}")
+            # print(f"✅ Saved image: {filename}")
             images.append(f"/media/{property_id}/{filename}")  # Use `/media/` path
 
     return images
@@ -231,10 +231,10 @@ def get_media_AG(property_id):
     ]
     
     if existing_images:
-        print(f"📂 Using cached images for Agent ID: {property_id}")
+        # print(f"📂 Using cached images for Agent ID: {property_id}")
         return existing_images  # Return `/media/` URLs
 
-    print(f"Fetching media for Agent ID: {property_id}")
+    # print(f"Fetching media for Agent ID: {property_id}")
     params = {
         "Resource": "Member",
         "Type": "AgentPhoto",  # Adjust as needed: "Large", "Thumbnail"
@@ -250,17 +250,21 @@ def get_media_AG(property_id):
         stream=True
     )
 
+
+# {'SearchType': 'Property', 'Class': 'Property', 'QueryType': 'DMQL2', 'Query': '(ListPrice=|300000-500000)', 'Format': 'COMPACT-DECODED', 'Count': 1, 'StandardNames
+# {'SearchType': 'Property', 'Class': 'Property', 'QueryType': 'DMQL2', 'Query': '(ListPrice=300000-500000)', 'Format': 'COMPACT-DECODED', 'Count': 1, 'StandardNames': 0, 'Limit': 9, 'Offset': 0, 'Sort': 'ModificationTimestamp-'}
+
     content_type = response.headers.get("Content-Type", "")
-    print(f"Response Content-Type: {content_type}")
+    # print(f"Response Content-Type: {content_type}")
 
     if "text/xml" in content_type:
-        print("Received an XML response instead of images:")
-        print(response.text)
+        # print("Received an XML response instead of images:")
+        # print(response.text)
         return []
 
     boundary_match = re.search(r'boundary="?([^";]+)"?', content_type)
     if not boundary_match:
-        print("Boundary not found. Check response headers:", content_type)
+        # print("Boundary not found. Check response headers:", content_type)
         return []
 
     boundary = boundary_match.group(1).encode()
@@ -277,7 +281,7 @@ def get_media_AG(property_id):
                 content_type = content_type_match.group(1)
                 extension = content_type.split("/")[-1]
             else:
-                print("Could not determine content type, skipping.")
+                # print("Could not determine content type, skipping.")
                 continue
 
             object_id_match = re.search(r"Object-ID:\s*(\d+)", headers)
@@ -287,14 +291,14 @@ def get_media_AG(property_id):
             file_path = os.path.join(media_dir, filename)
 
             if Path(file_path).is_file():
-                print(f"⚠️ Image already exists: {filename}, skipping download.")
+                # print(f"⚠️ Image already exists: {filename}, skipping download.")
                 images.append(f"/media/{property_id}/{filename}")
                 continue
 
             with open(file_path, "wb") as f:
                 f.write(image_data.split(b"\r\n--")[0])
 
-            print(f"✅ Saved image: {filename}")
+            # print(f"✅ Saved image: {filename}")
             images.append(f"/media/{property_id}/{filename}")  # Use `/media/` path
 
     return images
@@ -324,7 +328,7 @@ def get_single(listing_id):
     data_dict = []
 
     if response.status_code == 200:
-        print("Property Data Retrieved Successfully!")
+        # print("Property Data Retrieved Successfully!")
         raw_data = response.text
         soup = BeautifulSoup(raw_data, 'lxml')
 
@@ -425,7 +429,7 @@ def get_metadata(resource="Property"):
        
         return fdata  # XML Response (Parse it for filters)
     else:
-        print(f"Error fetching metadata: {response.status_code}")
+        # print(f"Error fetching metadata: {response.status_code}")
         return None
 
 def fetch_properties(seven_days=None, page=1, limit=4, **filters):
@@ -447,7 +451,7 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         else:
             query_parts.append(f'({key}=|{value})')  # Single value
     query_string = ','.join(query_parts)
-    print(query_string)
+    # print(query_string)
     if not query_string:
         query_string = "(MlsStatus=A)"
     if seven_days:
@@ -469,7 +473,7 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         "Offset": offset,
         "Sort": "ModificationTimestamp-",
     }
-    print(search_params)
+    # print(search_params)
     response = requests.get(
         RETS_SEARCH_URL,
         params=search_params,
@@ -544,13 +548,13 @@ def home(request):
     query = f"(ModificationTimestamp={seven_days_ago}+)"
     # filters['ListingContractDate']='ASE'
     data_dict,total_count = fetch_properties(query,**filters)
-    print(total_count)
+    # print(total_count)
     return render(request, 'home.html', {'properties': data_dict})
 
 
 def advFilter(request):
     if request.method == 'POST':
-        print(request.POST)  # Debugging: Print the raw form data
+        # print(request.POST)  # Debugging: Print the raw form data
 
         filters = {}
 
@@ -566,7 +570,7 @@ def advFilter(request):
                 filters[key] = value[0]  # Store single values normally
 
         query_string = "&".join(f"{key}={value}" for key, value in filters.items())  
-        print(query_string)  # Debugging: Print the generated query string
+        # print(query_string)  # Debugging: Print the generated query string
 
         return redirect(f"/property?{query_string}")  # Redirect to property view with filters
 
@@ -584,7 +588,7 @@ def listing(request,id):
     if request.method=='POST':
         try:
             data = json.loads(request.body)  # Parse JSON request body
-            print("Parsed JSON Data:", data)  # Debugging
+            # print("Parsed JSON Data:", data)  # Debugging
 
             if data.get('FORMTYPE') == 'Schedule Tour':
                 email = data.get('Email-Address', '')
@@ -606,7 +610,7 @@ def listing(request,id):
                 send_email(listingname, email, phone, message, None)  # Sending email
                 return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
         except json.JSONDecodeError:
-            print("Invalid JSON received")
+            # print("Invalid JSON received")
             return JsonResponse({"success": False, "error": "Invalid JSON format"}, status=400)
 
 
@@ -661,7 +665,7 @@ def activelisting(request):
     if not filters:
         filters["PropertyType"] = "RESI"
 
-    print("aa", filters)  # Debugging output
+    # print("aa", filters)  # Debugging output
 
     try:
         page = int(page)
@@ -694,7 +698,9 @@ def property(request):
     for key, value in request.GET.items():
         if key in ["page", "csrfmiddlewaretoken"] or not value.strip():  # Skip empty values
             continue
-
+        
+            
+        
         # Handle min-max filters dynamically
         if key.startswith("min_") or key.startswith("max_"):
             base_key = key.replace("min_", "").replace("max_", "")  # Extract actual field name
@@ -716,10 +722,26 @@ def property(request):
                 filters[key] = {"min": value[1:-1]}  # Extract min value from "$8000+"
             else:
                 filters[key] = value
-
+                
+        
         else:
             filters[key] = value  # Store normal filters
-
+        
+        if key == 'ListPrice':
+            filters['ListPrice']={}
+            if '-' in value:
+                if 'under' in value:
+                    min_price, max_price = map(str, value.split('-'))
+                    filters['ListPrice']['max'] = max_price
+                elif 'over' in value:
+                    min_price, max_price = map(str, value.split('-'))
+                    filters['ListPrice']['min'] = max_price
+                else:
+                    min_price, max_price = map(int, value.split('-'))
+                    filters['ListPrice']['min'] = min_price
+                    filters['ListPrice']['max'] = max_price
+            
+    # print(filters)
     # Remove duplicate min/max fields (like min_bedroom and max_bedroom)
     min_max_keys = [key for key in filters.keys() if key.startswith("min_") or key.startswith("max_")]
     for key in min_max_keys:
@@ -729,7 +751,7 @@ def property(request):
     if not filters:
         filters["PropertyType"] = "RESI"
 
-    print("aa", filters)  # Debugging output
+    # print("aa", filters)  # Debugging output
 
     try:
         page = int(page)
@@ -793,7 +815,7 @@ def send_email(name, email, phone, message, price_range):
 
 def contact(request):
     if request.method == 'POST':
-        print(request.POST)
+        # print(request.POST)
         name = f"{request.POST['First-Name']} {request.POST['Last-Name']}"
         email = request.POST['Email-Address']
         phone = request.POST['Phone-Number']
@@ -809,7 +831,7 @@ def contact(request):
 
 def sell(request):
     if request.method == 'POST':
-        print(request.POST)
+        # print(request.POST)
         name = f"{request.POST['First-Name']} {request.POST['Last-Name']}"
         email = request.POST['Email-Address']
         phone = request.POST['Phone-Number']

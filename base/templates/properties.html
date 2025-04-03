@@ -721,8 +721,12 @@
 
                         <div role="listitem" class="card-property raw w-dyn-item">
                             <div class="box-image-border-radius"><a href='/listing/{{property.ListingKeyNumeric}}'
-                                    class="box-ratio-3-4 w-inline-block"><img loading="lazy" alt="Riverbend Retreat"
-                                        src="{{property.Media.0}}" class="image-full-absolute-cover"></a></div>
+                                    class="box-ratio-3-4 w-inline-block">
+                                    <img loading="lazy" alt="Riverbend Retreat"
+                                        src="{% static "/assets/media/placeholder.png" %}" 
+                                        data-src="{{property.Media.0}}" 
+                                        class="image-full-absolute-cover lazyload">
+                                    </a></div>
                             <div class="card-property-content-wrap pop-card">
                                 <div class="card-property-label on-pop-card">
             
