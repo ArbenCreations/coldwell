@@ -1,4 +1,16 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} {% load static %} 
+
+{% block meta %}
+<title>About Us | Coldwell Banker YAD Realty </title>
+
+<meta name="description" content="Discover the story behind Coldwell Banker YAD Realty! Learn about our mission, vision, and how we make real estate seamless for Albertans.  ">
+
+<!-- Canonical URL (SEO Best Practice) -->
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+
+{% endblock meta %}
+{% block content %}
 {% comment %} <link rel="stylesheet" href="{% static 'assets/css/listing.css' %}" /> {% endcomment %}
 
 <div class="section hero-about-us-v1">
@@ -349,7 +361,7 @@
       class="card-mission"
     >
       <div class="card-mission-title">
-        <h3 class="color-dark-100">Our Mission to Realize People Dream</h3>
+        <h3 class="color-dark-100">Our Mission</h3>
       </div>
       <div class="card-mission-illustration-wrap">
         <div class="card-mission-bg-wrap">
@@ -368,7 +380,7 @@
       </div>
       <div class="card-mission-description">
         <div class="text-l">
-            At Coldwell Banker, we are committed to making your real estate journey seamless and rewarding. We take pride in delivering exceptional service, ensuring that every client is satisfied and confident in their decisions. Your happiness is our priority, and we go the extra mile to make buying or selling a home a stress-free and successful experience.
+          The best real estate services provider has a mission to simplify property transactions for Albertans with our expert counseling alongside local support added with creative solutions. We want to create effortless experiences for buying and selling properties alongside effortless investments. Your dreams are our priority.
         </div>
       </div>
     </div>
@@ -382,12 +394,11 @@
       class="heading"
     >
       <div class="heading-title max-width-485px">
-        <h2 class="color-dark-100">Comfort Is Our Top Priority For You</h2>
+        <h2 class="color-dark-100">Our Vision</h2>
       </div>
       <div class="max-width-568px">
         <div class="text-l">
-          We guarantee that the products we sell will make our customers happy
-          because we are very concerned about our consumer satisfaction
+          Coldwell Banker YAD Realty aspires to reach its mission of becoming Alberta's premier trusted real estate partner which focuses on turning adversaries into prospects while turning homes into potential assets. Our organization pursues an improved approach to real estate by guiding individual clients through every step of their journey.
         </div>
       </div>
     </div>
@@ -428,8 +439,7 @@
         </div>
         <div class="card-benefit-description">
           <div>
-            We provide the best for you. The price we offer accordance with the
-            quality we provide
+            We provide fair prices that match service excellence. You won’t be burning any holes in your wallet when hiring us. 
           </div>
         </div>
       </div>
@@ -465,8 +475,7 @@
         </div>
         <div class="card-benefit-description">
           <div>
-            We help you to taking care of all your needs, quickly to find your
-            dream property
+            We guarantee high efficiency in every transaction along with swift and smooth service processes.
           </div>
         </div>
       </div>
@@ -502,8 +511,7 @@
         </div>
         <div class="card-benefit-description">
           <div>
-            Put your trust in us. We are a legal entity with official legality
-            in the relevant government
+            We deliver expert guidance as well as clear transparent processes. Meaning, our clients will have complete peace of mind.
           </div>
         </div>
       </div>
@@ -558,8 +566,7 @@
         </div>
         <div class="card-benefit-description">
           <div>
-            We always work wih agents in their fields so that we can provide the
-            best quality
+            We are a group of knowledgeable experts who work painstakingly to achieve your success. You can always count on us when buying or selling a property.  
           </div>
         </div>
       </div>

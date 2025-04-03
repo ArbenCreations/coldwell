@@ -1,16 +1,29 @@
 {% extends "base.html" %} {% load static %}
 {% load humanize %}
+
+
+{% block meta %}
+<title>Best Property in Alberta | Coldwell Banker YAD Realty</title>
+
+<meta name="description" content="Find your dream property in Alberta with Coldwell Banker YAD Realty. Explore featured listings, trusted expertise, and personalized service to buy or sell homes on the best property-selling website in Alberta!">
+
+<!-- Canonical URL (SEO Best Practice) -->
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+
+{% endblock meta %}
  {% block content %}
 <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
 
 <section class="container-fluid col-xl-11 mx-auto py-5" id="Herosection">
   <div class="content_conatiner row justify-content-between gap-xl-0 gap-4">
     <div class="col-xl-6 wow animate__animated animate__fadeInUp">
-      <h1 class="fs72 ">We help people to realize their dream property</h1>
+      <h1 class="fs48 ">Your Search For Best Property in Alberta Ends Here </h1>
 
-      <p class="fs20 py-4 col-xl-10 pe-xl-3">
-        We are creative people who provide the best way to you who want to have
-        a new confortable and suitable place to live
+      <p class="fs14 py-4 col-xl-11 pe-xl-0">
+        Alberta’s most prestigious neighborhoods hold the perfect homes and real estate investments for your selection. Happen to be looking for one? Coldwell Banker YAD Realty provides assistance throughout your entire process - whether you want to purchase, sell or browse the market. 
+        <br>
+        Our team of agents will use their extensive real estate experience together with dedicated commitment to property goals for transforming your real estate dreams into reality. Here, use our search tool. Define your requirements through filters and locate ideal property according to your needs.  
       </p>
 
       <form action='{% url "property" %}' >
@@ -133,7 +146,7 @@
   <div
     class="d-flex justify-content-between py-5 flex-wrap flex-xl-nowrap gap-0 gap-xl-0"
   >
-    <h2 class="fs48 fw-bold">Featured Listings</h2>
+    <h2 class="fs48 fw-bold">Hot Properties in Alberta </h2>
 
     <a href="/property" class="d-flex fs18 fw-bold align-items-center gap-xl-3">
       Browse All Featured
@@ -502,11 +515,10 @@
   <div
     class="d-flex justify-content-between py-5 align-items-center flex-wrap flex-xl-nowrap gap-3 gap-xl-0"
   >
-    <h2 class="fs48 fw-bold">Comfort Is Our Top Priority For You</h2>
+    <h2 class="fs48 fw-bold">Why Choose Us As Your Trusted Real Estate Partner?</h2>
 
     <p class="col-xl-5 ps-xl-4 fs18">
-      We guarantee that the products we sell will make our customers happy
-      because we are very concerned about our consumer satisfaction
+      Everyone who deals with property transactions deserves a team which understands their needs directly. Coldwell Banker YAD Realty brings both local market expertise and individualized attention to deliver meaningful outcomes.  
     </p>
   </div>
 
@@ -535,10 +547,9 @@
           ></path>
         </svg>
       </div>
-      <h3 class="fs24">Affordable Price</h3>
+      <h3 class="fs24">Local knowledge, global reach </h3>
       <p class="pe-xl-2 pt-xl-2">
-        We provide the best for you. The price we offer accordance with the
-        quality we provide
+        Our team possesses complete knowledge of the Canadian state. This enables us to identify properties that perfectly fit your criteria from throughout its diverse geography.  
       </p>
     </div>
 
@@ -566,10 +577,9 @@
           ></path>
         </svg>
       </div>
-      <h3 class="fs24">Affordable Price</h3>
+      <h3 class="fs24">Tailored solutions </h3>
       <p class="pe-xl-2 pt-xl-2">
-        We provide the best for you. The price we offer accordance with the
-        quality we provide
+        Each individual client needs exclusive approaches because they all come with different needs. Coldwell Banker YAD Realty adapts its service methods to address individual client requirements.  
       </p>
     </div>
 
@@ -597,10 +607,9 @@
           ></path>
         </svg>
       </div>
-      <h3 class="fs24">Affordable Price</h3>
+      <h3 class="fs24">Seamless experience</h3>
       <p class="pe-xl-2 pt-xl-2">
-        We provide the best for you. The price we offer accordance with the
-        quality we provide
+        As we take care of all the necessary details between listing and closing, you can dedicate your efforts toward building your future.  
       </p>
     </div>
   </div>
@@ -609,9 +618,9 @@
   <div
     class="d-flex justify-content-between py-5 align-items-center flex-wrap flex-xl-nowrap gap-0 gap-xl-0"
   >
-    <h2 class="fs48 fw-bold">Explore Calgary</h2>
-
-    <a href="" class="d-flex fs18 fw-bold align-items-center gap-3">
+    <h2 class="fs48 fw-bold">Discover Calgary’s Best Neighborhoods  </h2>
+   
+    {% comment %} <a href="" class="d-flex fs18 fw-bold align-items-center gap-3">
       Browse All Areas
 
       <svg
@@ -638,7 +647,7 @@
           stroke-linejoin="round"
         ></path>
       </svg>
-    </a>
+    </a> {% endcomment %}
   </div>
 
   <div class="d-flex flex-wrap gap-3 gap-xl-0 justify-content-xl-start justify-content-center">
@@ -666,9 +675,11 @@
   <div
     class="d-flex justify-content-between py-5 align-items-center flex-wrap flex-xl-nowrap gap-0 gap-xl-0"
   >
-    <h2 class="fs48 fw-bold">Featured Categories</h2>
-
-    <a href="" class="d-flex fs18 fw-bold align-items-center gap-3">
+    <h2 class="fs48 fw-bold">Your Property Journey Starts Here  </h2>
+    <p class="col-xl-5 ps-xl-4 fs18">
+      We provide both residential family homes and prime commercial spaces as part of our service offerings. Release real estate possibilities that match your exact needs with our assistance!    
+    </p>
+    {% comment %} <a href="" class="d-flex fs18 fw-bold align-items-center gap-3">
       Browse All Featured
 
       <svg
@@ -695,7 +706,7 @@
           stroke-linejoin="round"
         ></path>
       </svg>
-    </a>
+    </a> {% endcomment %}
   </div>
 
   <div class="d-flex justify-content-start flex-wrap flex-xl-nowrap gap-4">
@@ -1441,11 +1452,11 @@
 <section id="Newsletter" class="wow animate__animated  animate__slideInUp row container-fluid col-11 col-xl-11 mx-auto my-xl-5">
   <div class="row justify-content-between">
     <div class="col-xl-5 p-xl-5 pt-4 px-4 part1">
-      <h3 class="fs48 text-white">Let's Connect</h3>
+      <h3 class="fs48 text-white">Let’s Make It Happen! </h3>
       <p class="fs18 text-white-50">
-        Join our newsletter to stay up to date on features and releases.
+        All prepared to move forward in real estate world of Alberta? Reach out to us today! You can contact our team to get answers about your needs. Set up property viewings as well as acquire expert guidance. Click on the button below to schedule an appointment. 
       </p>
-      <button class="btn btn_white w100" >Contact</button>
+      {% comment %} <button class="btn btn_white w100" >Contact</button> {% endcomment %}
      
     </div>
     <div class="col-xl-6 subsIMG"></div>

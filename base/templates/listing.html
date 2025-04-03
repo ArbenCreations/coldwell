@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load humanize %}
+{% load custom_filters %}
 
 {% block content %}
 {% comment %} <link rel="stylesheet" href="{% static 'assets/css/listing.css' %}"> {% endcomment %}
@@ -191,9 +192,13 @@
                     {{ listing.0.FullAddress|default:"" }}
 
                 </div>
+                <p class='pt-2'>
+                  Listing information last updated on {{ listing.0.ModificationTimestamp|format_iso8601 }}.
+
+                </p>
               </div>
             </div>
-            <a href="#" class="button button-outline w-inline-block"
+            <a href="#" class="button button-outline w-inline-block"  id="shareButton"
               ><div class="svg-icon _20x20 w-embed">
                 <svg
                   width="20"
@@ -251,7 +256,24 @@
               </div>
               <div>Share</div></a
             >
+            <!-- 🔹 Modal for Desktop Share Options -->
+<div id="shareModal" class="modal share">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Share this listing</h3>
+      <div class="share-icons">
+          <a href="#" id="fbShare" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+          <a href="#" id="twitterShare" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="#" id="linkedinShare" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="#" id="whatsappShare" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="#" id="emailShare"><i class="fas fa-envelope"></i> Email</a>
+      </div>
+  </div>
+</div>
           </div>
+
+
+
           <div class="details-property-facilities">
             <div class="big-card-property-facility">
               <div>Bedrooms</div>
@@ -1610,6 +1632,11 @@
     let dateInput = document.getElementById("Date-3");
     dateInput.showPicker();
   });
+  document.getElementById("Date-3").addEventListener("click", function () {
+  
+    let dateInput = document.getElementById("Date-3");
+    dateInput.showPicker();
+  });
 
   document.getElementById("Date-3").addEventListener("change", function () {
     document.getElementById("customDateInput").value = this.value;
@@ -1621,9 +1648,58 @@
     let dateInput = document.getElementById("Date-4");
     dateInput.showPicker();
   });
-
+  document.getElementById("Date-4").addEventListener("click", function () {
+  
+    let dateInput = document.getElementById("Date-4");
+    dateInput.showPicker();
+  });
   document.getElementById("Date-4").addEventListener("change", function () {
     document.getElementById("customDateInput4").value = this.value;
   });
 </script>
+<script>
+
+
+  document.getElementById("shareButton").addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent default action
+
+      const pageUrl = window.location.href; // Get current page URL
+      const pageTitle = document.title; // Get current page title
+      const modal = document.getElementById("shareModal");
+      const closeModal = document.querySelector(".close");
+
+      if (navigator.share) {
+          // ✅ Web Share API (for mobile users)
+          navigator.share({
+              title: pageTitle,
+              url: pageUrl
+          })
+          .then(() => console.log('Shared successfully!'))
+          .catch(error => console.log('Error sharing:', error));
+      } else {
+          // 🔹 Open Modal for Desktop Users
+          modal.style.display = "block";
+
+          document.getElementById("fbShare").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+          document.getElementById("twitterShare").href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(pageTitle)}`;
+          document.getElementById("linkedinShare").href = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(pageUrl)}&title=${encodeURIComponent(pageTitle)}`;
+          document.getElementById("whatsappShare").href = `https://api.whatsapp.com/send?text=${encodeURIComponent(pageTitle + ' ' + pageUrl)}`;
+          document.getElementById("emailShare").href = `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(pageUrl)}`;
+      }
+
+      // Close Modal on Click
+      closeModal.onclick = function() {
+          modal.style.display = "none";
+      };
+      
+      // Close modal if user clicks outside of modal
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      };
+  });
+</script>
+
+
 {% endblock content %}

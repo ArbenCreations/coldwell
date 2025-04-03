@@ -4495,7 +4495,7 @@ a.color-dark-50 {
     color: var(--background);
     border-radius: 15px;
     flex-flow: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     padding: 20px 40px;
     display: flex

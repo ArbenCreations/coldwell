@@ -8,8 +8,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="Description" content="Enter your description here" />
-<link rel="stylesheet" href="{% static 'assets/css/listing.css' %}">
+
+    {% block meta %}
+    
+    {% endblock meta %}
+<!-- Open Graph (For Facebook, LinkedIn) -->
+<meta property="og:title" content="Best Property in Alberta | Coldwell Banker YAD Realty">
+<meta property="og:description" content="Find your dream property in Alberta with Coldwell Banker YAD Realty. Discover top real estate listings and expert service for buying and selling homes.">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/static/assets/media/coldwell_logo.svg"> <!-- Update with actual image URL -->
+<meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}"> <!-- Update with actual site URL -->
+<meta property="og:type" content="website">
+
+<!-- Twitter Card (For Twitter/X) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Best Property in Alberta | Coldwell Banker YAD Realty">
+<meta name="twitter:description" content="Find your dream property in Alberta with Coldwell Banker YAD Realty. Trusted real estate experts to help you buy or sell homes.">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/static/assets/media/coldwell_logo.svg"> <!-- Update with actual image URL -->
+
+    <link rel="stylesheet" href="{% static 'assets/css/listing.css' %}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
@@ -22,8 +38,75 @@
 
     <style>
         #map { width: 100%; height: 500px; }
+        /* 🔹 Modal Background */
+.share.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* 🔹 Modal Content Box */
+.share .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 30%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+/* 🔹 Close Button */
+.share .close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* 🔹 Share Buttons */
+.share-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.share-icons a {
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.share-icons a i {
+    font-size: 18px;
+}
+
+/* 🔹 Social Media Colors */
+#fbShare { background: #1877F2; }
+#twitterShare { background: #1DA1F2; }
+#linkedinShare { background: #0077B5; }
+#whatsappShare { background: #25D366; }
+#emailShare { background: #DD4B39; }
+
+
     </style>
-    <title>Home</title>
+
+    
 </head>
 
 <body>
@@ -98,6 +181,8 @@
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
+                     <!-- Toggle Button -->
+        
                 </div>
                 <div class="row col-xl-7 py-xl-0 py-3 justify-content-end">
                     <div class="more-info col-md-3 col-6">
@@ -112,10 +197,9 @@
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </div>
-
+    
                     <div class="more-info col-md-3 col-6">
                         <h6>Cities</h6>
-
                         <ul>
                             {% for ffcity in cities|slice:":5" %}
                             <li><a href="/property?City={{ffcity.value}}">{{ffcity.long_value}}</a></li>
@@ -133,7 +217,35 @@
                 </div>
             </div>
         </div>
-    </footer> 
+
+        <div class="text-center mt-xl-4">
+            <div id="toggleMLS" class='fs14'>Designed and Developed by <a class='color-primary' href='https://utellitservices.com/'>
+                Utell It Services. </a>
+            </div>
+        </div>
+       <div class='border-0 border-top mt-4 pt-4'>
+
+        <div class='col-xl-8 mx-auto '>
+            <div class="text-center ">
+                <div id="toggleMLS" class='fs14'>MLS Data provided by Pillar 9 (see below)
+                </div>
+            </div>
+        
+            <!-- MLS Disclaimer Section -->
+            <div id="mlsDisclaimer" class="text-center mt-1">
+                <p class="small text-muted">
+                   Information Deemed Reliable But Not Guaranteed. 
+                    The information provided by this website is for the personal, non-commercial use of consumers 
+                    and may not be used for any purpose other than to identify prospective properties consumers 
+                    may be interested in purchasing.
+                </p>
+            </div>
+
+        </div>
+       </div>
+       
+    </footer>
+    
 
 
 
@@ -161,6 +273,8 @@
     <script>
         new WOW().init();
     </script>
+
+    
 </body>
 
 </html>

@@ -1,16 +1,55 @@
 {% extends "base.html" %}
 {% load static %}
 {% load humanize %}
+
+
+{% block meta %}
+{% if 'property' in request.get_full_path %}
+<title>All Listed Properties in Alberta | Coldwell Banker YAD  Realty</title>
+
+<meta name="description" content="Check out the wide range of listed properties for sale in Alberta. Homes, condos, commercial spaces - find and pick a listed property that matches your lifestyle! ">
+
+<!-- Canonical URL (SEO Best Practice) -->
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+{% else %}
+
+<title>Active Property Listings in Alberta | Coldwell Banker YAD Realty </title>
+
+<meta name="description" content="Discover the latest active property listings in Alberta. From beautiful houses to prime commercial spaces, your next opportunity is waiting at Coldwell Banker YAD Reality!  ">
+
+<!-- Canonical URL (SEO Best Practice) -->
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endif %}
+{% endblock meta %}
 {% block content %}
 <div class="section first-section">
     <div class="container w-container">
         <div class="heading margin-s">
-            <div class="heading-title d-flex gap-3 align-items-center">
+            <div class="heading-title d-flex gap-3 align-items-center flex-wrap">
                 {% if 'property' in request.get_full_path %}
-                
-                <h2 class="color-dark-100">Search Properties</h2>
+                <h4 class='color-dark-100 col-12'>All listings  </h4>
+
+                <h2 class="color-dark-100 col-xl-4">Discover Your Next Property in Alberta</h2>
+                <p class="col-xl-7 ps-xl-0 fs16 mb-0">
+                    Coldwell Banker YAD Realty has carefully selected an assortment of properties for individuals seeking their dream options throughout Alberta. The listings we provide target every property seeker who needs a suburban residence or downtown condo or business property. Our filtering system will help you find properties matching your way of life and financial means. 
+                   <br >
+                   A perfect home awaits your discovery through a single online action. Convert your dreaming phase into homeownership success! 
+                  
+                </p>
                 {% else %}
-                <h2 class="color-dark-100">My Active Listing</h2>
+                <h4 class='color-dark-100 col-12'>Active listings  </h4>
+
+                <h2 class="color-dark-100 col-xl-4">Explore Alberta’s Hottest Properties</h2>
+                <p class="col-xl-7 ps-xl-0 fs16 mb-0">
+                    Every property currently on the list here reveals fascinating stories about each space. Modern urban lofts, serene countryside estates - these are waiting for their next chapter - with you! Updated frequently, Coldwell Banker YAD Realty displays through active listings the prime properties of Alberta's real estate domain.
+                   <br >
+                        Regardless of your experience in home ownership, you will find something unique. 
+                  
+                </p>
+
+                 
+
                 {% endif %}
                 </div>
         </div>

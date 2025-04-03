@@ -42,6 +42,10 @@ h5 {
     font-family: "Syne", sans-serif;
 }
 
+.color-primary {
+    color: var(--primary);
+}
+
 p {
     color: var(--font-color-2);
     font-weight: 300;
