@@ -449,7 +449,12 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         elif isinstance(value, dict) and "max" in value:
             query_parts.append(f'({key}={value["max"]}-)')  # Less than max
         else:
-            query_parts.append(f'({key}=|{value})')  # Single value
+            if key =='ListingId':
+
+                query_parts.append(f'({key}={value})')  # Single value
+            else:
+                query_parts.append(f'({key}=|{value})')  # Single value
+                
     query_string = ','.join(query_parts)
     # print(query_string)
     if not query_string:
@@ -473,7 +478,7 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         "Offset": offset,
         "Sort": "ModificationTimestamp-",
     }
-    # print(search_params)
+    print(search_params)
     response = requests.get(
         RETS_SEARCH_URL,
         params=search_params,
@@ -740,7 +745,9 @@ def property(request):
                     min_price, max_price = map(int, value.split('-'))
                     filters['ListPrice']['min'] = min_price
                     filters['ListPrice']['max'] = max_price
-            
+        if key=='MLS':
+            filters['ListingId']=value
+            del filters['MLS']
     # print(filters)
     # Remove duplicate min/max fields (like min_bedroom and max_bedroom)
     min_max_keys = [key for key in filters.keys() if key.startswith("min_") or key.startswith("max_")]

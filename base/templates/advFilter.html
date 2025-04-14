@@ -141,6 +141,7 @@
             <label class="form-label">Property SubType</label>
             <div class="d-flex flex-wrap gap-3">
               {% for Subtype in property_subtypes %}
+              {% if not 'Boat' in Subtype.long_value %}
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -156,6 +157,8 @@
                   {{ Subtype.long_value }}
                 </label>
               </div>
+              {% endif %}
+              
               {% endfor %}
             </div>
           </div>
@@ -291,6 +294,7 @@
             <label class="form-label">Amenities</label>
             <div class="d-flex flex-wrap gap-3">
               {% for amenity in AssociationAmenities %}
+              {% if not 'Boat' in amenity.long_value %}
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -306,6 +310,7 @@
                   {{ amenity.long_value }}
                 </label>
               </div>
+              {% endif %}
               {% endfor %}
             </div>
           </div>

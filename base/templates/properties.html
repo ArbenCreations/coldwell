@@ -718,7 +718,7 @@
                 <div class="w-dyn-list">
                     <div role="list" class="search-result-grid w-dyn-items">
                         {% for property in properties %}
-
+                     
                         <div role="listitem" class="card-property raw w-dyn-item">
                             <div class="box-image-border-radius"><a href='/listing/{{property.ListingKeyNumeric}}'
                                     class="box-ratio-3-4 w-inline-block">
@@ -730,7 +730,7 @@
                             <div class="card-property-content-wrap pop-card">
                                 <div class="card-property-label on-pop-card">
             
-                                    <div class="text-s"> {{properties.0.MlsStatus}}</div>
+                                    <div class="text-s"> {{property.MlsStatus}}</div>
                                 </div>
                                 <div class="card-property-details-wrap">
                                     <div class="card-property-price">

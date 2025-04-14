@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-+82ziiax#dj#isv6-+zmq37itz!$^od073_m*5s@5=p#cpj3(s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "69.48.203.75","kanwalbhangu.ca"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1","kanwalbhangu.ca"]
 
 
 # Application definition
@@ -139,5 +139,5 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "pricetrackerprod@gmail.com"
-EMAIL_HOST_PASSWORD = "mivptpljczyacfjh"  # Use App Password for Gmail
+EMAIL_HOST_USER = "UposDailyReports@gmail.com"
+EMAIL_HOST_PASSWORD = "fuaknuvdbgeemiho"  # Use App Password for Gmail
