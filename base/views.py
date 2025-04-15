@@ -792,7 +792,7 @@ def about(request):
 
 
 
-def send_email(name, email, phone, message, price_range):
+def send_email(name, email, phone, message, price_range,femail):
     if price_range:
         pq=f'<p><strong>Postal code/Area of Interest:</strong> {price_range}</p>'
     else:
@@ -816,7 +816,7 @@ def send_email(name, email, phone, message, price_range):
         </body>
     </html>
     """
-    from_email = "pricetrackerprod@gmail.com"  # Replace with your email
+    from_email =femail  # Replace with your email
     recipient_list = [email]  # Replace with the recipient email
 
     email_message = EmailMessage(subject, body, from_email, recipient_list)
@@ -832,7 +832,7 @@ def contact(request):
         message = request.POST['Message']
         price_range = request.POST.get('Postal-code', 'Not specified')  # Avoid KeyError
         
-        send_email(name, email, phone, message,price_range)  # Sending email
+        send_email(name, email, phone, message,price_range,'info@kanwalbhangu.ca')  # Sending email
 
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
         
@@ -847,7 +847,7 @@ def sell(request):
         phone = request.POST['Phone-Number']
         message = request.POST['Message']
         
-        send_email(name, email, phone, message,None)  # Sending email
+        send_email(name, email, phone, message,None,'sell@kanwalbhangu.ca')  # Sending email
 
         return render(request, 'sell.html', {'message': 'Email sent successfully'})
         
