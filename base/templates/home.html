@@ -214,7 +214,7 @@
     </div>
     <div class="col-xl-7 p-4">
       <div
-        class="d-flex align-items-center justify-content-between flex-wrap gap-3 gap-xl-0 flex-xl-nowrap"
+        class="d-flex align-items-center justify-content-between flex-wrap gap-0 gap-xl-0 flex-xl-nowrap"
       >
         <h3>
           <span class="d-inline-block fs40 fsm32"> ${{ properties.0.ListPrice|floatformat:2|intcomma }}
@@ -233,7 +233,7 @@
         </div>
       </div>
 
-      <div class="propContent pt-5">
+      <div class="propContent pt-xl-5 pt-2">
         <h2 class="fs40">
           <a href='{% url "listing" id=properties.0.ListingKeyNumeric %}'>
             <svg

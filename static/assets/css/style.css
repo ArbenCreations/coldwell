@@ -600,6 +600,9 @@ footer .more-info ul li {
         border-bottom-left-radius: 0;
         border-top-right-radius: 15px;
     }
+    .property_card_big .btn.btn_outlined_blue {
+        padding: 7px 17px;
+    }
     .navbar-collapse {
         background-color: #fff !important;
     }
