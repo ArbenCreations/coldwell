@@ -148,7 +148,7 @@
                   "fileName": "Estately Property - Featured Photo.webp",
                   "fileSize": 56430,
                   "height": 600,
-                  "url": "http://127.0.0.1:8000/media/{{ media|cut:'media/' }}",
+                  "url": "{{ request.scheme }}://{{ request.get_host }}/media/{{ media|cut:'media/' }}",
                   "width": 1441,
                   "caption": "View from Outside",
                   "type": "image"
