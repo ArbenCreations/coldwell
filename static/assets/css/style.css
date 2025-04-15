@@ -254,9 +254,15 @@ a {
 }
 
 .form-check-label {
-    /* text-align: center; */
+    display: inline-block;
+    /* Ensures block-level wrapping */
+    white-space: normal !important;
+    /* Forces wrapping */
+    word-break: break-word;
+    /* Break long words if needed */
     max-width: 40ch;
-    margin: 0 auto;
+    /* Prevent overflow */
+    line-height: 1.3;
 }
 
 @supports (text-wrap: balance) {
