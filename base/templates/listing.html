@@ -144,25 +144,25 @@
               {% for media in listing.0.Media %}
                 {
                   "_id": "example_img",
-                  "origFileName": "Estately Property - Featured Photo.webp",
-                  "fileName": "Estately Property - Featured Photo.webp",
+                  "origFileName": "{{ listing.0.FullAddress|default:"" }}",
+                  "fileName": "{{ listing.0.FullAddress|default:"" }}",
                   "fileSize": 56430,
                   "height": 600,
                   "url": "{{ request.scheme }}://{{ request.get_host }}/media/{{ media|cut:'media/' }}",
                   "width": 1441,
-                  "caption": "View from Outside",
+                  "caption": "{{ listing.0.FullAddress|default:"" }} - Property Image",
                   "type": "image"
                 },
                 {% endfor %}
                 {
                   "_id": "example_img",
-                  "origFileName": "Estately Property - Photo Gallery 1.webp",
-                  "fileName": "Estately Property - Photo Gallery 1.webp",
+                  "origFileName": "{{ listing.0.FullAddress|default:"" }}",
+                  "fileName": "{{ listing.0.FullAddress|default:"" }}",
                   "fileSize": 29520,
                   "height": 702,
-                  "url": "/",
+                  "url": "{{ request.scheme }}://{{ request.get_host }}/media/{{listing.0.Media.2}}",
                   "width": 699,
-                  "caption": "Kitchen",
+                  "caption": "random",
                   "type": "image"
                 }
               ],
