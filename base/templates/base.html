@@ -1,6 +1,6 @@
 {% load static %}
 {% load humanize %}
-
+{% load custom_filters %}
 <!DOCTYPE html>
 <html data-wf-domain="homezy.webflow.io" data-wf-page="64088004b78d3f1cf2fef3f766666" data-wf-site="63dccc1ba88f450bf57ed4e1" data-wf-status="1" lang="en" data-wf-locale="en" data-wf-collection="64088004b78d3f335ffef3f5" data-wf-item-slug="cova-home-realty">
 
@@ -258,7 +258,12 @@
                     The information provided by this website is for the personal, non-commercial use of consumers 
                     and may not be used for any purpose other than to identify prospective properties consumers 
                     may be interested in purchasing.
+                    <br>
+
+                   <b> Listing information last updated on {% current_datetime %}.</b>
+
                 </p>
+                
             </div>
 
         </div>

@@ -450,7 +450,6 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
             query_parts.append(f'({key}={value["max"]}-)')  # Less than max
         else:
             if key =='ListingId':
-
                 query_parts.append(f'({key}={value})')  # Single value
             else:
                 query_parts.append(f'({key}=|{value})')  # Single value
@@ -505,6 +504,10 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         values = row.text.strip().split('\t')
         record = {columns[i]: values[i] if i < len(values) else '' for i in range(len(columns))}
         listing_id = record.get("ListingKeyNumeric")
+        MlsStatus = record.get("MlsStatus")
+        if (MlsStatus):
+            if record['MlsStatus'].lower() == 'active':
+                record['MlsStatus']='New'
         if listing_id:
             # Extracting address components
             street_number = record.get("StreetNumber", "").strip()

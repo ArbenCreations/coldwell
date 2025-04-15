@@ -8,7 +8,7 @@
 <div class="section first-section">
   <div class="container w-container">
     <div class="breadcrumb">
-      <a href="/properties-v1" class="w-inline-block"
+      <a href="{% url "property" %}" class="w-inline-block"
         ><div class="svg-icon _24x24 w-embed">
           <svg
             width="24"
@@ -193,7 +193,7 @@
 
                 </div>
                 <p class='pt-2'>
-                  Listing information last updated on {{ listing.0.ModificationTimestamp|format_iso8601 }}.
+                  Listing information last updated on {% current_datetime %}
 
                 </p>
               </div>
