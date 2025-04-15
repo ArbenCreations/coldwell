@@ -116,12 +116,12 @@
       </div>
       <form method='post'>
         {% csrf_token %}
-        <div class="row">
+        <div class="row px-xl-0 px-3 gap-3 gap-xl-0">
           <div class="col-xl-6">
-            <label class="form-label">Property Type</label>
-            <div class="d-flex flex-wrap gap-3">
+            <label class="form-label fw-bold">Property Type</label>
+            <div class="row gap-3">
               {% for ptype in property_types %}
-              <div class="form-check">
+              <div class="form-check col-xl-3 col-5">
                 <input
                   class="form-check-input"
                   type="radio"
@@ -138,11 +138,11 @@
           </div>
 
           <div class="col-xl-6">
-            <label class="form-label">Property SubType</label>
-            <div class="d-flex flex-wrap gap-3">
+            <label class="form-label fw-bold">Property SubType</label>
+            <div class="row gap-3 justify-content-between">
               {% for Subtype in property_subtypes %}
               {% if not 'Boat' in Subtype.long_value %}
-              <div class="form-check">
+              <div class="form-check col-xxl-3 col-5">
                 <input
                   class="form-check-input"
                   type="checkbox"
@@ -164,10 +164,10 @@
           </div>
         </div>
 
-        <div class="row py-4">
+        <div class="row py-4 px-xl-0 px-3 gap-3 gap-xl-0">
           <!-- Min & Max Price Inputs -->
           <div class="col-xl-6">
-            <label class="form-label">Min Price</label>
+            <label class="form-label fw-bold">Min Price</label>
             <input
               type="number"
               class="form-control"
@@ -178,7 +178,7 @@
           </div>
 
           <div class="col-xl-6">
-            <label class="form-label">Max Price</label>
+            <label class="form-label fw-bold">Max Price</label>
             <input
               type="number"
               class="form-control"
@@ -189,10 +189,10 @@
           </div>
         </div>
 
-        <div class="row py-4">
+        <div class="row py-4 px-xl-0 px-3 gap-3 gap-xl-0">
           <!-- Min & Max Rooms Inputs -->
           <div class="col-xl-6">
-            <label class="form-label">Min Rooms</label>
+            <label class="form-label fw-bold">Min Rooms</label>
             <input
               type="number"
               class="form-control"
@@ -203,7 +203,7 @@
           </div>
 
           <div class="col-xl-6">
-            <label class="form-label">Max Rooms</label>
+            <label class="form-label fw-bold">Max Rooms</label>
             <input
               type="number"
               class="form-control"
@@ -214,10 +214,10 @@
           </div>
         </div>
 
-        <div class="row py-4">
+        <div class="row py-4 px-xl-0 px-3 gap-3 gap-xl-0">
           <!-- Min & Max Living Space Inputs -->
           <div class="col-xl-6">
-            <label class="form-label">Min Living Space (ft²)</label>
+            <label class="form-label fw-bold">Min Living Space (ft²)</label>
             <input
               type="number"
               class="form-control"
@@ -228,7 +228,7 @@
           </div>
 
           <div class="col-xl-6">
-            <label class="form-label">Max Living Space (ft²)</label>
+            <label class="form-label fw-bold">Max Living Space (ft²)</label>
             <input
               type="number"
               class="form-control"
@@ -239,13 +239,13 @@
           </div>
         </div>
 
-        <div class="row py-4">
+        <div class="row py-4 px-xl-0 px-3 gap-3 gap-xl-0">
           <!-- Basement Type (Checkboxes) -->
           <div class="col-xl-12">
-            <label class="form-label">Basement Type</label>
-            <div class="d-flex flex-wrap gap-3">
+            <label class="form-label fw-bold">Basement Type</label>
+            <div class="row gap-3 ">
               {% for basement in Basement_types %}
-              <div class="form-check">
+              <div class="form-check col-xxl-2 col-5">
                 <input
                   class="form-check-input"
                   type="checkbox"
@@ -265,13 +265,13 @@
           </div>
         </div>
 
-        <div class="row py-4">
+        <div class="row py-4 px-xl-0 px-3 gap-3 gap-xl-0">
           <!-- Architectural Style (Checkboxes) -->
           <div class="col-xl-12">
-            <label class="form-label">Architectural Style</label>
-            <div class="d-flex flex-wrap gap-3">
+            <label class="form-label fw-bold">Architectural Style</label>
+            <div class="row gap-3 justify-content-between">
               {% for style in ArchitecturalStyle %}
-              <div class="form-check">
+              <div class="col-xxl-2 col-5 form-check">
                 <input
                   class="form-check-input"
                   type="checkbox"
@@ -288,14 +288,14 @@
           </div>
         </div>
 
-        <div class="row py-4">
+        <div class="row py-4 px-xl-0 px-3 gap-3 gap-xl-0">
           <!-- Amenities (Checkboxes) -->
           <div class="col-xl-12">
-            <label class="form-label">Amenities</label>
-            <div class="d-flex flex-wrap gap-3">
+            <label class="form-label fw-bold">Amenities</label>
+            <div class="row gap-3 justify-content-between">
               {% for amenity in AssociationAmenities %}
               {% if not 'Boat' in amenity.long_value %}
-              <div class="form-check">
+              <div class="form-check col-xxl-2 col-5">
                 <input
                   class="form-check-input"
                   type="checkbox"
