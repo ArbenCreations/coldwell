@@ -588,6 +588,9 @@ footer .more-info ul li {
     .fs40 {
         font-size: 22px;
     }
+    .fsm32 {
+        font-size: 32px !important;
+    }
     .amenities {
         row-gap: 20px;
         grid-template-columns: repeat(2, 1fr);
