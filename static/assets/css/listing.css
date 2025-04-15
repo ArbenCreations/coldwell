@@ -4497,7 +4497,7 @@ a.color-dark-50 {
     flex-flow: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 20px 40px;
+    padding: 20px 40px !important;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
