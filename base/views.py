@@ -435,7 +435,8 @@ def get_metadata(resource="Property"):
 def fetch_properties(seven_days=None, page=1, limit=4, **filters):
     offset = (page - 1) * limit  # Calculate offset for pagination
     query_parts = []
-    
+
+    print(filters.items())
     for key, value in filters.items():
         if value is None:
             continue
@@ -449,11 +450,11 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
         elif isinstance(value, dict) and "max" in value:
             query_parts.append(f'({key}={value["max"]}-)')  # Less than max
         else:
-            if key =='ListingId':
+            if key in ['ListingId','StreetNumber','StreetName','StreetSuffix','PostalCode']:
                 query_parts.append(f'({key}={value})')  # Single value
             else:
                 query_parts.append(f'({key}=|{value})')  # Single value
-                
+    
     query_string = ','.join(query_parts)
     # print(query_string)
     if not query_string:
@@ -461,10 +462,16 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
     if seven_days:
         query_string+=f",{seven_days}"
     try:
-        if filters['ListAgentFullName']:
-            query_string = f"(ListAgentFullName={filters['ListAgentFullName']}),(MlsStatus=A)"
-    except:
-        pass
+        agent_name = filters.get('ListAgentFullName')  # or just 'AgentFullName'
+        if agent_name:
+            query_string = f"((ListAgentFullName={agent_name})|(CoListAgentFullName={agent_name})),(MlsStatus=A)"
+        else:
+            pass
+            # query_string += "(MlsStatus=A)"
+    except Exception as e:
+        print(f"Error building query: {e}")
+        # query_string = "(MlsStatus=A)"
+    print(query_string)
     search_params = {
         "SearchType": "Property",
         "Class": "Property",
@@ -681,11 +688,12 @@ def activelisting(request):
         page = 1
 
     filters['ListAgentFullName']='Kanwal Bhangu'
-    # filters['ListingId']='207109916'
+    filters['CoListAgentFullName']='Kanwal Bhangu'
+    # filters['ListingId']='A2204288'
     # filters['MlsStatus']='Active'
     # Fetch properties using the dynamic filters
     properties, total_count = fetch_properties(page=page, limit=limit, **filters)
-    # print(properties)
+    print(properties)
     # Set up pagination
     paginator = Paginator(range(total_count), limit)
 
@@ -697,6 +705,81 @@ def activelisting(request):
     })
 
 
+
+
+import re
+
+
+def parse_search_input(search_value, metadata):
+    filters = {}
+    search_value = search_value.strip()
+    if not search_value:
+        return filters
+
+    # Metadata mapping: city name to code
+    cities = metadata.get("City", [])
+    city_name_to_code = {city["long_value"].lower(): city["value"] for city in cities}
+
+    # Split comma-separated parts (e.g., "4641 128 Avenue, Calgary, T2P 1J9")
+    parts = [p.strip() for p in search_value.split(",") if p.strip()]
+    postal_regex = r"^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$"
+    mls_regex = r"^[A-Za-z]?\d{5,8}$"  # Accepts A123456 or 123456
+
+    for part in parts:
+        lower_part = part.lower()
+
+        # Check for MLS number
+        if re.match(mls_regex, part, re.IGNORECASE):
+            filters["ListingId"] = part.upper()
+            continue
+
+        # Canadian postal code
+        if re.match(postal_regex, part, re.IGNORECASE):
+            filters["PostalCode"] = part.upper()
+            continue
+
+        # City name
+        if lower_part in city_name_to_code:
+            filters["City"] = city_name_to_code[lower_part]
+            continue
+
+        # Address matching
+        if "StreetNumber" not in filters:
+            addr_match = re.match(
+                r'(?P<number>\d+)\s+(?P<name>[\w\s]+?)\s+(?P<suffix>Avenue|Street|St|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr|Lane|Ln|Court|Ct|Trail|Trl)\b',
+                part,
+                re.IGNORECASE,
+            )
+            if addr_match:
+                filters["StreetNumber"] = addr_match.group("number")
+                filters["StreetName"] = addr_match.group("name").strip()
+                filters["StreetSuffix"] = addr_match.group("suffix").title()
+            else:
+                filters["StreetName"] = part
+
+    # Handle single-part input (fallback logic)
+    if len(parts) == 1 and not filters:
+        term = parts[0]
+        if re.match(mls_regex, term, re.IGNORECASE):
+            filters["ListingId"] = term.upper()
+        elif re.match(postal_regex, term, re.IGNORECASE):
+            filters["PostalCode"] = term.upper()
+        elif term.lower() in city_name_to_code:
+            filters["City"] = city_name_to_code[term.lower()]
+        else:
+            addr_match = re.match(
+                r'(?P<number>\d+)\s+(?P<name>[\w\s]+?)\s+(?P<suffix>Avenue|Street|St|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr|Lane|Ln|Court|Ct|Trail|Trl)\b',
+                term,
+                re.IGNORECASE,
+            )
+            if addr_match:
+                filters["StreetNumber"] = addr_match.group("number")
+                filters["StreetName"] = addr_match.group("name").strip()
+                filters["StreetSuffix"] = addr_match.group("suffix").title()
+            else:
+                filters["StreetName"] = term
+
+    return filters
 def property(request):
     page = request.GET.get('page', 1)
     limit = 9  # Number of properties per page
@@ -704,7 +787,7 @@ def property(request):
     filters = {}
 
     for key, value in request.GET.items():
-        if key in ["page", "csrfmiddlewaretoken"] or not value.strip():  # Skip empty values
+        if key in ["page", "csrfmiddlewaretoken","MLS_or_City"] or not value.strip():  # Skip empty values
             continue
         
             
@@ -748,10 +831,16 @@ def property(request):
                     min_price, max_price = map(int, value.split('-'))
                     filters['ListPrice']['min'] = min_price
                     filters['ListPrice']['max'] = max_price
-        if key=='MLS':
-            filters['ListingId']=value
-            del filters['MLS']
-    # print(filters)
+        # if key=='MLS':
+        #     filters['ListingId']=value
+        #     del filters['MLS']
+    
+    search_value = request.GET.get("MLS_or_City", "").strip()
+
+    if search_value:
+
+        filters.update(parse_search_input(search_value,load_metadata()))
+    print(filters)
     # Remove duplicate min/max fields (like min_bedroom and max_bedroom)
     min_max_keys = [key for key in filters.keys() if key.startswith("min_") or key.startswith("max_")]
     for key in min_max_keys:
@@ -772,6 +861,7 @@ def property(request):
     # filters['ListingId']='207109916'
     # filters['MlsStatus']='Active'
     # Fetch properties using the dynamic filters
+    print(filters)
     properties, total_count = fetch_properties(page=page, limit=limit, **filters)
     # print(properties)
     # Set up pagination

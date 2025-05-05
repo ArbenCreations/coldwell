@@ -39,7 +39,8 @@ def metadata_context(request):
     # Filter cities that are only in Alberta
     filtered_cities = [
         {
-            "long_value": city["long_value"], 
+            "long_value": city["long_value"],
+            "value":city["value"],
             "image": priority_cities_images.get(city["long_value"], "images/default.jpg")
         }
         for city in cities if city["long_value"] in alberta_cities
