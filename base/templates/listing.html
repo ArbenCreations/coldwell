@@ -295,7 +295,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="text-r-bold ">{{listing.0.BedroomsTotal}}</div>
+                <div class="text-r-bold ">{% if listing.0.BedroomsTotal %} {{listing.0.BedroomsTotal}} {% else %} N/A {% endif %}</div>
               </div>
             </div>
             <div class="big-card-property-facility">
@@ -325,7 +325,7 @@
                     ></path>
                   </svg>
                 </div>
-                <div class="text-r-bold ">{{listing.0.BathroomsTotalInteger}}</div>
+                <div class="text-r-bold ">{% if listing.0.BathroomsTotalInteger %} {{listing.0.BathroomsTotalInteger}} {% else %} N/A {% endif %} </div>
               </div>
             </div>
             <div class="big-card-property-facility">
@@ -369,7 +369,7 @@
                     </defs>
                   </svg>
                 </div>
-                <div class="text-r-bold ">{{listing.0.LivingAreaSF|floatformat:0|intcomma}} sqft</div>
+                <div class="text-r-bold ">{% if listing.0.LivingAreaSF %} {{listing.0.LivingAreaSF|floatformat:0|intcomma}} sqft {% else %} N/A {% endif %} </div>
               </div>
             </div>
 
@@ -414,7 +414,7 @@
                     </defs>
                   </svg>
                 </div>
-                <div class="text-r-bold ">{{listing.0.YearBuilt}} </div>
+                <div class="text-r-bold ">{% if listing.0.YearBuilt %} {{listing.0.YearBuilt}} {% else %} N/A {% endif %}</div>
               </div>
             </div>
 
@@ -459,7 +459,7 @@
                     </defs>
                   </svg>
                 </div>
-                <div class="text-r-bold ">{{listing.0.FormattedDaysOnMarket}}</div>
+                <div class="text-r-bold ">{% if listing.0.FormattedDaysOnMarket %} {{listing.0.FormattedDaysOnMarket}} {% else %} N/A {% endif %} </div>
               </div>
             </div>
 
