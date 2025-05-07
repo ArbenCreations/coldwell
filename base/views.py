@@ -432,7 +432,7 @@ def get_metadata(resource="Property"):
         # print(f"Error fetching metadata: {response.status_code}")
         return None
 
-def fetch_properties(seven_days=None, page=1, limit=4, **filters):
+def fetch_properties(seven_days=None, page=1, limit=4,is_getmedia=True, **filters):
     offset = (page - 1) * limit  # Calculate offset for pagination
     query_parts = []
 
@@ -540,9 +540,9 @@ def fetch_properties(seven_days=None, page=1, limit=4, **filters):
             ]
             record["FullAddress"] = ", ".join(filter(None, full_address_parts))  # Remove empty parts
             AgentID = record.get("ListAgentKeyNumeric", "").strip()
-            
-            record["Media"] = get_media(listing_id)
-            record["AgentMedia"] = get_media_AG(AgentID)
+            if is_getmedia:
+                record["Media"] = get_media(listing_id)
+                record["AgentMedia"] = get_media_AG(AgentID)
             # print(
             #     get_media_AG(AgentID)
             # )
@@ -709,6 +709,15 @@ def activelisting(request):
 
 import re
 
+def live_search(request):
+    search_value = request.GET.get("query", "").strip()
+    metadata = load_metadata()
+    filters = parse_search_input(search_value, metadata)
+    # print(filters)
+    properties, total_count = fetch_properties(page=1, limit=9,is_getmedia=False , **filters)
+    # print(properties)
+    return JsonResponse(properties,safe=False)
+
 
 def parse_search_input(search_value, metadata):
     filters = {}
@@ -838,7 +847,6 @@ def property(request):
     search_value = request.GET.get("MLS_or_City", "").strip()
 
     if search_value:
-
         filters.update(parse_search_input(search_value,load_metadata()))
     print(filters)
     # Remove duplicate min/max fields (like min_bedroom and max_bedroom)

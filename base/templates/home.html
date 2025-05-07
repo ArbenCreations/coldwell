@@ -27,9 +27,14 @@
 
       <form action='{% url "property" %}' >
         <div
-        class="searchBox bg-white d-inline-flex flex-wrap flex-xl-nowrap gap-4 flex-column"
+        class="searchBox bg-white d-inline-flex flex-wrap flex-xl-nowrap gap-4 flex-column position-relative"
         >
-        <input type="text" class="form-control w-100 rounded-15" name="MLS_or_City" placeholder="Search by neighborhood , city, postal code  or MLS number" />
+        <input  id="search-input" autocomplete="off" type="text" class="form-control w-100 rounded-15" name="MLS_or_City" placeholder="Search by neighborhood , city, postal code  or MLS number" />
+        
+        <div class='output shadow-lg'>
+
+        </div>
+
         <div class="d-inline-flex flex-wrap flex-xl-nowrap gap-4 bg-white">
 
           <div class="searchItem d-flex align-items-center gap-3">

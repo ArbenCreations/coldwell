@@ -307,6 +307,65 @@
         new WOW().init();
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            let typingTimer;
+            const delay = 300;
+        
+            $("#search-input").on("input", function () {
+                clearTimeout(typingTimer);
+                const query = $(this).val().trim();
+        
+                $(".output").hide().html('');
+                if (query.length === 0) return;
+        
+                $(".output").html('<div class="loader"></div>').show();
+        
+                typingTimer = setTimeout(() => {
+                    $.ajax({
+                        url: '{% url "live_search" %}',
+                        method: "GET",
+                        data: { query: query },
+                        success: function (response) {
+                            if (response && response.length > 0) {
+                                let ress = '';
+                                for (let i = 0; i < response.length; i++) {
+                                    ress += `<div class="items"><a href="/property?MLS_or_City=${encodeURIComponent(response[i].ListingId)}">${response[i].FullAddress}</a></div>`;
+                                }
+                                $(".output").html(ress).fadeIn();
+                            } else {
+                                $(".output").html('<div class="p-3">No results found.</div>');
+                            }
+                        },
+                        error: function (xhr) {
+                            console.error("Search error:", xhr.responseText);
+                            $(".output").html('<div class="p-3"> Error fetching data.</div>');
+                        }
+                    });
+                }, delay);
+            });
+        
+            // Hide output on blur, unless hovering on output
+            $("#search-input").on("blur", function () {
+                setTimeout(() => {
+                    if (!$(".output:hover").length) {
+                        $(".output").fadeOut(150);
+                    }
+                }, 200); // Delay to allow clicking a link
+            });
+        
+            // Optional: keep showing output if user focuses back
+            $("#search-input").on("focus", function () {
+                const query = $(this).val().trim();
+                if (query.length > 0 && $(".output").children().length > 0) {
+                    $(".output").fadeIn();
+                }
+            });
+        });
+        </script>
+
     
 </body>
 

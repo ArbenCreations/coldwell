@@ -11,6 +11,8 @@ urlpatterns = [
     path('contact',contact,name='contact'),
     path('sell',sell,name='sell'),
     path('advance-filter',advFilter,name='advFilter'),
+    path("api/live-search/", live_search, name="live_search"),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
