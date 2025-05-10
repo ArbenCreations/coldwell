@@ -734,38 +734,8 @@ def parse_search_input(search_value, metadata):
     postal_regex = r"^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$"
     mls_regex = r"^[A-Za-z]?\d{5,8}$"  # Accepts A123456 or 123456
 
-    for part in parts:
-        lower_part = part.lower()
 
-        # Check for MLS number
-        if re.match(mls_regex, part, re.IGNORECASE):
-            filters["ListingId"] = part.upper()
-            continue
-
-        # Canadian postal code
-        if re.match(postal_regex, part, re.IGNORECASE):
-            filters["PostalCode"] = part.upper()
-            continue
-
-        # City name
-        if lower_part in city_name_to_code:
-            filters["City"] = city_name_to_code[lower_part]
-            continue
-
-        # Address matching
-        if "StreetNumber" not in filters:
-            addr_match = re.match(
-                r'(?P<number>\d+)\s+(?P<name>[\w\s]+?)\s+(?P<suffix>Avenue|Street|St|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr|Lane|Ln|Court|Ct|Trail|Trl)\b',
-                part,
-                re.IGNORECASE,
-            )
-            if addr_match:
-                filters["StreetNumber"] = addr_match.group("number")
-                filters["StreetName"] = addr_match.group("name").strip()
-                filters["StreetSuffix"] = addr_match.group("suffix").title()
-            else:
-                filters["StreetName"] = part
-
+    print('parts',parts)
     # Handle single-part input (fallback logic)
     if len(parts) == 1 and not filters:
         term = parts[0]
@@ -777,16 +747,78 @@ def parse_search_input(search_value, metadata):
             filters["City"] = city_name_to_code[term.lower()]
         else:
             addr_match = re.match(
-                r'(?P<number>\d+)\s+(?P<name>[\w\s]+?)\s+(?P<suffix>Avenue|Street|St|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr|Lane|Ln|Court|Ct|Trail|Trl)\b',
+                r'(?P<number>\d+)\s+(?P<name>\d+(?:\s+\w+)*|\w+(?:\s+\w+)*)\s+(?P<suffix>Avenue|Street|St|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr|Lane|Ln|Court|Ct|Trail|Trl)\b',
                 term,
                 re.IGNORECASE,
             )
+            print('addd' ,addr_match)
+
+            if not addr_match:
+                # Try partial address (just number and name)
+                addr_match = re.match(
+                    r'(?P<number>\d+)\s+(?P<name>[\w\s]+)',
+                    term,
+                    re.IGNORECASE,
+                )
+            print('addd' ,addr_match)
+            street_suffixes = [
+                "Avenue", "Street", "St", "Ave", "Boulevard", "Blvd", "Road", "Rd",
+                "Drive", "Dr", "Lane", "Ln", "Court", "Ct", "Trail", "Trl"
+            ]
             if addr_match:
                 filters["StreetNumber"] = addr_match.group("number")
                 filters["StreetName"] = addr_match.group("name").strip()
-                filters["StreetSuffix"] = addr_match.group("suffix").title()
+                if "suffix" in addr_match.groupdict() and addr_match.group("suffix"):
+                    filters["StreetSuffix"] = addr_match.group("suffix").title()
             else:
-                filters["StreetName"] = term
+                if term.title() in street_suffixes:
+                    filters["StreetSuffix"] = term.title()
+                else:
+                    filters["StreetNumber"] = term
+            print(filters)
+    else:
+        for part in parts:
+            lower_part = part.lower()
+
+            # Check for MLS number
+            if re.match(mls_regex, part, re.IGNORECASE):
+                filters["ListingId"] = part.upper()
+                continue
+
+            # Canadian postal code
+            if re.match(postal_regex, part, re.IGNORECASE):
+                filters["PostalCode"] = part.upper()
+                continue
+
+            # City name
+            if lower_part in city_name_to_code:
+                filters["City"] = city_name_to_code[lower_part]
+                continue
+            print('filtersfilters',filters)
+            # Address matching
+            if "StreetNumber" not in filters:
+                addr_match = re.match(
+                    r'(?P<number>\d+)\s+(?P<name>[\w\s]+?)\s+(?P<suffix>Avenue|Street|St|Ave|Boulevard|Blvd|Road|Rd|Drive|Dr|Lane|Ln|Court|Ct|Trail|Trl)\b',
+                    part,
+                    re.IGNORECASE,
+                )
+                if not addr_match:
+                    # Try partial address (just number and name)
+                    addr_match = re.match(
+                        r'(?P<number>\d+)\s+(?P<name>[\w\s]+)',
+                        part,
+                        re.IGNORECASE,
+                    )
+                print('HELLOOO ', addr_match)
+                if addr_match:
+                    filters["StreetNumber"] = addr_match.group("number")
+                    filters["StreetName"] = addr_match.group("name").strip()
+                    if "suffix" in addr_match.groupdict() and addr_match.group("suffix"):
+                        filters["StreetSuffix"] = addr_match.group("suffix").title()
+                else:
+                    filters["StreetName"] = part
+
+    
 
     return filters
 def property(request):
