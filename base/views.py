@@ -928,36 +928,49 @@ def about(request):
 
 
 
-def send_email(name, email, phone, message, price_range,femail):
-    if price_range:
-        pq=f'<p><strong>Postal code/Area of Interest:</strong> {price_range}</p>'
-    else:
-        pq=''
+def send_email(name, email, phone, message, price_range, femail):
+    nam = f'<p><strong>Name:</strong> {name}</p>' if name else ''
+    pq = f'<p><strong>Postal code/Area of Interest:</strong> {price_range}</p>' if price_range else ''
 
-    if name:
-        nam=f'<p><strong>Name:</strong> {name}</p>'
-    else:
-        nam=''
-    subject = f"New Contact Form Submission from {name}"
+    subject = f"New Contact Form Submission from {name or 'a visitor'}"
     body = f"""
     <html>
-        <body>
-            <h2>New Contact Form Submission</h2>
-            {nam}
-            <p><strong>Email:</strong> {email}</p>
-            <p><strong>Phone:</strong> {phone}</p>
-            {pq}
-            <p><strong>Message:</strong></p>
-            <p>{message}</p>
+        <body style="font-family: Arial, sans-serif; background-color: #fbfaff; padding: 20px; color: #333;">
+            <table style="max-width: 600px; margin: auto; background: #fff; border-radius: 8px; overflow: hidden;">
+                <tr style="background-color: #ff9f1c;">
+                    <td style="padding: 20px; text-align: center;">
+                        <img src="https://kanwalbhangu.ca/static/assets/media/logo2.png" alt="Company Logo" style="max-width: 150px; margin-bottom: 10px;">
+                        <h2 style="margin: 0; color: white;">New Contact Form Submission</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 20px;">
+                        {nam}
+                        <p><strong>Email:</strong> {email}</p>
+                        <p><strong>Phone:</strong> {phone}</p>
+                        {pq}
+                        <p><strong>Message:</strong></p>
+                        <p style="background: #f0f0f0; padding: 10px; border-radius: 4px;">{message}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #fafafa; text-align: center; padding: 15px; font-size: 12px; color: #777;">
+                        <p>Thank you for contacting us.</p>
+                        <p>&copy; 2025 Coldwell Banker | Yad Realty</p>
+                    </td>
+                </tr>
+            </table>
         </body>
     </html>
     """
-    from_email =femail  # Replace with your email
-    recipient_list = [email]  # Replace with the recipient email
+
+    from_email = femail
+    recipient_list = [femail]
 
     email_message = EmailMessage(subject, body, from_email, recipient_list)
-    email_message.content_subtype = "html"  # Set content type to HTML
+    email_message.content_subtype = "html"
     email_message.send()
+
 
 def contact(request):
     if request.method == 'POST':
@@ -968,8 +981,8 @@ def contact(request):
         message = request.POST['Message']
         price_range = request.POST.get('Postal-code', 'Not specified')  # Avoid KeyError
         
-        send_email(name, email, phone, message,price_range,'info@kanwalbhangu.ca')  # Sending email
-        # send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com')  # Sending email
+        # send_email(name, email, phone, message,price_range,'info@kanwalbhangu.ca')  # Sending email
+        send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com')  # Sending email
 
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
         
