@@ -332,7 +332,7 @@
                             if (response && response.length > 0) {
                                 let ress = '';
                                 for (let i = 0; i < response.length; i++) {
-                                    ress += `<div class="items"><a href="/property?MLS_or_City=${encodeURIComponent(response[i].ListingId)}">${response[i].FullAddress}</a></div>`;
+                                    ress += `<div class="items"><a href="/listing/${encodeURIComponent(response[i].ListingKeyNumeric)}">${response[i].FullAddress}</a></div>`;
                                 }
                                 $(".output").html(ress).fadeIn();
                             } else {
