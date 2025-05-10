@@ -771,10 +771,16 @@ def parse_search_input(search_value, metadata):
                 if "suffix" in addr_match.groupdict() and addr_match.group("suffix"):
                     filters["StreetSuffix"] = addr_match.group("suffix").title()
             else:
-                if term.title() in street_suffixes:
-                    filters["StreetSuffix"] = term.title()
-                else:
+                if term.isdigit():
                     filters["StreetNumber"] = term
+                elif term.lower() in street_suffixes:
+                    filters["StreetSuffix"] = term.title()
+                elif re.match(postal_regex, term, re.IGNORECASE):
+                    filters["PostalCode"] = term.upper()
+                elif re.match(mls_regex, term, re.IGNORECASE):
+                    filters["ListingId"] = term.upper()
+                else:
+                    filters["StreetName"] = term.title()
             print(filters)
     else:
         for part in parts:
