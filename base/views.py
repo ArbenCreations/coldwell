@@ -935,12 +935,12 @@ def send_email(name, email, phone, message, price_range, femail):
     subject = f"New Contact Form Submission from {name or 'a visitor'}"
     body = f"""
     <html>
-        <body style="font-family: Arial, sans-serif; background-color: #fbfaff; padding: 20px; color: #333;">
+        <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; color: #333;">
             <table style="max-width: 600px; margin: auto; background: #fff; border-radius: 8px; overflow: hidden;">
-                <tr style="background-color: #ff9f1c;">
+                <tr style="background-color: #fbfaff;">
                     <td style="padding: 20px; text-align: center;">
                         <img src="https://kanwalbhangu.ca/static/assets/media/logo2.png" alt="Company Logo" style="max-width: 150px; margin-bottom: 10px;">
-                        <h2 style="margin: 0; color: white;">New Contact Form Submission</h2>
+                        <h2 style="margin: 0; color: #052570;">New Contact Form Submission</h2>
                     </td>
                 </tr>
                 <tr>
@@ -981,8 +981,8 @@ def contact(request):
         message = request.POST['Message']
         price_range = request.POST.get('Postal-code', 'Not specified')  # Avoid KeyError
         
-        # send_email(name, email, phone, message,price_range,'info@kanwalbhangu.ca')  # Sending email
-        send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com')  # Sending email
+        send_email(name, email, phone, message,price_range,'info@kanwalbhangu.ca')  # Sending email
+        # send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com')  # Sending email
 
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
         
