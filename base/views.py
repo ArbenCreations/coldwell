@@ -612,7 +612,7 @@ def listing(request,id):
                 meetdate = data.get('Date', '')
                 meetTime = data.get('Time', '')
                 message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
-                send_email(listingname, email, phone, message, None)  # Sending email
+                send_email(listingname, email, phone, message, None,'lead@kanwalbhangu.ca')  # Sending email
                 return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
             
             if data.get('FORMTYPE') == 'Request Quote':
@@ -622,7 +622,7 @@ def listing(request,id):
                 meetdate = data.get('Date', '')
                 meetTime = data.get('Time', '')
                 message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
-                send_email(listingname, email, phone, message, None)  # Sending email
+                send_email(listingname, email, phone, message, None,'lead@kanwalbhangu.ca')  # Sending email
                 return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
         except json.JSONDecodeError:
             # print("Invalid JSON received")
@@ -969,6 +969,7 @@ def contact(request):
         price_range = request.POST.get('Postal-code', 'Not specified')  # Avoid KeyError
         
         send_email(name, email, phone, message,price_range,'info@kanwalbhangu.ca')  # Sending email
+        # send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com')  # Sending email
 
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
         
@@ -984,6 +985,7 @@ def sell(request):
         message = request.POST['Message']
         
         send_email(name, email, phone, message,None,'sell@kanwalbhangu.ca')  # Sending email
+        # send_email(name, email, phone, message,None,'hamu.dhillon@gmail.com')  # Sending email
 
         return render(request, 'sell.html', {'message': 'Email sent successfully'})
         
