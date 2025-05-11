@@ -612,7 +612,8 @@ def listing(request,id):
                 meetdate = data.get('Date', '')
                 meetTime = data.get('Time', '')
                 message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
-                send_email(listingname, email, phone, message, None,'lead@kanwalbhangu.ca')  # Sending email
+                subject='Schedule Tour'
+                send_email(listingname, email, phone, message, None,'leads@kanwalbhangu.ca',subject)  # Sending email
                 return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
             
             if data.get('FORMTYPE') == 'Request Quote':
@@ -622,7 +623,9 @@ def listing(request,id):
                 meetdate = data.get('Date', '')
                 meetTime = data.get('Time', '')
                 message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
-                send_email(listingname, email, phone, message, None,'lead@kanwalbhangu.ca')  # Sending email
+                subject='Request Quote'
+
+                send_email(listingname, email, phone, message, None,'leads@kanwalbhangu.ca',subject)  # Sending email
                 return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
         except json.JSONDecodeError:
             # print("Invalid JSON received")
@@ -928,11 +931,11 @@ def about(request):
 
 
 
-def send_email(name, email, phone, message, price_range, femail):
+def send_email(name, email, phone, message, price_range, femail,subject):
     nam = f'<p><strong>Name:</strong> {name}</p>' if name else ''
     pq = f'<p><strong>Postal code/Area of Interest:</strong> {price_range}</p>' if price_range else ''
 
-    subject = f"New Contact Form Submission from {name or 'a visitor'}"
+    subject = subject
     body = f"""
     <html>
         <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; color: #333;">
@@ -969,8 +972,10 @@ def send_email(name, email, phone, message, price_range, femail):
 
     email_message = EmailMessage(subject, body, from_email, recipient_list)
     email_message.content_subtype = "html"
-    email_message.send()
-
+    try:
+        email_message.send()
+    except Exception as e:
+        print(e)
 
 def contact(request):
     if request.method == 'POST':
@@ -981,8 +986,8 @@ def contact(request):
         message = request.POST['Message']
         price_range = request.POST.get('Postal-code', 'Not specified')  # Avoid KeyError
         
-        send_email(name, email, phone, message,price_range,'info@kanwalbhangu.ca')  # Sending email
-        # send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com')  # Sending email
+        # send_email(name, email, phone, message,price_range,'leads@kanwalbhangu.ca')  # Sending email
+        send_email(name, email, phone, message,price_range,'leads@kanwalbhangu.ca','Contact Query from Website')  # Sending email
 
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
         
@@ -997,8 +1002,8 @@ def sell(request):
         phone = request.POST['Phone-Number']
         message = request.POST['Message']
         
-        send_email(name, email, phone, message,None,'sell@kanwalbhangu.ca')  # Sending email
-        # send_email(name, email, phone, message,None,'hamu.dhillon@gmail.com')  # Sending email
+        send_email(name, email, phone, message,None,'leads@kanwalbhangu.ca','Sell Query from Website')  # Sending email
+        # send_email(name, email, phone, message,None,'leads@kanwalbhangu.ca')  # Sending email
 
         return render(request, 'sell.html', {'message': 'Email sent successfully'})
         
