@@ -16,6 +16,9 @@ from django.core.mail import EmailMessage
 from datetime import datetime, timedelta
 from django.http import HttpResponseBadRequest
 
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 METADATA_FILE = os.path.join(BASE_DIR, "static", "metadata.json")
@@ -978,13 +981,17 @@ def send_email(name, email, phone, message, price_range, femail,subject):
     except Exception as e:
         print(e)
 
+
+def is_valid_phone(phone):
+    # Very basic check: adjust as needed
+    return bool(re.match(r'^\+?\d{7,15}$', phone))
+
 def contact(request):
     if request.method == 'POST':
-        # Get reCAPTCHA token from frontend
+        # reCAPTCHA validation
         recaptcha_token = request.POST.get('g-recaptcha-response')
-        secret_key = settings.RECAPTCHA_SECRET_KEY  # Or hardcode it temporarily
+        secret_key = settings.RECAPTCHA_SECRET_KEY
 
-        # Verify token with Google
         recaptcha_response = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',
             data={
@@ -995,20 +1002,44 @@ def contact(request):
 
         result = recaptcha_response.json()
 
-        # Debug line (optional): print(result)
-
-        # Check if reCAPTCHA passed
         if not result.get('success') or result.get('score', 0) < 0.5:
             return HttpResponseBadRequest("Failed reCAPTCHA verification")
 
-        # Process form data after reCAPTCHA passes
-        name = f"{request.POST.get('First-Name', '')} {request.POST.get('Last-Name', '')}"
-        email = request.POST.get('Email-Address', '')
-        phone = request.POST.get('Phone-Number', '')
-        message = request.POST.get('Message', '')
-        price_range = request.POST.get('Postal-code', 'Not specified')
+        # Get form fields
+        first_name = request.POST.get('First-Name', '').strip()
+        last_name = request.POST.get('Last-Name', '').strip()
+        email = request.POST.get('Email-Address', '').strip()
+        phone = request.POST.get('Phone-Number', '').strip()
+        message = request.POST.get('Message', '').strip()
+        price_range = request.POST.get('Postal-code', 'Not specified').strip()
 
-        # Send email
+        # Validations
+        errors = []
+
+        if not first_name:
+            errors.append("First name is required.")
+        if not last_name:
+            errors.append("Last name is required.")
+        if not email:
+            errors.append("Email is required.")
+        else:
+            try:
+                validate_email(email)
+            except ValidationError:
+                errors.append("Enter a valid email address.")
+
+        if not phone or not is_valid_phone(phone):
+            errors.append("Enter a valid phone number.")
+
+        if not message:
+            errors.append("Message is required.")
+
+        if errors:
+            return render(request, 'contact.html', {'errors': errors})
+
+        # All validations passed
+        name = f"{first_name} {last_name}"
+
         send_email(
             name, email, phone, message, price_range,
             'hamu.dhillon@gmail.com', 'Contact Query from Website'

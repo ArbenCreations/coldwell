@@ -43,6 +43,17 @@
                             <div> {{message}}</div>
                         </div>
                         {% endif %}
+                {% if errors %}
+                   
+                        {% for error in errors %}
+                        <div class="error-message w-form-fail d-block" tabindex="-1" role="region"
+                            aria-label="Contact Us V1 Form failure">
+                            <div>{{ error }}</div>
+                        </div>
+                      
+                        {% endfor %}
+                  
+                {% endif %}
                 <div id="w-node-bdcb45e8-12c7-f0c5-23d3-a8dbe422efac-9821ebb8" class="card-contact-form">
                     <div class="form-block w-form">
                        
