@@ -962,7 +962,7 @@ def send_email(name, email, phone, message, price_range, femail,subject):
                 </tr>
                 <tr>
                     <td style="background-color: #fafafa; text-align: center; padding: 15px; font-size: 12px; color: #777;">
-                        <p>Thank you for contacting us.</p>
+                      
                         <p>&copy; 2025 Coldwell Banker | Yad Realty</p>
                     </td>
                 </tr>
