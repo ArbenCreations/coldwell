@@ -141,3 +141,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "UposDailyReports@gmail.com"
 EMAIL_HOST_PASSWORD = "fuaknuvdbgeemiho"  # Use App Password for Gmail
+
+
+RECAPTCHA_SECRET_KEY  ='6Lf8mj8rAAAAANNghMe78Fn3xV71xEcsCJeyRkAV'

@@ -14,6 +14,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from datetime import datetime, timedelta
+from django.http import HttpResponseBadRequest
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -979,20 +980,43 @@ def send_email(name, email, phone, message, price_range, femail,subject):
 
 def contact(request):
     if request.method == 'POST':
-        # print(request.POST)
-        name = f"{request.POST['First-Name']} {request.POST['Last-Name']}"
-        email = request.POST['Email-Address']
-        phone = request.POST['Phone-Number']
-        message = request.POST['Message']
-        price_range = request.POST.get('Postal-code', 'Not specified')  # Avoid KeyError
-        
-        # send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com')  # Sending email
-        send_email(name, email, phone, message,price_range,'hamu.dhillon@gmail.com','Contact Query from Website')  # Sending email
+        # Get reCAPTCHA token from frontend
+        recaptcha_token = request.POST.get('g-recaptcha-response')
+        secret_key = settings.RECAPTCHA_SECRET_KEY  # Or hardcode it temporarily
+
+        # Verify token with Google
+        recaptcha_response = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data={
+                'secret': secret_key,
+                'response': recaptcha_token
+            }
+        )
+
+        result = recaptcha_response.json()
+
+        # Debug line (optional): print(result)
+
+        # Check if reCAPTCHA passed
+        if not result.get('success') or result.get('score', 0) < 0.5:
+            return HttpResponseBadRequest("Failed reCAPTCHA verification")
+
+        # Process form data after reCAPTCHA passes
+        name = f"{request.POST.get('First-Name', '')} {request.POST.get('Last-Name', '')}"
+        email = request.POST.get('Email-Address', '')
+        phone = request.POST.get('Phone-Number', '')
+        message = request.POST.get('Message', '')
+        price_range = request.POST.get('Postal-code', 'Not specified')
+
+        # Send email
+        send_email(
+            name, email, phone, message, price_range,
+            'hamu.dhillon@gmail.com', 'Contact Query from Website'
+        )
 
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
-        
-    return render(request, 'contact.html')
 
+    return render(request, 'contact.html')
 
 def sell(request):
     if request.method == 'POST':
