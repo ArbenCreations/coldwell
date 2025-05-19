@@ -983,8 +983,10 @@ def send_email(name, email, phone, message, price_range, femail,subject):
 
 
 def is_valid_phone(phone):
-    # Very basic check: adjust as needed
-    return bool(re.match(r'^\+?\d{7,15}$', phone))
+    pattern = re.compile(
+        r'^(\+1\s?)?(\(?[2-9][0-9]{2}\)?[\s\-]?)?[2-9][0-9]{2}[\s\-]?[0-9]{4}$'
+    )
+    return bool(pattern.match(phone))
 
 def contact(request):
     if request.method == 'POST':
