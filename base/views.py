@@ -617,7 +617,7 @@ def listing(request,id):
                 meetTime = data.get('Time', '')
                 message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
                 subject='Schedule Tour'
-                send_email(listingname, email, phone, message, None,'hamu.dhillon@gmail.com',subject)  # Sending email
+                send_email(listingname, email, phone, message, None,'leads@kanwalbhangu.ca',subject)  # Sending email
                 return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
             
             if data.get('FORMTYPE') == 'Request Quote':
@@ -629,7 +629,7 @@ def listing(request,id):
                 message = f'Date - {meetdate} \n Time {meetTime} \n Subject - {data.get('FORMTYPE')}'
                 subject='Request Quote'
 
-                send_email(listingname, email, phone, message, None,'hamu.dhillon@gmail.com',subject)  # Sending email
+                send_email(listingname, email, phone, message, None,'leads@kanwalbhangu.ca',subject)  # Sending email
                 return JsonResponse({"success": True, "message": "Email sent successfully"}, status=200)
         except json.JSONDecodeError:
             # print("Invalid JSON received")
@@ -1044,7 +1044,7 @@ def contact(request):
 
         send_email(
             name, email, phone, message, price_range,
-            'hamu.dhillon@gmail.com', 'Contact Query from Website'
+            'leads@kanwalbhangu.ca', 'Contact Query from Website'
         )
 
         return render(request, 'contact.html', {'message': 'Email sent successfully'})
@@ -1059,8 +1059,8 @@ def sell(request):
         phone = request.POST['Phone-Number']
         message = request.POST['Message']
         
-        send_email(name, email, phone, message,None,'hamu.dhillon@gmail.com','Sell Query from Website')  # Sending email
-        # send_email(name, email, phone, message,None,'hamu.dhillon@gmail.com')  # Sending email
+        send_email(name, email, phone, message,None,'leads@kanwalbhangu.ca','Sell Query from Website')  # Sending email
+        # send_email(name, email, phone, message,None,'leads@kanwalbhangu.ca')  # Sending email
 
         return render(request, 'sell.html', {'message': 'Email sent successfully'})
         
